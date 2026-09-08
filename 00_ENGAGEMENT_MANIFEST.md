@@ -50,30 +50,60 @@ ISOLATION_STATUS: UNVERIFIED
 
 `memory/ENGAGEMENT_MEMORY.md`
 
-## 5. Engagement Context
+This is the controlled Engagement-specific working memory for NURA ERP Architecture.
+
+It contains current established local knowledge, accepted/reconciled decisions, unresolved issues, rejected/superseded decisions, current solution state and material cross-Part dependencies.
+
+Historical QA / Bootstrap materials remain evidence and lineage sources; they are not the default current working truth.
+
+## 5. Runtime Professional Profile
+
+`runtime/ARCHITECT_PROFESSIONAL_BACKGROUND.md`
+
+Status: **PROVISIONAL RUNTIME PROFESSIONAL PROFILE**
+
+This profile defines the professional formation, depth of expertise and working posture ARCHITECT applies within this Engagement.
+
+It is subordinate to Project Instructions, Cognitive Core and governing System Protocols.
+
+It does not constitute permanent Expert Memory / EKB promotion and does not independently create governance authority or permissions.
+
+## 6. Engagement Context
 
 - `context/chat_qa/`
 - `context/source_documents/`
 - `outputs/architecture/`
 
-## 6. Authority hierarchy
+Historical QA / Bootstrap artifacts are retained for provenance, rationale, disputed decisions and reconstruction of solution lineage. They do not need to remain continuously loaded into the active runtime after their material current state has been consolidated into controlled Engagement Memory.
 
-TO BE ESTABLISHED DURING BOOTSTRAP.
+## 7. Authority Hierarchy
 
-Do not infer authority merely from file age, chat order, or document format.
+For current Engagement truth, use the following claim-relative working order:
 
-If authoritative sources conflict, do not silently blend them. Record the conflict and its resolution basis or escalate.
+1. applicable authoritative NURA / NU / legal / institutional sources for the claim in question;
+2. current accepted architecture Parts together with controlled Engagement Memory;
+3. verified supporting evidence;
+4. historical QA / Bootstrap materials for rationale, lineage, rejected/superseded alternatives and unresolved conflicts.
 
-## 7. Runtime isolation
+Do not infer authority merely from file age, chat order or document format.
+
+If an accepted / reconciled correction is explicitly recorded in Engagement Memory as not yet propagated to a Part, that Part is treated as stale for that specific claim until synchronization.
+
+In other Part ↔ Engagement Memory conflicts, do not silently prefer either source. Record the discrepancy and reconcile it explicitly.
+
+If authoritative sources conflict, do not silently blend them. Resolve claim, scope, jurisdiction, precedence, effective date, version or System-of-Record basis where possible; otherwise escalate the unresolved conflict.
+
+## 8. Runtime Isolation
 
 Required:
+
 - no raw context from unrelated Engagements;
 - Project-only / equivalent context isolation where available;
 - connector/source access limited to what the Engagement requires.
 
 Isolation verification status: UNVERIFIED
 
-## 8. Platform / organizational data handling
+## 9. Platform / Organizational Data Handling
 
 Required for this Engagement: TO_CONFIRM  
 PLATFORM_DATA_HANDLING_STATUS: UNVERIFIED  
@@ -81,9 +111,10 @@ ORGANIZATION_POLICY_STATUS: UNVERIFIED
 
 Context isolation does not by itself establish organizational approval for confidential data.
 
-## 9. Confidentiality / transfer rules
+## 10. Confidentiality / Transfer Rules
 
 Before anything leaves the Engagement for permanent ARCHITECT candidate/EKB storage, de-identify unnecessary:
+
 - personal names;
 - internal document names;
 - financial figures;
@@ -93,14 +124,13 @@ Processes/cases: ASK ENGAGEMENT CONFIDENTIALITY AUTHORITY until explicitly class
 
 Permission to transfer out of the Engagement does not authorize global EKB promotion.
 
-## 10. Provenance mapping
+## 11. Provenance Mapping
 
 Opaque IDs used in EKB: none yet  
 Identifiable mapping location: Engagement-side only  
 Access control: private repository / Engagement runtime
 
-## 11. Open governance issues
+## 12. Open Governance Issues
 
 - Confirm confidentiality classification.
 - Confirm Engagement Confidentiality Authority.
-- Establish claim-relative authority hierarchy during bootstrap.
