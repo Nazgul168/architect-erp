@@ -1,6 +1,6 @@
 # ENGAGEMENT_MEMORY.md
 
-- **MEMORY_VERSION:** `1.1`
+- **MEMORY_VERSION:** `1.2`
 - **LAST_RECONCILED:** `2026-09-08`
 - **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis`, `Part 02 — Process Architecture`, `Part 03 — System Analysis`, fully reviewed during Global Reconciliation on 2026-09-08.
 - **BOOTSTRAP / RECONCILIATION reference:** QA Bootstrap Batches 1–8 + accepted Global Reconciliation, 2026-09-08.
@@ -10,7 +10,7 @@
 - **Engagement:** NURA ERP Architecture
 - **Engagement ID:** `ENG-NURA-ERP-001`
 - **Status:** ACTIVE
-- **Memory status:** UPDATED WORKING VERSION — POST-BASELINE PROJECT LIFECYCLE / SETUP / AUTHORIZATION REVIEW INCORPORATED
+- **Memory status:** UPDATED WORKING VERSION — OPEN ISSUE #1 PROJECT LIFECYCLE / SETUP / OPERATIONAL CONTROL RESOLVED; PART PROPAGATION PENDING
 - **Current architecture state:** Parts 00–03 developed; controlled normalization is required before Part 04.
 - **Purpose of this memory:** compact working memory of the current NURA ERP architecture. It is not a transcript, Bootstrap ledger, or substitute for the architecture Parts.
 - **Canonical baseline persistence:** baseline `ENGAGEMENT_MEMORY.md` v1.0 is user-confirmed as canonically persisted in the canonical Engagement Git repository. The same confirmation applies to the baseline `ARCHITECT_PROFESSIONAL_BACKGROUND.md` and updated `00_ENGAGEMENT_MANIFEST.md` referenced by this Engagement.
@@ -73,26 +73,31 @@ Application preserves its own lifecycle, review history, identifiers, Final Subm
 
 PI, Co-PI, RA, Researcher and similar labels are contextual Project Roles / Participations, not separate Person entities. Employment Contract / Service Agreement is separate from Project Participation.
 
-### Funding Decision, Funding Agreement, Project Lifecycle and Operational Authorization
+### Funding Decision, Authorizing Basis, Project Lifecycle and Operational Authorization
 
-**Funding Decision ≠ Funding Agreement ≠ Project.**
+**Funding Decision ≠ Authorizing Basis ≠ Project.**
 
-For external funding, a Funding Decision / Award may justify creation of the Project record before the Funding Agreement is signed. This allows Legal, Post-Award and PI to perform Project Setup and other preparatory work in one Project context.
+A Funding Decision / Award may justify creation of a Project record before the Project has the applicable official basis to operate. This allows Legal, Post-Award and PI to perform Project Setup and other preparatory work in one Project context.
 
-For external funding:
+Each Project Type must define its applicable **Authorizing Basis**. A Project becomes business-active when that valid official basis exists and is recorded in ERP. The Authorizing Basis is not necessarily a Funding Agreement and is not determined by actual cash receipt.
 
-- Funding Decision recorded, Funding Agreement not yet signed → Project business lifecycle = `Setup`;
-- Signed Funding Agreement recorded → Project business lifecycle = `Active`.
+Established examples:
 
-Actual Funding receipt is separate from Project lifecycle. A delayed or missing tranche does not make a signed external Project non-active.
+- external grant: Funding Decision recorded, but no signed + registered Funding Agreement recorded in ERP → Project lifecycle = `Setup`;
+- external grant: signed + registered Funding Agreement recorded in ERP with its official registration details → Project lifecycle = `Active`;
+- internal grant: Research Council Decision is the Authorizing Basis and is functionally equivalent, for Project activation semantics, to the registered external Funding Agreement → Project lifecycle = `Active`.
 
-Project business lifecycle must be derived from recorded business facts and must not be freely assigned through a generic status field.
+Other Project Types must use the applicable approved agreement, decision or other official basis; the exact `Project Type → Authorizing Basis` taxonomy remains to be completed with the broader Agreement taxonomy.
 
-`Setup Complete` is a readiness outcome, not a Project lifecycle status.
+Actual Funding receipt is separate from Project lifecycle. A delayed or missing tranche does not make an otherwise authorized Project non-active.
 
-Operational permission to initiate expenditures is a separate management control. Head of Post-Award must explicitly authorize expenditure initiation after all Mandatory Setup Checks are complete.
+`Project Created` is a creation event, not a persistent business lifecycle state. A newly created Project immediately has the lifecycle state implied by the recorded business facts: for example, `Setup` for an external Award awaiting its registered Agreement, or `Active` for an internal grant created from the Research Council Decision.
 
-The final terminology and detailed state model for Operational Authorization / restricted operation remain open within Project lifecycle normalization.
+`Setup Complete` is a readiness outcome, not a Project lifecycle status. Normal expenditure authorization is blocked until all Mandatory Setup Checks are complete.
+
+Operational permission to initiate expenditures is a separate management control. Head of Post-Award must explicitly grant **Operational Authorization** after the Mandatory Setup Checks are complete. Operational Authorization should remain conceptually separate from dynamic Operational Restrictions rather than using a combined lifecycle/status such as `Granted with Restrictions`.
+
+If Agreement preparation for an external Award is formally discontinued before the Authorizing Basis exists, the Project becomes `Not Proceeded` rather than being deleted. `Not Proceeded` is inactive for normal work but supports controlled reopening of the same Project, with the same Project identity and history, when the same Award resumes. A genuinely new Funding Decision / Award creates a new Project.
 
 ### Funding Agreement Amendment
 
@@ -110,21 +115,21 @@ The final terminology and detailed state model for Operational Authorization / r
 
 ### External Project Spending Gate
 
-For external grants, no Project expenditure or financial commitment may be initiated before the Funding Agreement is signed.
+For external grants, no Project expenditure or financial commitment may be initiated before the Funding Agreement is signed. In ERP, expenditure initiation is additionally gated by the Project having the applicable recorded Authorizing Basis and explicit Operational Authorization; for the normal external-grant case this means the signed + registered Funding Agreement is recorded in ERP.
 
-Retroactive contractual `Effective From` does not by itself authorize NURA to incur Project expenditures before the actual signing of the Funding Agreement. Scientific work may in practice begin earlier on available resources, but this does not create expenditure authority under the grant.
+Retroactive contractual `Effective From` does not by itself authorize NURA to incur Project expenditures before the actual legal/administrative activation basis exists. Scientific work may in practice begin earlier on available resources, but this does not create expenditure authority under the grant.
 
-Imported Accounting Actuals / 1C facts that imply Project expenditure before the required signed Funding Agreement must be automatically identifiable for reconciliation / investigation.
+Imported Accounting Actuals / 1C facts that imply Project expenditure before the applicable external-grant authorization gate must be automatically identifiable for reconciliation / investigation. The authoritative 1C fact is preserved; ERP flags the business-control inconsistency rather than overwriting the accounting record.
 
 ### Budget Authorization, Allocation, Revision and Version
 
-Budget may be prepared as Draft during Project Setup before the Funding Agreement is signed.
+Budget may be prepared as Draft during Project Setup / readiness work before the applicable Authorizing Basis exists, where the Project Type and process allow such preparation. For the normal external-grant case this includes Budget preparation before the Funding Agreement is signed and registered.
 
-Formal Budget Approval occurs only after the applicable Funding Agreement has been signed and recorded in ERP. The curating Post-Award Manager explicitly approves the Budget, and Budget Approval is a Mandatory Setup Check.
+Formal Budget Approval occurs only after the applicable Project Authorizing Basis has been recorded in ERP. For the normal external-grant case this means the signed + registered Funding Agreement is recorded; for an internal grant the Research Council Decision provides the applicable basis. The curating Post-Award Manager explicitly approves the Budget, and Budget Approval is a Mandatory Setup Check.
 
-A Budget may be approved with only part of the total Funding Agreement amount allocated to specific Budget Categories / Lines. The model must distinguish at least:
+A Budget may be approved with only part of the total applicable Funding / authorized amount allocated to specific Budget Categories / Lines. The model must distinguish at least:
 
-- total applicable Funding / Agreement Amount;
+- total applicable Funding / authorized amount;
 - Approved Budget Allocations;
 - Unallocated Amount;
 - Available Budget within approved allocations.
@@ -150,7 +155,7 @@ Target taxonomy:
 - Current Operational Truth is structured data.
 - Approved versions are immutable historical records.
 - Official Word/PDF documents are generated representations where required.
-- Procurement Planning is permitted during Project `Setup`.
+- Procurement Planning is permitted during Setup/readiness work before Operational Authorization, including an external Project in lifecycle `Setup` and an `Active` Project whose readiness is not yet complete.
 - Research Needs and Procurement Plan represent planning / forecast information and do not by themselves authorize expenditure or create a procurement commitment.
 - An Approved Procurement Plan may exist before Project Operational Authorization.
 - A formal Procurement Request remains required to initiate procurement.
@@ -180,7 +185,8 @@ Delivered Quantity and Accepted Quantity are separate facts. A delivery may be f
 - Business Change represents a real change in the business fact and uses the applicable governed workflow.
 - Data Correction repairs an incorrectly recorded fact without creating false business history.
 - Reconciliation Exception records a mismatch between operational interpretation and authoritative accounting data.
-- Controlled Exception Override permits an approved deviation from an applicable rule for one specific case without changing the rule itself.
+- Controlled Exception Override permits an authorized deviation from an explicitly overrideable operational rule / restriction for one specific case without changing the underlying rule or Project-wide restriction.
+- Hard Business Validation is distinct from an overrideable Operational Restriction. A case-specific exception must not bypass a rule classified as non-overrideable / hard validation.
 
 ### Business Object, Document and File
 
@@ -191,6 +197,28 @@ Structured business facts are primary where search, control, automation, audit o
 ### Audit / External Review
 
 **Audit / External Review** is a separate Business Entity, not a Project status. It may have explicit object scope or criteria-based scope and may involve one or many Projects / Funding Agreements.
+
+### Operational Restrictions, Suspension and Case-Specific Exceptions
+
+Operational Restrictions are a separate dynamic management-control layer over an `Active` Project. They are universal and are not limited to Funding Delay. They may be introduced, changed or removed during the life of an Active Project for an applicable management reason.
+
+A restriction may constrain, where relevant:
+
+- expenditure / commitment type or category;
+- amount;
+- date / period;
+- specific classes of expenditure initiation;
+- another explicitly modeled operational scope.
+
+Operational Restrictions govern **new expenditure initiatives and new obligations**. They do not automatically cancel, invalidate or stop performance of obligations that were already validly created before the restriction.
+
+An expenditure initiative that already exists but has not yet reached the applicable obligation-forming event must be suspended when a new Project restriction prohibits it. For Procurement, the established example is: if the supplier contract has not yet been signed, the affected Procurement Request / execution path is suspended; a signed existing obligation continues through fulfillment, acceptance and payment. The equivalent obligation-forming point for other expenditure domains must be defined in the applicable domain process.
+
+`Suspended Requests` / equivalent queues are system views over the underlying expenditure objects, not separate parallel registers. The source object retains the suspension state/reason, the causal link to the Project restriction, the date/time and relevant history. Post-Award, PI and responsible operational offices must be able to see affected suspended items according to their role/context.
+
+Head of Post-Award has cross-project operational visibility over expenditure initiatives needed to administer Project restrictions and may grant a **case-specific exception** to one suspended initiative without removing the Project-wide restriction. The exception requires a mandatory `Reason`, does not require a separate approval, and must be fully audit-logged.
+
+A case-specific exception applies only to the relevant overrideable Operational Restriction. It does not bypass Hard Business Validation.
 
 ---
 
@@ -254,17 +282,33 @@ Structured business facts are primary where search, control, automation, audit o
 
 29. **Project lifecycle, readiness and expenditure authorization are separate controls.** Project business lifecycle is derived from business facts; Setup readiness and Operational Authorization must not be collapsed into one status.
 
-30. **External Project business activation is based on signed legal basis, not cash receipt.** A signed external Funding Agreement makes the Project business-active; delayed Funding is managed as a separate Funding / operational risk.
+30. **Project business activation is based on the applicable Authorizing Basis, not cash receipt.** Each Project Type has an applicable official activation basis. For the normal external-grant case, a signed + registered Funding Agreement recorded in ERP makes the Project business-active; for an internal grant, the Research Council Decision is the Authorizing Basis. Delayed Funding is managed separately.
 
 31. **Expenditure initiation requires explicit Operational Authorization.** Head of Post-Award performs a final explicit authorization after all Mandatory Setup Checks are complete. Normal authorization is blocked until those checks pass.
 
-32. **Operational Authorization gates expenditure initiation, not planning.** Non-expenditure Setup work, including Research Needs and Procurement Planning, remains available before Operational Authorization.
+32. **Operational Authorization gates expenditure initiation, not planning.** Non-expenditure Setup/readiness work, including Research Needs and Procurement Planning, remains available before Operational Authorization regardless of whether the Project lifecycle is still `Setup` or is already `Active` because its Authorizing Basis exists.
 
 33. **Budget authority may be partial.** Only approved allocations are spendable; unallocated Funding remains visible but unavailable for expenditure. Full allocation of the Agreement Amount is not required for `Setup Complete`.
 
-34. **Funding recovery does not silently remove management restrictions.** Receipt of delayed Funding triggers notification / review for a restricted Project, but explicit restrictions remain until an authorized decision changes them.
+34. **Changed underlying conditions do not silently remove explicit management restrictions.** A relevant change, such as receipt of delayed Funding, may trigger notification / review, but an explicit Operational Restriction remains until an authorized management action changes or removes it.
 
 35. **Procurement Plan approval is planning approval, not purchase authorization.** A formal Procurement Request remains required; planned requests may use a simplified route subject to automated current-Budget and restriction validation.
+
+36. **Operational Restrictions are universal and dynamic.** They are not a special Funding Delay status and may be introduced, changed or removed throughout the life of an `Active` Project without changing the Project business lifecycle.
+
+37. **Restrictions govern future commitment formation, not existing obligations.** An Operational Restriction blocks affected new expenditure initiatives / obligations. Obligations validly created before the restriction continue to execution, acceptance and payment unless another independent authoritative process changes them.
+
+38. **Pre-obligation expenditure initiatives may be suspended by Project restriction.** Existing Requests / initiatives that have not yet reached their applicable obligation-forming event become `Suspended by Project Restriction` when the restriction applies. Suspension is represented on the source object and exposed through derived operational views, not a parallel register.
+
+39. **Case-specific exception preserves the Project-wide restriction.** Head of Post-Award may resume one suspended expenditure initiative through an explicit rule-specific exception with mandatory Reason and audit trail, without an additional approval and without removing the underlying Project restriction. Hard Business Validations remain non-bypassable through this mechanism.
+
+40. **Agreement-preparation timing uses controlled thresholds, not observed averages as rules.** The Agreement workflow should distinguish configurable `Target Duration` from `Critical Escalation Threshold`; exceeding the target notifies/reminds the responsible Legal user, while exceeding the critical threshold escalates to COO and Director. Actual average duration remains an analytical KPI.
+
+41. **Legal records discontinuation; Legal does not originate the refusal decision.** Closing unsuccessful Agreement preparation requires a structured reason and the NURA refusal letter to the funder as mandatory evidence. No separate approval of Legal's recording action is required. Closure stops the Agreement-preparation timing/escalation path and notifies Post-Award, COO and Director.
+
+42. **Unsuccessful pre-active Project history is retained and reopenable.** If the same Award resumes after `Not Proceeded`, the same Project is reopened with the same identity and prior Setup history. Setup information is not copied into a separate archive or deleted; archival presentation is a view/access state over retained history.
+
+43. **`Project Created` is an event, not a lifecycle state.** A Project immediately receives the lifecycle state implied by its business facts and applicable Authorizing Basis.
 
 ---
 
@@ -376,40 +420,55 @@ Only items worth retaining to prevent accidental reintroduction:
 - Direct external-system writes to ERP database tables — rejected.
 - Mandatory manual Head-of-Post-Award button for every normal Project Closure — superseded by closure based on mandatory conditions, subject to final cross-Part normalization.
 - Treating all procurement fulfillment stages as one honest top-level Procurement Request status — rejected; detailed progress belongs primarily to underlying Items / Cases / downstream objects and may be aggregated for user presentation.
-- `Pending Activation` as the Project lifecycle status for a signed external Project experiencing delayed Funding — superseded; the Project remains `Active` while Funding condition and Operational Restrictions are represented separately.
+- `Pending Activation` as a Project lifecycle status — superseded; Project business activity follows the applicable Authorizing Basis, while Setup readiness, Operational Authorization, Funding condition and Operational Restrictions are represented separately.
 - `Ready for Administration` as a Project lifecycle status — superseded; use `Setup Complete` as a readiness outcome / concise system concept.
 - Automatic Project expenditure authorization when Setup checks happen to become complete — rejected; explicit Head of Post-Award authorization is required.
 - Automatic removal of Operational Restrictions when delayed Funding is received — rejected.
 - Requirement to allocate the full Funding Agreement amount before `Setup Complete` — rejected.
 - Treating Approved Procurement Plan as authorization to start procurement — rejected; a formal Procurement Request remains required.
 - Blocking Research Needs / Procurement Planning until Operational Authorization — rejected; planning is allowed during `Setup`.
+- `Signed Funding Agreement → Active` as a complete external-grant trigger — superseded by `signed + registered Funding Agreement recorded in ERP → Active`.
+- `Created` as a persistent Project lifecycle status — rejected; Project creation is an event and the Project immediately takes the lifecycle state implied by business facts.
+- `Activate with Restrictions` / `Granted with Restrictions` as the sole representation of restricted operation — superseded by separate Operational Authorization plus dynamic Operational Restrictions that may change throughout the Active Project lifecycle.
+- Operational Restrictions automatically stopping obligations already validly created before the restriction — rejected; restrictions govern future obligation formation / affected new expenditure initiation.
+- A separate manually maintained `Suspended Requests` register — rejected; suspension is stored on the source expenditure objects and exposed through system views.
+- Requiring an additional approval for a Head-of-Post-Award case-specific restriction exception — rejected; mandatory Reason + audit trail are sufficient within the established role responsibility.
+- Treating an overrideable Operational Restriction and a Hard Business Validation as the same control — rejected; case-specific exceptions cannot bypass hard validations.
+- Deleting or copying unfinished Project Setup into a separate archive after Agreement preparation fails — rejected; retained Project history remains on the same Project, which becomes `Not Proceeded` and may be reopened for the same Award.
 
 ---
 
 ## Open Issues / Conflicts
 
-These are intentionally not resolved in this memory.
+Items below are either intentionally unresolved or explicitly marked as resolved but pending propagation to the architecture Parts.
 
 ### Architecture normalization required before Part 04
 
-1. Complete Project lifecycle / readiness / Operational Authorization normalization across Parts 00–03.
+1. **RESOLVED — pending propagation to Parts 00–03:** Project lifecycle / Setup readiness / Operational Authorization / Operational Restriction semantics.
 
-   Established for external grants:
-   - Project record may be created after Funding Decision before Funding Agreement;
-   - before signed Funding Agreement: Project lifecycle = `Setup`;
-   - signed Funding Agreement: Project lifecycle = `Active`;
-   - Funding receipt/delay does not determine `Active` status;
+   Established target model:
+   - each Project Type has an applicable `Authorizing Basis`;
+   - `Project Created` is an event, not a persistent lifecycle status;
+   - external Award may create the Project before the Authorizing Basis exists → `Setup`;
+   - normal external-grant Authorizing Basis = signed + registered Funding Agreement recorded in ERP → `Active`;
+   - internal-grant Authorizing Basis = Research Council Decision → `Active`;
+   - other Project Types use their applicable approved agreement / decision / official basis; exact taxonomy is deferred to Agreement taxonomy normalization;
+   - Funding receipt / delay does not determine `Active` status;
    - `Setup Complete` is readiness, not lifecycle;
-   - expenditure initiation requires explicit Head of Post-Award Operational Authorization;
-   - normal authorization is blocked until all Mandatory Setup Checks are complete;
-   - Operational Authorization may be restricted.
+   - normal Operational Authorization is blocked until all Mandatory Setup Checks are complete;
+   - Head of Post-Award explicitly grants Operational Authorization;
+   - Operational Restrictions are a separate universal dynamic control throughout Active Project life;
+   - restrictions affect new obligations / expenditure initiatives, not already validly created obligations;
+   - affected pre-obligation initiatives are suspended on the source object and surfaced through system views;
+   - Head of Post-Award may grant a case-specific exception with mandatory Reason and audit trail, without a separate approval; hard validations remain non-bypassable;
+   - unsuccessful Agreement preparation may move a pre-active Project to `Not Proceeded`; the same Project may be reopened if the same Award resumes;
+   - Legal closure of unsuccessful Agreement preparation records the outcome with structured Reason + mandatory refusal letter evidence;
+   - Agreement-preparation timing uses configurable Target and Critical escalation thresholds.
 
-   Remaining:
-   - finalize terminology for Operational Authorization / restricted operation and replacement of legacy `Pending Activation`;
-   - define the precise restriction model and audit semantics;
-   - verify/normalize lifecycle rules for internal grants and other Project types;
-   - decide whether `Created` is a persistent business state or primarily a creation event / initial technical condition;
-   - propagate the accepted semantics consistently through Parts 00–03.
+   Pending implementation only:
+   - propagate the accepted semantics consistently through Parts 00–03;
+   - select final UI labels where wording remains implementation-level rather than business-semantic;
+   - complete the broader `Project Type → Authorizing Basis` mapping together with Open Issue #12 Agreement taxonomy.
 2. Apply the corrected Application State Model and distinguish internal NURA review from external funder review; keep actions/events separate from persistent states.
 3. Decide Research Need own lifecycle versus derived downstream Procurement progress.
 4. Canonicalize Procurement Plan / Amendment / Version terminology across Parts.
@@ -461,19 +520,19 @@ These are intentionally not resolved in this memory.
 
 ### Part 00 — Scope & Architecture Principles
 
-Substantial architecture baseline. Core scope, boundaries, principles and SoR model are usable. Contains several stale remnants / assertions that require controlled normalization before Part 04. In particular, Project creation / Setup / business-active / expenditure-authorization semantics must be synchronized with the accepted Engagement Memory correction.
+Substantial architecture baseline. Core scope, boundaries, principles and SoR model are usable. Contains several stale remnants / assertions that require controlled normalization before Part 04. In particular, Project creation, Authorizing Basis, `Setup` / `Active`, `Not Proceeded`, Setup readiness, Operational Authorization and dynamic Operational Restriction semantics must be synchronized with the resolved Open Issue #1 model.
 
 ### Part 01 — Business Analysis
 
-Substantial business baseline covering context, stakeholders, business requirements, business rules and glossary. Current operating-scale values are planning estimates. Formal Process Ownership and some cardinalities remain unresolved.
+Substantial business baseline covering context, stakeholders, business requirements, business rules and glossary. Current operating-scale values are planning estimates. Formal Process Ownership and some cardinalities remain unresolved. Project Authorizing Basis, activation, Setup-readiness and expenditure-control business rules require propagation from resolved Open Issue #1.
 
 ### Part 02 — Process Architecture
 
-Substantial expanded baseline covering Pre-Award, Agreement / Project Initiation, Funding, Budget, Project Change, Research Team, Procurement, Services, Reporting, Payment, Reconciliation, Closure and cross-functional controls. Several lifecycle/state semantics must be synchronized. PF-02 / Project initiation sequencing and the legacy `Pending Activation` treatment are stale against the accepted Project lifecycle / Operational Authorization semantics recorded in this memory.
+Substantial expanded baseline covering Pre-Award, Agreement / Project Initiation, Funding, Budget, Project Change, Research Team, Procurement, Services, Reporting, Payment, Reconciliation, Closure and cross-functional controls. Several lifecycle/state semantics must be synchronized. PF-02 / Project initiation sequencing, the legacy `Pending Activation` treatment, Agreement-preparation closure/escalation behavior and restriction/suspension handling are stale against the resolved Open Issue #1 model recorded in this memory.
 
 ### Part 03 — System Analysis
 
-Advanced current system-behavior baseline covering Functional Requirements, Use Cases, System Context, State Models, Validation, Roles / Permissions, Integration Requirements and NFR. Most late validation corrections are incorporated. The Application State Model and several cross-Part terms still require normalization. The current Project State Model is stale where it treats `Ready for Administration` as a lifecycle status and does not cleanly separate business lifecycle, Setup readiness and expenditure Operational Authorization.
+Advanced current system-behavior baseline covering Functional Requirements, Use Cases, System Context, State Models, Validation, Roles / Permissions, Integration Requirements and NFR. Most late validation corrections are incorporated. The Application State Model and several cross-Part terms still require normalization. The current Project State Model is stale where it treats `Ready for Administration` as a lifecycle status and does not model the resolved separation among Authorizing Basis-driven lifecycle, Setup readiness, Operational Authorization, dynamic Operational Restrictions, suspension and case-specific exceptions.
 
 ### Part 04 — Data Architecture
 
@@ -485,7 +544,7 @@ Not started.
 
 ### Readiness
 
-**Parts 00–03 require a controlled normalization pass before Part 04.** No redesign is implied; the objective is to eliminate known semantic contradictions before they become formal Data Domains, entities, states, relationships and constraints. Open Issue #1 is substantially clarified but not yet closed; Parts remain unchanged until its remaining terminology / restriction-model questions are resolved.
+**Parts 00–03 require a controlled normalization pass before Part 04.** No redesign is implied; the objective is to eliminate known semantic contradictions before they become formal Data Domains, entities, states, relationships and constraints. Open Issue #1 is resolved at the architecture-decision level and is now **pending propagation to Parts 00–03**. Parts remain intentionally unchanged at this checkpoint; other related normalization issues, including Open Issue #7 Project Closure, remain separate.
 
 ---
 
@@ -494,9 +553,15 @@ Not started.
 Parts 04–05 must preserve and explicitly model:
 
 - Application and Project independent identity/history;
-- Award/Funding Decision → Project creation versus signed-Agreement business activation distinction;
+- Funding Decision / Award → Project creation versus Project-Type-specific `Authorizing Basis` → business `Active` distinction;
 - Funding Agreement / Amendment / Funding / Project / Budget independent lifecycles;
-- Project business lifecycle versus Setup readiness versus Operational Authorization / restrictions;
+- Project business lifecycle versus Setup readiness versus Operational Authorization versus dynamic Operational Restrictions;
+- `Project Created` as event, `Not Proceeded` pre-active outcome and controlled reopening of the same Project for the same Award;
+- external-grant `signed + registered Agreement recorded in ERP` activation trigger versus retroactive `Effective From`;
+- Operational Restriction scope/effective history, affected expenditure-object suspension, causal link to restriction, case-specific exception, mandatory Reason and audit trail;
+- suspension as source-object state / progress with derived views rather than a separate register;
+- Hard Business Validation versus overrideable Operational Restriction;
+- Agreement-preparation Target / Critical escalation thresholds, closure reason and refusal-letter evidence;
 - Current / Proposed / Effective semantics;
 - decision/signature/registration dates versus `Effective From`;
 - causal links between formal changes and downstream consequences;
@@ -508,7 +573,7 @@ Parts 04–05 must preserve and explicitly model:
 - unresolved same-Project multi-role cardinality;
 - Procurement Request / Request Item / Case / Item Allocation structure;
 - unresolved Procurement Procedure boundary;
-- Research Need versus downstream derived progress, while preserving Research Need / Procurement Planning availability during Project `Setup`;
+- Research Need versus downstream derived progress, while preserving Research Need / Procurement Planning availability during Setup/readiness work before Operational Authorization;
 - Procurement Plan / Amendment / Version / Consolidated Current Plan;
 - Supplier Contract / Shipment / Delivery / Acceptance / Payment distinctions;
 - Business Change / Data Correction / Reconciliation Exception / Controlled Exception Override distinctions;
@@ -537,6 +602,11 @@ Do not finalize a Part 05 cardinality for any relationship that remains listed a
 - Current operational data, immutable approved snapshots and generated official documents are different functions and should not be conflated.
 - Before formalizing the Data Model, lifecycle/state/event/progress semantics must be validated against the real business process.
 - User corrections to actual NURA work take precedence over generic architecture patterns when they are credible and consistent with governing constraints.
-- For external grants, legal/business Project activity and permission to initiate expenditures are different facts: a signed Funding Agreement can make a Project active while expenditure initiation remains subject to explicit Operational Authorization.
-- Planning approval is not expenditure authorization: Research Needs and Procurement Plan may be prepared/approved during Setup, while a formal Procurement Request remains the expenditure-initiation boundary.
+- Project business activity and permission to initiate expenditures are different facts: the applicable Authorizing Basis makes the Project `Active`, while expenditure initiation remains subject to Setup readiness and explicit Operational Authorization.
+- Planning approval is not expenditure authorization: Research Needs and Procurement Plan may be prepared/approved during Setup/readiness work before Operational Authorization, while a formal Procurement Request remains the expenditure-initiation boundary.
 - Funding delay is a separate operational/financial condition; it should not distort the Project lifecycle merely to make the problem visible.
+- For external grants, practical NURA lifecycle activation should wait for the signed + registered Agreement to be recorded with official registration details rather than introducing unnecessary transient states for a short signature-to-registration interval.
+- Operational restrictions are management controls over future commitment formation, not a substitute Project lifecycle and not an automatic cancellation of existing obligations.
+- In NURA's small-organization operating model, ERP should provide Head of Post-Award the functional control needed to administer restrictions/exceptions and rely on explicit Reason + audit trail rather than add approval layers whose only purpose is to police managerial good faith. Hard business validations remain a separate non-bypassable boundary.
+- An archive view should not become a second data store: discontinued pre-active Projects retain their original Setup history and can be reopened when the same Award resumes.
+- Process SLA thresholds and escalation limits are governed control parameters; observed average duration is an analytical KPI and should not itself become the process rule.
