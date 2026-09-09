@@ -68,7 +68,17 @@ It is subordinate to Project Instructions, Cognitive Core and governing System P
 
 It does not constitute permanent Expert Memory / EKB promotion and does not independently create governance authority or permissions.
 
-## 6. Engagement Context
+## 6. Learning Candidate Staging
+
+Canonical Engagement-side candidate staging:
+
+`memory/LEARNING_CANDIDATES.md`
+
+After each Learning & Change Review, newly identified or materially updated transferable learning candidates must be recorded in this file.
+
+Engagement-side candidate staging does not constitute transfer to permanent ARCHITECT candidate storage or promotion to Expert Memory / EKB.
+
+## 7. Engagement Context
 
 - `context/chat_qa/`
 - `context/source_documents/`
@@ -76,7 +86,7 @@ It does not constitute permanent Expert Memory / EKB promotion and does not inde
 
 Historical QA / Bootstrap artifacts are retained for provenance, rationale, disputed decisions and reconstruction of solution lineage. They do not need to remain continuously loaded into the active runtime after their material current state has been consolidated into controlled Engagement Memory.
 
-## 7. Authority Hierarchy
+## 8. Authority Hierarchy
 
 For current Engagement truth, use the following claim-relative working order:
 
@@ -93,7 +103,7 @@ In other Part ↔ Engagement Memory conflicts, do not silently prefer either sou
 
 If authoritative sources conflict, do not silently blend them. Resolve claim, scope, jurisdiction, precedence, effective date, version or System-of-Record basis where possible; otherwise escalate the unresolved conflict.
 
-## 8. Runtime Isolation
+## 9. Runtime Isolation
 
 Required:
 
@@ -103,7 +113,7 @@ Required:
 
 Isolation verification status: UNVERIFIED
 
-## 9. Platform / Organizational Data Handling
+## 10. Platform / Organizational Data Handling
 
 Required for this Engagement: TO_CONFIRM  
 PLATFORM_DATA_HANDLING_STATUS: UNVERIFIED  
@@ -111,7 +121,7 @@ ORGANIZATION_POLICY_STATUS: UNVERIFIED
 
 Context isolation does not by itself establish organizational approval for confidential data.
 
-## 10. Confidentiality / Transfer Rules
+## 11. Confidentiality / Transfer Rules
 
 Before anything leaves the Engagement for permanent ARCHITECT candidate/EKB storage, de-identify unnecessary:
 
@@ -124,13 +134,13 @@ Processes/cases: ASK ENGAGEMENT CONFIDENTIALITY AUTHORITY until explicitly class
 
 Permission to transfer out of the Engagement does not authorize global EKB promotion.
 
-## 11. Provenance Mapping
+## 12. Provenance Mapping
 
 Opaque IDs used in EKB: none yet  
 Identifiable mapping location: Engagement-side only  
 Access control: private repository / Engagement runtime
 
-## 12. Open Governance Issues
+## 13. Open Governance Issues
 
 - Confirm confidentiality classification.
 - Confirm Engagement Confidentiality Authority.

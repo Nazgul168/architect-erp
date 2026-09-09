@@ -1,3 +1,17 @@
+# LEARNING_CANDIDATES.md
+
+Durable Engagement-side staging for transferable learning identified during NURA ERP work.
+
+## Maintenance Rule
+
+After each Learning & Change Review:
+
+- add all newly identified transferable candidates;
+- update existing candidates if new evidence materially changes them;
+- preserve candidate status and provenance;
+- do not treat a candidate as validated Expert Memory;
+- do not transfer it to permanent ARCHITECT candidate storage or EKB unless applicable confidentiality, transfer and Slow-Loop governance requirements are satisfied.
+
 # Learning Candidates
 
 Document status: ENGAGEMENT-SIDE CANDIDATE BACKLOG  
