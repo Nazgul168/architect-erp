@@ -1,3 +1,4 @@
+\
 # Engagement Manifest — NURA ERP Architecture
 
 Engagement ID: ENG-NURA-ERP-001  
@@ -26,7 +27,7 @@ Develop and maintain the conceptual, logical and governing architecture for the 
 - QA/chat history needed to reconstruct how the architecture evolved;
 - Engagement-specific lessons and unresolved issues;
 - Engagement-side learning candidates;
-- current Engagement phase / consolidation / transition-readiness control.
+- current Engagement phase / consolidation / checkpoint / transition-readiness control.
 
 ### Out of scope
 
@@ -44,9 +45,12 @@ GOVERNING_PACK_REVISION: 6f843575253c35312d24d03bd6fe9560045b8e95
 EXECUTION_PROFILE_ID: TO_BE_ASSIGNED / VERIFIED  
 EKB_UPDATE_POLICY: CONTROLLED_UPDATE  
 EKB_REVISION_CURRENT: 6f843575253c35312d24d03bd6fe9560045b8e95  
+RUNTIME_DEPLOYMENT_RECORD_ID: TO_BE_ASSIGNED / VERIFIED  
 RUNTIME_STATE: UNVERIFIED  
 ISOLATION_REQUIRED: YES  
 ISOLATION_STATUS: UNVERIFIED  
+
+Where a canonical Runtime Deployment Record exists, it owns the detailed runtime configuration. Engagement checkpoint state should reference that record rather than duplicating independently maintained runtime configuration.
 
 ## 4. Canonical Engagement Memory
 
@@ -95,28 +99,132 @@ Canonical Engagement-side control artifact:
 - current phase;
 - next planned material phase;
 - consolidation-control state;
+- System State Checkpoint identity / status;
+- reporting-window baseline;
+- uncheckpointed-material-delta state;
 - transition-readiness / gate state;
-- recorded verification evidence for those control states.
+- verification evidence for those control states.
 
-Before recommending or beginning a material phase transition, ARCHITECT must verify the applicable transition state and gate in this file.
+This authority is limited to control/reporting state.
 
-Completion of a local conversational plan or task sequence does not by itself establish readiness for the next phase.
+It does not make Control authoritative for NURA business truth.
 
-If the applicable gate is `NOT_READY`, ARCHITECT must not begin the next material phase and must first address the unmet transition criteria.
+### Consolidation / Transition Relationship
 
-**Phase-transition control supplements, but does not replace, applicable Learning & Change Review and Engagement Memory consolidation triggers after materially significant accepted work.**
+Phase-transition control supplements, but does not replace, applicable Learning & Change Review and Engagement Memory consolidation triggers after material accepted work.
 
-A material phase transition is therefore a backstop for state consolidation, not the sole trigger for learning / memory maintenance.
+A material phase transition is therefore a downstream backstop, not the sole trigger for learning / memory maintenance.
 
-## 8. Engagement Context
+### Consolidation Pressure Sensor
 
-- `context/chat_qa/`
-- `context/source_documents/`
-- `outputs/architecture/`
+NURA uses a **Consolidation Pressure Sensor based on observable proxies**.
 
-Historical QA / Bootstrap artifacts are retained for provenance, rationale, disputed decisions and reconstruction of solution lineage. They do not need to remain continuously loaded into the active runtime after their material current state has been consolidated into controlled Engagement Memory.
+It does not claim to measure actual model context-window occupancy.
 
-## 9. Claim-Relative Authority Hierarchy
+The sensor uses:
+
+- approximate volume proxy;
+- semantic / decision pressure;
+- context-degradation symptoms.
+
+The operative sensor rules are maintained in `runtime/ENGAGEMENT_CONTROL.md`.
+
+## 8. System State Checkpoint
+
+### 8.1 System State Bundle
+
+For checkpoint / delta-reporting purposes, the System State Bundle consists of:
+
+- `00_ENGAGEMENT_MANIFEST.md`;
+- `runtime/ENGAGEMENT_CONTROL.md`;
+- `memory/ENGAGEMENT_MEMORY.md`;
+- `memory/LEARNING_CANDIDATES.md`;
+- `runtime/ARCHITECT_PROFESSIONAL_BACKGROUND.md`;
+- pointer to the applicable Runtime Deployment Record where available.
+
+If no formal Runtime Deployment Record exists, verified runtime-binding fields may be used as fallback evidence.
+
+### 8.2 Architecture Outputs
+
+Architecture Parts and other outputs are not System State Bundle members.
+
+However, checkpoint evidence must preserve the relevant architecture-output revision/pointer set used by ARCHITECT at that checkpoint.
+
+This enables later reconstruction of which Part versions were current or stale at the checkpoint baseline.
+
+### 8.3 Checkpoint Identity
+
+Each System State Checkpoint uses an independent logical ID, e.g.:
+
+`CP-NURA-001`
+
+Preferred Git reference:
+
+`refs/tags/nura-checkpoint/CP-NURA-001`
+
+The checkpoint Control must not contain the hash of the same Git commit that contains that Control revision.
+
+### 8.4 Checkpoint Finalization
+
+A checkpoint is not operationally verified merely because its candidate commit exists.
+
+Verification requires successful completion of the applicable finalization sequence defined in `runtime/ENGAGEMENT_CONTROL.md`, including:
+
+- canonical commit;
+- checkpoint Git reference creation/push;
+- resolution of that reference to the intended commit;
+- resolved commit-hash evidence recorded non-self-referentially;
+- required runtime/source verification;
+- checkpoint-integrity verification.
+
+The finalization record may be written in a later administrative Control revision because that later record points backward to the already-existing checkpoint commit and therefore does not create self-reference.
+
+### 8.5 Checkpoint Git Reference Integrity
+
+A Git tag is not assumed immutable merely because it exists.
+
+Preferred repository control is protection of the checkpoint-tag namespace, e.g.:
+
+`nura-checkpoint/*`
+
+against unauthorized update/deletion.
+
+The checkpoint's resolved commit hash must be preserved as verification evidence in a non-self-referential finalization record.
+
+If the tag later resolves to a different commit than the recorded hash, treat this as a checkpoint-integrity failure.
+
+### 8.6 Bootstrap Safeguard
+
+When the checkpoint mechanism is introduced while unreviewed material delta already exists:
+
+- do not establish the first checkpoint from the latest edited files;
+- preserve the unreviewed delta;
+- review from the earliest reliably identifiable pre-delta baseline;
+- if exact historical coherent baseline is unavailable, record it as `UNVERIFIED`;
+- establish the first verified checkpoint only after catch-up review, system-state update, canonical persistence and runtime/source verification.
+
+For the current NURA state, the conservative bootstrap semantic baseline is `ENGAGEMENT_MEMORY.md v1.3`, while exact coherent bundle revision remains to be verified.
+
+## 9. Delta Reporting
+
+Learning & Change Review reports material delta since the last verified System State Checkpoint, or from the explicit conservative bootstrap baseline while the first checkpoint is pending.
+
+Previously checkpointed unchanged Engagement state must not be represented as new work or new learning merely because it is mentioned again.
+
+Earlier state may be included when it:
+
+- changed;
+- was corrected, superseded or rejected;
+- became conflicted;
+- gained materially new evidence;
+- created a new dependency;
+- is required to explain current delta.
+
+Modification of one System State Bundle file does not by itself advance the reporting baseline.
+
+Administrative / formatting edits must not reset the reporting window while uncheckpointed material delta remains.
+
+## 10. Claim-Relative Authority Hierarchy
 
 For current Engagement truth, use the following claim-relative working order:
 
@@ -130,7 +238,7 @@ Do not infer authority merely from file age, chat order, document format, or the
 ### Artifact-specific authority
 
 - `ENGAGEMENT_MEMORY.md` — established Engagement knowledge, subject to the hierarchy above;
-- `ENGAGEMENT_CONTROL.md` — current phase, consolidation state, transition readiness and their verification evidence;
+- `ENGAGEMENT_CONTROL.md` — phase, consolidation, checkpoint, delta-reporting and transition-readiness state;
 - `LEARNING_CANDIDATES.md` — candidate staging status only;
 - `ARCHITECT_PROFESSIONAL_BACKGROUND.md` — runtime professional formation/working profile, subordinate to governing ARCHITECT sources.
 
@@ -156,7 +264,17 @@ If authoritative sources conflict, do not silently blend them.
 
 Resolve the claim, scope, jurisdiction, precedence, effective date, version or System-of-Record basis where possible; otherwise escalate the unresolved conflict.
 
-## 10. Runtime Isolation
+## 11. Engagement Context
+
+- `context/chat_qa/`
+- `context/source_documents/`
+- `outputs/architecture/`
+
+Historical QA / Bootstrap artifacts are retained for provenance, rationale, disputed decisions and reconstruction of solution lineage.
+
+They do not need to remain continuously loaded into the active runtime after their material current state has been consolidated into controlled Engagement Memory.
+
+## 12. Runtime Isolation
 
 Required:
 
@@ -166,7 +284,7 @@ Required:
 
 Isolation verification status: UNVERIFIED
 
-## 11. Platform / Organizational Data Handling
+## 13. Platform / Organizational Data Handling
 
 Required for this Engagement: TO_CONFIRM  
 PLATFORM_DATA_HANDLING_STATUS: UNVERIFIED  
@@ -174,7 +292,7 @@ ORGANIZATION_POLICY_STATUS: UNVERIFIED
 
 Context isolation does not by itself establish organizational approval for confidential data.
 
-## 12. Confidentiality / Transfer Rules
+## 14. Confidentiality / Transfer Rules
 
 Before anything leaves the Engagement for permanent ARCHITECT candidate/EKB storage, de-identify unnecessary:
 
@@ -187,14 +305,16 @@ Processes/cases: ASK ENGAGEMENT CONFIDENTIALITY AUTHORITY until explicitly class
 
 Permission to transfer out of the Engagement does not authorize permanent EKB promotion.
 
-## 13. Provenance Mapping
+## 15. Provenance Mapping
 
 Opaque IDs used in EKB: none yet  
 Identifiable mapping location: Engagement-side only  
 Access control: private repository / Engagement runtime
 
-## 14. Open Governance Issues
+## 16. Open Governance Issues
 
 - Confirm confidentiality classification.
 - Confirm Engagement Confidentiality Authority.
 - Complete runtime/source verification where current values remain UNVERIFIED.
+- Establish / verify Runtime Deployment Record if adopted as the canonical runtime-binding owner.
+- Configure or verify checkpoint-tag protection for `nura-checkpoint/*` if repository controls permit it.
