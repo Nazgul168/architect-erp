@@ -339,6 +339,73 @@ Improves architecture completeness, document-layer clarity and traceability from
 
 ---
 
+## CAND-NURA-011 — Material Phase Transition Requires Explicit State Consolidation
+
+**Type:** methodology heuristic / decision principle  
+**Status:** CANDIDATE ONLY  
+**Confidence:** medium-high  
+**Origin:** NURA ERP Engagement control incident, 2026-09-09
+
+### Proposed knowledge
+Completion of a local task sequence is not sufficient evidence of readiness for a material downstream transformation when materially accepted Working State produced during that sequence has not yet been consolidated into the applicable controlled working state.
+
+Before a material downstream phase transition, verify that accepted state has been consolidated, relevant issue/status registers are synchronized, the applicable learning review has occurred, and no blocking inconsistency remains.
+
+### Recognition cues
+- a discovery / reconciliation / design question cycle appears complete;
+- a rewrite, migration, implementation, data-modeling, publication, release, or other large downstream transformation is about to begin;
+- the upstream work produced materially accepted decisions or corrections;
+- downstream transformation would be expensive to redo if stale state is used.
+
+### Applicability
+Architecture and systems design, policy/procedure development, research synthesis, data-model transitions, implementation handoff, document rewrites, release/migration readiness, and other multi-stage knowledge-work processes.
+
+### Limits
+Do not require a heavy checkpoint for trivial task transitions. The control should be proportional to the cost and risk of the downstream transformation.
+
+A textual phase gate is an externalized control state, not a hard technical platform lock.
+
+### Evidence summary
+Derived from an Engagement control incident where a substantial semantic question cycle had completed and the next planned action was a full downstream rewrite, but materially accepted decisions still existed only in Working State / chat and had not yet been consolidated into controlled Engagement Memory.
+
+### Expected behavioral impact
+Reduces premature movement into expensive downstream work while accepted upstream state is still unconsolidated or stale in the active canonical working state.
+
+---
+
+## CAND-NURA-012 — Significant Accepted Work Can Require Consolidation Without a Phase Transition
+
+**Type:** failure mode / methodology heuristic  
+**Status:** CANDIDATE ONLY  
+**Confidence:** medium  
+**Origin:** NURA ERP Engagement control incident, 2026-09-09
+
+### Proposed knowledge
+Materially significant accepted Working State can accumulate while work remains inside the same formal phase.
+
+Therefore, phase-transition checks cannot be the sole trigger for Engagement Memory consolidation or Learning & Change Review. A separate observable indication is needed when material accepted state has accumulated since the last consolidation checkpoint.
+
+### Recognition cues
+- multiple accepted decisions accumulate within one ongoing phase;
+- Open Issues are resolved or materially reclassified without a phase change;
+- accepted rules, concepts, relationships, boundaries or terminology are corrected;
+- reusable learning is identified during ongoing work;
+- important accepted truth would otherwise remain only in chat / Working State.
+
+### Applicability
+Long-running analysis, architecture engagements, research and policy work, iterative product design, legal/contract analysis, and other work where one phase can contain many material decisions.
+
+### Limits
+Do not force a heavy review after every minor correction. The threshold should remain proportional to materiality and the risk of losing or misapplying accepted state.
+
+### Evidence summary
+Derived from the same Engagement control incident: the primary failure occurred because significant accepted design work did not autonomously trigger consolidation; the later planned phase transition merely exposed the gap.
+
+### Expected behavioral impact
+Reduces dependence on the model remembering an abstract significant-work rule and reduces loss of accepted state during long same-phase work.
+
+---
+
 # Candidate Register
 
 | ID | Title | Status | Permanent ARCHITECT staging |
@@ -353,6 +420,8 @@ Improves architecture completeness, document-layer clarity and traceability from
 | CAND-NURA-008 | Responsibility Duration Is Not Labor Effort | CANDIDATE ONLY | NOT TRANSFERRED |
 | CAND-NURA-009 | Administrative Support Workflow Is Not Object Lifecycle | CANDIDATE ONLY | NOT TRANSFERRED |
 | CAND-NURA-010 | Missing Architecture Layer Detection | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-011 | Material Phase Transition Requires Explicit State Consolidation | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-012 | Significant Accepted Work Can Require Consolidation Without a Phase Transition | CANDIDATE ONLY | NOT TRANSFERRED |
 
 ---
 
