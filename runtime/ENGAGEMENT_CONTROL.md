@@ -2,7 +2,7 @@
 # ENGAGEMENT_CONTROL.md
 
 - **ENGAGEMENT_ID:** `ENG-NURA-ERP-001`
-- **CONTROL_VERSION:** `1.1`
+- **CONTROL_VERSION:** `1.2`
 - **CONTROL_STATUS:** ACTIVE
 - **LAST_UPDATED:** `2026-09-10`
 
@@ -47,9 +47,11 @@ Established Engagement knowledge belongs in `memory/ENGAGEMENT_MEMORY.md`, subje
 
 ### 3.1 Phase State
 
-- **CURRENT_PHASE:** Semantic Reconciliation / Question Cycle Complete — Consolidation Pending
+- **CURRENT_PHASE:** Semantic Reconciliation / Question Cycle Complete — Consolidated; Checkpoint Finalization Deferred by Infrastructure
 - **NEXT_PHASE:** Full Rewrite / Synchronization of Parts 00–03
-- **NEXT_PHASE_GATE:** `NOT_READY`
+- **NEXT_PHASE_GATE:** `READY_WITH_DEFERRED_CHECKPOINT`
+- **NEXT_PHASE_USER_CONTINUATION_DECISION:** `PENDING`
+- **INFRASTRUCTURE_DEFERMENT:** `GITHUB_CANONICAL_WRITE / CHECKPOINT FINALIZATION TECHNICALLY UNAVAILABLE`
 
 ### 3.2 System State Checkpoint / Bootstrap State
 
@@ -63,19 +65,19 @@ Established Engagement knowledge belongs in `memory/ENGAGEMENT_MEMORY.md`, subje
 - **PENDING_CHECKPOINT_GIT_REF:** `refs/tags/nura-checkpoint/CP-NURA-001`
 - **CHECKPOINT_FINALIZATION_STATE:** `NOT_STARTED`
 
-Current NURA work already contains unreviewed material delta after the v1.3 Memory baseline.
+The post-v1.3 material delta has now been reviewed and semantically consolidated, but the first System State Checkpoint remains pending canonical persistence, source verification and checkpoint finalization.
 
-Therefore no new System State Checkpoint may be established until the catch-up Learning & Change Review and the required system-state update cycle are complete.
+`CP-NURA-001` must remain pending until the required system-state update/finalization cycle is complete. Its pending state does **not** by itself block architecture work after semantic consolidation when the only blocker is technical unavailability of GitHub/canonical checkpoint infrastructure. In that case the continuation policy in Sections 17–21 applies.
 
 ### 3.3 Delta / Consolidation State
 
 - **CURRENT_SYSTEM_UPDATE:** `IN_PROGRESS`
 - **REPORTING_WINDOW_START:** `BOOTSTRAP_REVIEW_FROM`
 - **UNCHECKPOINTED_MATERIAL_DELTA:** `YES`
-- **UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK:** `YES`
-- **CONSOLIDATION_STATE:** `DUE`
+- **UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK:** `NO`
+- **CONSOLIDATION_STATE:** `CURRENT`
 
-Reason: materially significant accepted design work accumulated after the current conservative bootstrap baseline and has not yet been consolidated into a completed verified system-state update.
+Reason: the catch-up Learning & Change Review from the v1.3 conservative baseline has been completed; accepted post-v1.3 design state has been consolidated into `ENGAGEMENT_MEMORY.md v1.4`; `LEARNING_CANDIDATES.md` has been updated; Professional Background and permanent ARCHITECT / governing implications were explicitly assessed; and the full-file Engagement Memory consistency check passed. Canonical checkpoint persistence/finalization is still pending.
 
 ### 3.4 Required State Invariant
 
@@ -181,6 +183,8 @@ Required sequence:
 10. canonically persist the coherent system-state bundle;
 11. synchronize / verify required runtime-visible sources;
 12. only then finalize `CP-NURA-001`.
+
+This sequence governs **checkpoint finalization**, not semantic permission to continue architecture design. If GitHub/canonical persistence is technically unavailable after complete semantic consolidation, keep the checkpoint pending and apply the controlled infrastructure-deferment path in Sections 17–21 rather than blocking architecture work indefinitely.
 
 If the exact historical coherent bundle cannot be reconstructed, do not invent it.
 
@@ -356,7 +360,7 @@ If the coherent system-state update has **not yet been fully persisted and check
 - `UNCHECKPOINTED_MATERIAL_DELTA: YES`;
 - `CURRENT_SYSTEM_UPDATE: IN_PROGRESS`.
 
-Therefore the following intermediate state is valid:
+Therefore the following intermediate states are valid:
 
 ```text
 UNCHECKPOINTED_MATERIAL_DELTA = YES
@@ -365,10 +369,36 @@ CONSOLIDATION_STATE = CURRENT
 NEXT_PHASE_GATE = NOT_READY
 ```
 
-This resolves the distinction between:
+when a **semantic or source-integrity blocker** still exists; or:
 
-- historical fact that significant work occurred; and
-- current fact that significant accepted work remains unconsolidated.
+```text
+UNCHECKPOINTED_MATERIAL_DELTA = YES
+UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK = NO
+CONSOLIDATION_STATE = CURRENT
+NEXT_PHASE_GATE = READY_WITH_DEFERRED_CHECKPOINT
+NEXT_PHASE_USER_CONTINUATION_DECISION = PENDING
+```
+
+when semantic consolidation is complete and the only remaining blocker is technical unavailability of canonical GitHub/checkpoint infrastructure.
+
+This distinguishes:
+
+- whether accepted state is semantically consolidated;
+- whether checkpoint persistence/finalization has completed; and
+- whether the user has explicitly chosen to continue architecture work while checkpoint infrastructure is deferred.
+
+---
+
+### 11.1 Consolidation Evidence — 2026-09-10
+
+- Catch-up Learning & Change Review from conservative baseline `ENGAGEMENT_MEMORY.md v1.3`: COMPLETE.
+- `ENGAGEMENT_MEMORY.md v1.4`: runtime-visible and byte-identical to the accepted final v1.4 artifact; SHA-256 `c3e7fca1ad420b57452281f1129b550e9a036b2f7c6dea878720ea1affb30549`.
+- `LEARNING_CANDIDATES.md`: runtime-visible and byte-identical to the accepted updated candidate artifact; SHA-256 `edb12c3bfa846fb4535640ae53b9498913ddcbc0b9343cde41216cb4e3ca51b4`.
+- Open / Resolved / Deferred register: synchronized in Engagement Memory. Issues #3/#16, #4, #5, #6 and #8 are resolved at architecture-concept level; detailed Part 04–05 modeling/cardinality work is carried by Issue #17 and deferred Authorizing Basis mapping by Issue #32.
+- Full-file Engagement Memory consistency check: PASS. Established Architectural Decisions are sequential `1–65`; stale formulations occur only in explicit rejected/superseded or stale-Part descriptions; no blocking internal contradiction was found.
+- Professional Background implication: `NO CHANGE`.
+- Permanent ARCHITECT / governing implication: `NO GOVERNING CHANGE NEEDED`; candidates remain Engagement-side `CANDIDATE ONLY`.
+- Runtime-source verification completed for the current Memory and Learning Candidates artifacts; canonical repository equivalence remains UNVERIFIED until repository access/write and read-back verification succeed.
 
 ---
 
@@ -533,10 +563,10 @@ Retain checkpoint evidence for architecture outputs even though they are not bun
 
 | Dependency | Canonical revision / pointer | Runtime-visible revision / pointer | Status |
 |---|---|---|---|
-| Part 00 | TO_RECORD | TO_VERIFY | UNVERIFIED |
-| Part 01 | TO_RECORD | TO_VERIFY | UNVERIFIED |
-| Part 02 | TO_RECORD | TO_VERIFY | UNVERIFIED |
-| Part 03 | TO_RECORD | TO_VERIFY | UNVERIFIED |
+| Part 00 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `7d794cf6891d5f4656243a5adb61c2887033aa3b5fc1828c89eeeae0bf09749e` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
+| Part 01 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `d6ed9260dbb818123b3ea0da26621f996d8ac6c3cd7dafeba9f13964ded5d533` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
+| Part 02 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `b00b6cd659ac1d33c2337e8157cf51061c16a2a5492df5d3d0e47f8b45884faf` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
+| Part 03 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `ed8eb22f8c81ab87bd889b9e6241c2452c5b2daf8ccec05dca52db9a6baa25e4` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
 
 Also record the applicable Runtime Deployment Record ID / revision where available.
 
@@ -583,44 +613,78 @@ System State Checkpoint, Consolidation State and Next Phase Gate are distinct co
 ≠
 `Consolidation State`
 ≠
-`Next Phase Gate`
+`Next Phase Gate`.
 
 Completion of a local conversational plan or task sequence does not by itself establish readiness for the next material phase.
 
-ARCHITECT must not recommend, declare ready for, or begin the `NEXT_PHASE` while:
+A material next phase is **semantically blocked** while:
 
-- `NEXT_PHASE_GATE = NOT_READY`; or
 - `CONSOLIDATION_STATE = DUE`; or
-- required pre-transition system-state finalization remains incomplete.
+- a required semantic/source-integrity exit criterion is not satisfied; or
+- an unresolved ambiguity/conflict materially blocks the next phase.
 
-Before changing `NEXT_PHASE_GATE` to `READY`, ARCHITECT must perform a separate verification pass against every applicable exit criterion.
+Pending canonical GitHub persistence or checkpoint finalization is normally an important control-state deficiency, but it is **not by itself a semantic blocker** when all of the following are true:
+
+1. the applicable Learning & Change Review is complete;
+2. accepted Working State is fully consolidated into the current runtime-visible Engagement Memory;
+3. Open / Resolved / Deferred / Rejected / Superseded states are synchronized;
+4. required runtime-visible source artifacts for the next architecture work are verified as the intended consolidated artifacts;
+5. no semantic/source-integrity conflict blocks the next phase; and
+6. checkpoint completion is blocked solely by technical unavailability of GitHub/canonical persistence infrastructure rather than by uncertainty about the intended state.
+
+In that condition ARCHITECT must:
+
+- disclose that GitHub/canonical checkpoint infrastructure is technically unavailable;
+- record the checkpoint as deferred/pending, never as completed or verified;
+- set `NEXT_PHASE_GATE = READY_WITH_DEFERRED_CHECKPOINT`;
+- ask the user whether to continue the architecture work despite the deferred checkpoint; and
+- begin the next phase only after an explicit user decision to continue.
+
+This is a controlled continuation path, not a waiver of semantic consolidation.
 
 ---
 
 ## 18. Exit Criteria — Ready for Full Rewrite / Synchronization of Parts 00–03
 
-- [ ] Current reconciliation / question cycle is complete: all material items are classified as `RESOLVED`, `OPEN`, or explicitly `DEFERRED`.
-- [ ] Catch-up Learning & Change Review has been completed.
-- [ ] All accepted / established Working State has been consolidated into current Engagement Memory.
-- [ ] Open Issues / Conflicts register is synchronized.
-- [ ] Learning Candidates are updated where applicable.
-- [ ] Full-file Engagement Memory consistency check is complete.
-- [ ] Current Solution State / Readiness reflects latest accepted architecture state.
-- [ ] Professional Background implications explicitly assessed.
-- [ ] Permanent ARCHITECT / governing implications explicitly assessed.
-- [ ] No unresolved ambiguity or conflict materially blocks rewrite.
+### 18.1 Semantic readiness criteria — blocking
+
+- [x] Current reconciliation / question cycle is complete: all material items are classified as `RESOLVED`, `OPEN`, or explicitly `DEFERRED`.
+- [x] Catch-up Learning & Change Review has been completed.
+- [x] All accepted / established Working State has been consolidated into current Engagement Memory.
+- [x] Open Issues / Conflicts register is synchronized.
+- [x] Learning Candidates are updated where applicable.
+- [x] Full-file Engagement Memory consistency check is complete.
+- [x] Current Solution State / Readiness reflects latest accepted architecture state.
+- [x] Professional Background implications explicitly assessed.
+- [x] Permanent ARCHITECT / governing implications explicitly assessed.
+- [x] No unresolved ambiguity or conflict materially blocks rewrite.
+- [x] Runtime-visible `ENGAGEMENT_MEMORY.md` and `LEARNING_CANDIDATES.md` are verified as the intended consolidated artifacts for the next phase.
+
+Failure of any applicable criterion in 18.1 keeps `NEXT_PHASE_GATE = NOT_READY`.
+
+### 18.2 Persistence / checkpoint criteria — required for verified checkpoint, conditionally non-blocking for architecture continuation
+
 - [ ] `CP-NURA-001` has been successfully finalized and verified.
-- [ ] Required runtime-visible Project Sources are synchronized against the intended checkpoint state.
-- [ ] Parts 00–03 dependency revisions are recorded.
+- [ ] Canonical Git persistence/read-back has been verified.
+- [ ] Canonical dependency revisions for Parts 00–03 are recorded.
+
+These criteria remain required before claiming a **verified System State Checkpoint**.
+
+If they cannot be completed solely because GitHub/canonical persistence infrastructure is technically unavailable, they may be marked `DEFERRED — INFRASTRUCTURE UNAVAILABLE` for phase-continuation purposes. They must not be marked PASS and the checkpoint must remain pending.
+
+If failure instead indicates uncertainty about which artifact/revision is correct, source mismatch, unresolved semantic conflict, or loss of required evidence, it remains blocking and `NEXT_PHASE_GATE` stays `NOT_READY`.
 
 ---
 
 ## 19. Phase Gate Verification Evidence
 
-- **GATE_VERIFIED_AT:** `NOT_VERIFIED`
-- **GATE_VERIFIED_BY:** `NOT_VERIFIED`
-- **VERIFICATION_RESULT:** `NOT_READY`
-- **VERIFICATION_EVIDENCE:** `PENDING`
+- **GATE_VERIFIED_AT:** `2026-09-10`
+- **GATE_VERIFIED_BY:** `ARCHITECT runtime — semantic/source verification only`
+- **VERIFICATION_RESULT:** `READY_WITH_DEFERRED_CHECKPOINT`
+- **SEMANTIC_READINESS:** `PASS`
+- **CHECKPOINT_READINESS:** `DEFERRED — GITHUB/CANONICAL PERSISTENCE TECHNICALLY UNAVAILABLE`
+- **NEXT_PHASE_USER_CONTINUATION_DECISION:** `PENDING`
+- **VERIFICATION_EVIDENCE:** `Semantic consolidation requirements pass; current runtime-visible Engagement Memory v1.4 and Learning Candidates were verified as the intended consolidated artifacts; no blocking semantic ambiguity was found. CP-NURA-001 and canonical dependency revisions remain unverified because GitHub/canonical repository access is technically unavailable. This infrastructure deferment does not equal checkpoint completion and requires explicit user continuation decision before architecture work begins.`
 
 A vague assertion such as “the latest files seem to be uploaded” is insufficient.
 
@@ -630,62 +694,79 @@ A vague assertion such as “the latest files seem to be uploaded” is insuffic
 
 `CONSOLIDATION_STATE` and `NEXT_PHASE_GATE` are independent.
 
-A valid state is:
+Allowed transition-readiness states for the current Engagement control are:
+
+- `NOT_READY` — one or more blocking semantic/source-integrity criteria fail;
+- `READY_WITH_DEFERRED_CHECKPOINT` — semantic readiness passes, checkpoint infrastructure is technically unavailable, and explicit user continuation decision is still required;
+- `READY` — semantic readiness passes and applicable persistence/checkpoint requirements needed for the intended transition have also passed.
+
+A valid infrastructure-deferred state is:
 
 ```text
 CONSOLIDATION_STATE = CURRENT
-NEXT_PHASE_GATE = NOT_READY
+NEXT_PHASE_GATE = READY_WITH_DEFERRED_CHECKPOINT
+NEXT_PHASE_USER_CONTINUATION_DECISION = PENDING
+SYSTEM_STATE_CHECKPOINT_STATUS = BOOTSTRAP_PENDING
 ```
 
-when consolidation is complete but one or more phase-transition exit criteria remain unsatisfied.
+When `READY_WITH_DEFERRED_CHECKPOINT`, ARCHITECT must inform the user of the technical GitHub/canonical persistence limitation and ask whether to continue architecture work.
 
-Only when all applicable exit criteria pass:
+If the user explicitly chooses to continue:
 
-- set `NEXT_PHASE_GATE: READY`;
-- record phase-gate verification evidence.
+```text
+NEXT_PHASE_USER_CONTINUATION_DECISION = APPROVED
+```
 
-No ARCHITECT Maintainer approval is required merely to mark an ordinary Engagement phase transition `READY` when evidence passes.
+The architecture phase may then start while checkpoint state remains pending.
 
-Authority for NURA business decisions, confidentiality decisions and permanent ARCHITECT changes remains role-specific.
+If the user chooses not to continue, keep the phase unchanged and wait for infrastructure recovery / checkpoint completion.
+
+No ARCHITECT Maintainer approval is required merely for this ordinary Engagement phase continuation. Authority for NURA business decisions, confidentiality decisions and permanent ARCHITECT changes remains role-specific.
 
 ---
 
 ## 21. Actual Phase Start
 
-`READY` means the next phase may begin. It does not mean it has begun.
+`READY` or `READY_WITH_DEFERRED_CHECKPOINT + NEXT_PHASE_USER_CONTINUATION_DECISION = APPROVED` means the next architecture phase may begin. It does not mean it has already begun.
 
 When substantive work on `NEXT_PHASE` actually starts, updating this Control is one of the first required actions:
 
 1. move former `NEXT_PHASE` into `CURRENT_PHASE`;
 2. define the next material `NEXT_PHASE`;
-3. set the new `NEXT_PHASE_GATE: NOT_READY`;
-4. define phase-appropriate exit criteria;
-5. preserve prior verification evidence in Git history.
+3. set the new phase's gate according to its own readiness criteria;
+4. preserve `CP-NURA-001` and canonical persistence as `PENDING / DEFERRED` until actually completed;
+5. preserve prior verification evidence and user continuation decision in canonical history when GitHub becomes available.
 
-Do not continue materially in the new phase while this file still claims the previous phase is current.
+Do not claim checkpoint finalization merely because architecture work continued under the deferred-infrastructure path.
 
 ---
 
 ## 22. Current Expected Sequence
 
-For current NURA ERP state:
+For current NURA ERP state, the normal path remains:
 
 **Catch-up delta review from v1.3 conservative baseline**
 → **Engagement Memory consolidation**
 → **Learning Candidates update where applicable**
 → **Professional Background / permanent ARCHITECT assessment**
 → **full-file Memory consistency check**
-→ **prepare coherent checkpoint candidate**
-→ **Phase A: checkpoint candidate commit**
-→ **Phase B: annotated tag + remote/tag/runtime evidence verification**
-→ **EXTERNAL_VERIFICATION_PASSED — checkpoint still not VERIFIED**
-→ **Phase C: canonical administrative Control commit records VERIFIED + resolved candidate hash**
-→ **CP-NURA-001 becomes canonically VERIFIED; reporting window/counters reset**
-→ **Phase D: synchronize current Control to active runtime / Project Sources**
-→ **CP-NURA-001 verified operational state visible to runtime**
+→ **canonical persistence / checkpoint finalization when infrastructure is available**
 → **phase-gate verification**
 → **Full Rewrite / Synchronization of Parts 00–03**
+→ **cross-Part V&V**.
+
+When canonical GitHub/checkpoint infrastructure is technically unavailable after semantic consolidation, use this alternate controlled path:
+
+**semantic consolidation complete**
+→ **runtime-visible consolidated sources verified**
+→ **record canonical persistence / CP-NURA-001 as DEFERRED — INFRASTRUCTURE UNAVAILABLE**
+→ **phase-gate verification = READY_WITH_DEFERRED_CHECKPOINT**
+→ **inform user of the limitation and ask whether to continue**
+→ if user approves: **Full Rewrite / Synchronization of Parts 00–03**
 → **cross-Part V&V**
+→ when GitHub becomes available: **resume canonical persistence / CP-NURA-001 finalization and record the actual dependency revisions**.
+
+Architecture work performed during the infrastructure-deferred period must remain traceable to the runtime-visible consolidated baseline used to start that work.
 
 ---
 
@@ -699,4 +780,6 @@ If this Control itself is stale and the runtime cannot write it canonically, ARC
 
 - state the required state change;
 - provide the proposed updated artifact / patch;
-- behave conservatively according to the stricter state until persistence is confirmed.
+- keep canonical persistence / checkpoint status explicitly `PENDING / DEFERRED`, never falsely `VERIFIED`;
+- if semantic consolidation or source integrity is incomplete, remain blocked;
+- if semantic consolidation is complete and GitHub/canonical persistence is the only technical blocker, apply Sections 17–21: inform the user, ask whether to continue architecture work, and proceed only after explicit user approval while preserving the deferred checkpoint state.
