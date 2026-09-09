@@ -219,8 +219,13 @@ An obligation must remain closure-blocking where applicable authority explicitly
 ### Evidence summary
 Derived from a case where long-term dissemination obligations could continue after administrative and financial project closure.
 
+### Material refinement — 2026-09-10
+Closure significance may be relationship/context-specific rather than an intrinsic property of the obligation. The same underlying obligation may be permitted to outlive closure of one parent object while still blocking closure of another parent object if unresolved consequences remain under that second object.
+
+Recognition cue: the same obligation is linked to several governed parent objects whose closure criteria differ.
+
 ### Expected behavioral impact
-Produces cleaner lifecycle semantics and avoids artificially open parent records.
+Produces cleaner lifecycle semantics, avoids artificially open parent records, and prevents one global `closure-blocking` flag from being misapplied across different parent-object contexts.
 
 ---
 
@@ -293,8 +298,9 @@ Model separate workflows or related facts where they have independent actors, au
 
 ### Recognition cues
 - one status enum contains internal review, external review, submission, decision and handover stages;
-- an external evaluator controls a stage that the system cannot actually observe;
-- support activity is optional but represented as mandatory lifecycle state.
+- an external evaluator or counterparty controls a stage that the system cannot actually observe reliably;
+- support activity is optional but represented as mandatory lifecycle state;
+- real work permits several valid orderings or repeated cycles of the same coordination activities.
 
 ### Applicability
 Applications, contracts, cases, submissions, compliance processes, onboarding.
@@ -303,10 +309,13 @@ Applications, contracts, cases, submissions, compliance processes, onboarding.
 A support/review step may legitimately be a lifecycle state where it is mandatory, authoritative and part of the object's own state semantics.
 
 ### Evidence summary
-Derived from separating administrative application checking from scientific peer review, external submission and funding outcome.
+Originally derived from separating administrative application checking from scientific peer review, external submission and funding outcome. Further refined by a contract-preparation case where external/manual counterparty coordination was real but not reliably observable by the system and could occur in different/repeated sequences.
+
+### Material refinement — 2026-09-10
+An externally performed or manually communicated activity should not become a mandatory lifecycle state merely because it is useful to know that it happened, especially where the system cannot reliably observe its start/end. Prefer action/evidence/timestamps or optional operational progress where appropriate.
 
 ### Expected behavioral impact
-Reduces overloaded state models and improves authority semantics.
+Reduces overloaded state models, improves authority/observability semantics and avoids false precision in workflow status.
 
 ---
 
@@ -406,6 +415,134 @@ Reduces dependence on the model remembering an abstract significant-work rule an
 
 ---
 
+## CAND-NURA-013 — Operational Current State Is Not the Same as Formal Approved Snapshot
+
+**Type:** decision principle / modeling pattern  
+**Status:** CANDIDATE ONLY  
+**Confidence:** high
+**Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
+
+### Proposed knowledge
+When a working state changes continuously while formal approval occurs periodically, model the current operational state separately from the immutable formally approved snapshot.
+
+The latest approved snapshot may be historically/formally authoritative without being the freshest operational truth.
+
+### Recognition cues
+- rolling plan or forecast changes between formal approvals;
+- users work from a live operational register while governance signs periodic snapshots;
+- `approved`, `effective`, `current` or `consolidated` are being used interchangeably;
+- formal approval frequency is lower than operational change frequency.
+
+### Applicability
+Procurement plans, operating plans, forecasts, board-approved plans, regulatory submissions, policy baselines, portfolio plans.
+
+### Limits
+If formal approval is itself the event that makes every change operationally usable, the two states may legitimately coincide.
+
+### Evidence summary
+Derived from a planning model where operationally accepted changes became immediately relevant for monitoring/work, while immutable formally approved versions were created only periodically.
+
+### Expected behavioral impact
+Prevents stale formal snapshots from being misrepresented as live operational truth and prevents continuous work from creating unnecessary formal versions.
+
+---
+
+## CAND-NURA-014 — Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge
+
+**Type:** modeling pattern / heuristic  
+**Status:** CANDIDATE ONLY  
+**Confidence:** high
+**Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
+
+### Proposed knowledge
+When one aggregate object contains child items that may legitimately be at different downstream stages at the same time, detailed progress should live at the child/item/allocation level and aggregate progress should be derived or intentionally coarse.
+
+A single detailed manual status on the parent should not pretend that all children share one stage.
+
+### Recognition cues
+- one case/order/request contains many items or lots;
+- some children are selected/contracted/delivered while others failed or remain under evaluation;
+- users ask for one status although the underlying state is heterogeneous;
+- parent status repeatedly becomes ambiguous or misleading.
+
+### Applicability
+Procurement cases, orders, shipments, batch processing, portfolios, multi-item service requests, fulfillment systems.
+
+### Limits
+A single parent status may still be appropriate where children are required to move atomically or the parent lifecycle intentionally represents only a coarse phase.
+
+### Evidence summary
+Derived from a procurement case that could contain many items/lots with simultaneous Evaluation, Contracting, Delivery and Not-Procured outcomes.
+
+### Expected behavioral impact
+Improves status truthfulness, analytics and exception handling while reducing overloaded parent lifecycle models.
+
+---
+
+## CAND-NURA-015 — Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation
+
+**Type:** decision principle  
+**Status:** CANDIDATE ONLY  
+**Confidence:** high
+**Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
+
+### Proposed knowledge
+A planning or demand object may remain revisable, but once a downstream contractual, financial or other binding obligation exists, changing the upstream object must trigger the applicable downstream change / amendment / termination / reconciliation path rather than silently rewriting the obligation history.
+
+The existence of an obligation is not necessarily an absolute prohibition on later change; it changes the governance and consequences of that change.
+
+### Recognition cues
+- upstream quantity/scope changes after contract or commitment;
+- users want to edit the original request as if no downstream obligation exists;
+- amendment/termination cost or counterparty consent becomes relevant;
+- auditability requires preserving the originally authorized/contracted facts.
+
+### Applicability
+Procurement, budgets, resource plans, orders, subscriptions, service requests, reservations, contracts.
+
+### Limits
+If the downstream object is explicitly non-binding or designed to inherit upstream edits until a later commitment event, the boundary should be placed at the actual obligation-forming event instead.
+
+### Evidence summary
+Derived from a quantity change requested after a supplier contract had already been concluded, where change remained possible only through a controlled procurement/contract path.
+
+### Expected behavioral impact
+Preserves causal history and prevents upstream edits from fabricating a false downstream past.
+
+---
+
+## CAND-NURA-016 — Automation May Require Changing the Evidence-Supply Environment, Not Only the Software
+
+**Type:** architecture principle / heuristic  
+**Status:** CANDIDATE ONLY  
+**Confidence:** medium-high
+**Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
+
+### Proposed knowledge
+When useful automation depends on a fact that the system cannot infer and only an external actor knows, architecture should examine whether the surrounding process, interface, policy or contractual obligation should require that actor to provide the fact.
+
+The software should still support fallback handling when the expected evidence/input is absent or late.
+
+### Recognition cues
+- automation needs shipment/content/timing details known only by a supplier or partner;
+- the system is blamed for not routing/alerting correctly despite missing upstream evidence;
+- better automation requires a behavioral/process/contract change outside the application itself;
+- failure to provide data must not make real-world events impossible to record.
+
+### Applicability
+Supplier portals, logistics, service appointments, partner integrations, compliance submissions, external evidence collection.
+
+### Limits
+Do not impose contractual/process obligations where the required information is unavailable to the external actor, disproportionate to collect, or not material enough to justify the burden.
+
+### Evidence summary
+Derived from a delivery-notification problem where correct receiver routing depended on supplier-provided shipment contents and timing, which the ERP could not otherwise know.
+
+### Expected behavioral impact
+Broadens architecture from application-only design to socio-technical evidence supply while preserving operational resilience through fallback paths.
+
+---
+
 # Candidate Register
 
 | ID | Title | Status | Permanent ARCHITECT staging |
@@ -422,6 +559,10 @@ Reduces dependence on the model remembering an abstract significant-work rule an
 | CAND-NURA-010 | Missing Architecture Layer Detection | CANDIDATE ONLY | NOT TRANSFERRED |
 | CAND-NURA-011 | Material Phase Transition Requires Explicit State Consolidation | CANDIDATE ONLY | NOT TRANSFERRED |
 | CAND-NURA-012 | Significant Accepted Work Can Require Consolidation Without a Phase Transition | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-013 | Operational Current State Is Not the Same as Formal Approved Snapshot | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-014 | Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-015 | Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE ONLY | NOT TRANSFERRED |
 
 ---
 

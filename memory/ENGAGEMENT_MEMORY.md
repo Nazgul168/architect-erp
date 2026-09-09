@@ -1,7 +1,7 @@
 # ENGAGEMENT_MEMORY.md
 
-- **MEMORY_VERSION:** `1.3`
-- **LAST_RECONCILED:** `2026-09-09`
+- **MEMORY_VERSION:** `1.4`
+- **LAST_RECONCILED:** `2026-09-10`
 - **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis`, `Part 02 — Process Architecture`, `Part 03 — System Analysis`, fully reviewed during Global Reconciliation on 2026-09-08.
 - **BOOTSTRAP / RECONCILIATION reference:** QA Bootstrap Batches 1–8 + accepted Global Reconciliation, 2026-09-08.
 
@@ -10,8 +10,8 @@
 - **Engagement:** NURA ERP Architecture
 - **Engagement ID:** `ENG-NURA-ERP-001`
 - **Status:** ACTIVE
-- **Memory status:** UPDATED WORKING VERSION — OPEN ISSUES #1, #2, #7, #11/#12 RESOLVED AT ARCHITECTURE-DECISION LEVEL; FULL CROSS-PART REWRITE / SYNCHRONIZATION PENDING
-- **Current architecture state:** Parts 00–03 developed but materially stale against accepted post-v1.2 decisions. Remaining business questions are being closed before a full rewrite/synchronization of Parts 00–03. Master architecture structure now includes future Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08.
+- **Memory status:** CONSOLIDATED WORKING VERSION — ISSUES #1, #2, #3/#16, #4, #5, #6, #7, #8, #11/#12 RESOLVED AT ARCHITECTURE-DECISION LEVEL; FULL CROSS-PART REWRITE / SYNCHRONIZATION PENDING
+- **Current architecture state:** Parts 00–03 are developed but materially stale against accepted post-v1.2/post-v1.3 decisions. The current semantic reconciliation / question cycle is complete. This v1.4 consolidates the accepted post-v1.3 decisions required before the full rewrite/synchronization of Parts 00–03. Transition readiness remains governed by `ENGAGEMENT_CONTROL.md`. The master architecture structure includes future Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08.
 - **Purpose of this memory:** compact working memory of the current NURA ERP architecture. It is not a transcript, Bootstrap ledger, or substitute for the architecture Parts.
 - **Canonical baseline persistence:** baseline `ENGAGEMENT_MEMORY.md` v1.0 is user-confirmed as canonically persisted in the canonical Engagement Git repository. The same confirmation applies to the baseline `ARCHITECT_PROFESSIONAL_BACKGROUND.md` and updated `00_ENGAGEMENT_MANIFEST.md` referenced by this Engagement.
 - **Canonical persistence:** Canonical persistence of the current version is determined by the canonical Engagement repository and its version history. This runtime has no verified canonical write path and does not claim to perform canonical writes.
@@ -127,6 +127,32 @@ Post-Award Handover Required, Authorizing Basis Requirement Satisfied and Operat
 
 **Funding Agreement Amendment** is a separate Business Entity related `1:N` to Funding Agreement. It has its own lifecycle, legal dates, proposed/effective terms, history and causal consequences.
 
+### Agreement Processing, Legal Effect, Termination and Administrative Closeout
+
+Agreement / Amendment preparation is not one universal linear lifecycle. The system must support meaningful work/action history including `Draft Preparation`, `Internal Coordination`, `EDMS Coordination / Approval / NURA Signature` and applicable Counterparty exchange / coordination evidence.
+
+The order may vary by funder / legal case and may repeat. `Counterparty Coordination` is not a mandatory system lifecycle state where ERP cannot reliably observe the external/manual activity. Counterparty changes may require a new EDMS document version and repetition of formal coordination/signature steps.
+
+Agreement registration facts include the NURA registration number/date and may include separate funder/partner number/date. Independent identifiers and dates must remain separate structured facts. These official identifiers may be displayed together after registration, but they are not assumed to exist when the draft Agreement is first generated.
+
+Amendment follows the same general preparation model and remains linked to its parent Agreement; in EDMS it may be initiated from that Agreement rather than created as an unrelated new document.
+
+Preparation that is permanently discontinued before conclusion records the Agreement preparation outcome as `Not Concluded`. Where applicable, the linked pre-active Project follows the established `Not Proceeded` rule.
+
+Legal effect is separate from preparation workflow. `Effective` condition is derived from applicable legal/document facts and terms rather than maintained as a generic manual processing status.
+
+Agreement administrative closeout is separate from Project Closure. Target administrative states are:
+
+`Open → Pending Closeout → Closed`.
+
+Agreement Closeout is confirmed by **Head of Post-Award + Legal** using the applicable obligation checklist, with completion evidence determined automatically or manually as appropriate.
+
+An open related Project does not automatically block Agreement Closure. An unresolved Agreement obligation or consequence remains closure-blocking where it can still produce a penalty, refund, claim, dispute or other contractual consequence. The same underlying obligation may therefore be non-blocking for Project Closure while remaining Agreement-Closure-Blocking.
+
+Early Termination / Early Cessation is a formal event with its own reason/basis, initiator, effective date, supporting/authorizing documents and consequences. Reason/basis and consequences must be stored separately. Early termination of legal effect does not itself mean Agreement `Closed`; the Agreement remains `Pending Closeout` until applicable contractual, financial, reporting, dispute and settlement obligations are resolved.
+
+For internal grants where no Agreement exists, early cessation is a Project event and may be supported by the applicable Research Council Decision or other required authorizing evidence.
+
 ### Funding, Budget and Accounting
 
 **Funding ≠ Budget ≠ Commitment ≠ Operational Actual ≠ Accounting Actual.**
@@ -177,39 +203,74 @@ Use of NURA Own Funds or another alternative source requires the applicable Fund
 
 ### Research Need
 
-**Research Need** is a PI-oriented structured statement of a planned material procurement need and planning input. Its exact own lifecycle versus derived downstream procurement progress remains unresolved and must be normalized before Data Architecture / Data Model finalization.
+**Research Need** is a PI-oriented structured statement of a planned material procurement need and planning input.
+
+Research Need has its own lifecycle and must not use downstream Procurement execution stages as its lifecycle states. `Procurement Request Created`, `Procurement Case`, `Supplier Selected`, `Contract Signed`, `Delivered`, `Accepted` and `Paid` are downstream progress facts derived through related objects.
+
+One Research Need may be satisfied through multiple downstream Procurement Requests / Item Allocations. For quantity-based material needs, ERP should derive progress using applicable quantities such as `Need Quantity`, `Requested Quantity`, `Contracted Quantity`, `Delivered Quantity`, `Accepted Quantity` and `Remaining Need Quantity`. Fulfilment is based on satisfaction of the need, normally sufficient Accepted Quantity, rather than Payment.
+
+Research Need may be revised or cancelled with history preserved. If downstream Procurement already exists, the change must use the applicable downstream change / withdrawal process rather than silently rewriting existing Procurement facts.
+
+After Supplier Contract signature, PI may still request a material change or withdrawal, but it requires a **Formal Request to Procurement**. Procurement Office may approve or reject it based on supplier agreement, amendment/termination feasibility, penalties/cost and other contractual consequences. Contract signature is therefore not an absolute prohibition on change; it is the boundary after which change becomes a controlled downstream obligation-change process.
+
+Exact final Research Need lifecycle labels and unresolved reverse cardinalities are deferred to Part 05 / Issue #17 and do not reopen the resolved architectural concept.
 
 ### Procurement Plan
 
-Target taxonomy:
+Procurement Plan is primarily a planning and operational monitoring instrument, not transaction authorization.
 
-**Initial Procurement Plan → Procurement Plan Amendment(s) → Procurement Plan Version(s) → Consolidated Current Procurement Plan.**
+The model distinguishes:
 
-- Current Operational Truth is structured data.
-- Approved versions are immutable historical records.
-- Official Word/PDF documents are generated representations where required.
-- Procurement Planning is permitted during Setup/readiness work before Operational Authorization, including an external Project in lifecycle `Setup` and an `Active` Project whose readiness is not yet complete.
-- Research Needs and Procurement Plan represent planning / forecast information and do not by themselves authorize expenditure or create a procurement commitment.
-- An Approved Procurement Plan may exist before Project Operational Authorization.
-- A formal Procurement Request remains required to initiate procurement.
-- Where a Procurement Request is created from an approved Procurement Plan Item, it may bypass repeat manual Post-Award review and proceed to Procurement Office only after automatic validation against the current approved Budget, applicable limits, existing Commitments and Operational Restrictions.
+- **Procurement Plan** — persistent logical planning context;
+- **Effective Procurement Plan** — latest current structured operational truth;
+- **Approved Procurement Plan Version** — immutable formally approved snapshot;
+- **Procurement Plan Amendment** — formal delta document/package submitted for periodic approval;
+- **Consolidated Approved Procurement Plan** — consolidated representation of the latest formally approved state, generatable as Word/PDF where required.
+
+Effective Procurement Plan may be newer than the latest Approved Procurement Plan Version because accepted operational additions/changes may occur between formal Directorate approvals.
+
+After a Research Need has passed the required Post-Award and Procurement approvals, its applicable Plan Item is reflected automatically in the Effective Procurement Plan. No additional `Approve inclusion into Effective Plan` action is required.
+
+Operational changes do not create a new physical Procurement Plan Version after every edit. Formal immutable Versions are created only through the applicable formal approval process. `Approved` and `Effective` are separate semantics.
+
+Procurement Planning is permitted during Setup/readiness work before Operational Authorization, including an external Project in lifecycle `Setup` and an `Active` Project whose readiness is not yet complete. Research Needs and Procurement Plan represent planning / forecast information and do not by themselves authorize expenditure or create a procurement commitment.
+
+A formal Procurement Request remains required to initiate procurement. Where a Procurement Request is created from an applicable approved/planned Item, it may bypass repeat manual Post-Award review only where the established rules allow and after automatic validation against the current approved Budget, applicable limits, existing Commitments and Operational Restrictions.
 
 ### Procurement Request and Procurement Case
 
 **Procurement Request ≠ Procurement Case.**
 
 - Procurement Request represents what the Project / Research Team requested and remains active until all Request Items reach a valid final outcome.
-- Procurement Case represents the concrete Procurement Office execution context.
+- Procurement Case represents the Procurement Office execution / sourcing / consolidation context. It is not synonymous with an Announcement.
 
-Request↔Case relationships must be stored at Item / Quantity allocation level and support both split and consolidation.
+Request↔Case relationships must be stored at Item / Quantity allocation level and support both split and consolidation. ERP may identify and propose consolidation candidates across Requests / Projects, but Procurement makes the final consolidation decision.
 
-Whether **Procurement Procedure** is a separate first-class Business Object or is represented through Procurement Case + Procurement Method-specific workflow remains unresolved.
+Announcement, sourcing round or other market-facing activity is an activity or artifact within the applicable Case / Method.
+
+**Procurement Procedure is not modeled as a separate first-class Business Object.** Procurement Method and applicable configurable rules determine Case execution.
+
+A failed/non-resulting attempt for an Item preserves its outcome in the original Case. Remaining need may subsequently be allocated to another Procurement Case.
+
+The architecture must not force one Procurement Case to exactly one Supplier Contract. A Case may result in zero, one or multiple Supplier Contracts depending on Lots, Winners, Method and outcome. Exact logical cardinalities remain subject to Part 05 / Issue #17.
+
+Detailed heterogeneous progress belongs primarily to Case Items / Lots / Allocations and downstream objects. Case-level progress/state should be coarse or derived where Items are at different execution stages.
 
 ### Delivery and Acceptance
 
 **Delivery ≠ Acceptance.**
 
-Delivered Quantity and Accepted Quantity are separate facts. A delivery may be fully delivered but only partially accepted or rejected.
+Delivered Quantity and Accepted Quantity are separate facts. Acceptance is recorded at **Delivery Item / Quantity** level. One Delivery may contain Items for multiple Projects and may be accepted by multiple actual receivers.
+
+Applicable receivers may include PI, Project Administrator, Procurement staff and an RA explicitly designated by the PI as a procurement assistant / receiver, together with other roles where later rules permit. The system should normally route users to the Items relevant to their Project / assignment while preserving who actually confirmed receipt.
+
+Aggregate Delivery outcomes such as `Accepted / Partially Accepted / Rejected` should be derived from underlying item/quantity acceptance facts where possible rather than maintained as an independent manual truth. Where useful, distinguish `Remaining to Deliver` from `Delivered but Not Yet Accepted`.
+
+Where applicable, standard Supplier Contract terms should require **Advance Delivery Notice** identifying the relevant Contract, goods / Contract Lines, quantities and expected delivery date/time, together with applicable shipment/delivery references. ERP should use this information to identify affected Projects and notify relevant potential receivers.
+
+Lack of advance notification must not prevent registration of an actual Delivery. The system must support fallback operational handling when Supplier provides only a Contract reference or otherwise insufficient advance detail.
+
+Unresolved rejected/non-conforming quantities may create Delivery Exceptions and may affect Payment / closure according to the applicable rules.
 
 ### Change, Correction, Reconciliation and Override
 
@@ -383,6 +444,26 @@ Stable fundamental invariants may remain Hard Business Validations. Configurabil
 
 55. **NURA ERP master architecture includes a distinct Solution Architecture layer between Information Architecture and Enterprise Architecture.**
 
+56. **Agreement preparation is variable and action-based.** Preparation may follow different and repeated sequences; external/manual Counterparty Coordination is not forced into a mandatory lifecycle state where ERP cannot reliably observe it.
+
+57. **Agreement processing, legal/document facts, legal effect and administrative closeout are separate dimensions.**
+
+58. **Agreement Closure is separate from Project Closure and is obligation-driven.** Head of Post-Award and Legal jointly confirm administrative closeout against the applicable obligation checklist.
+
+59. **Agreement early termination is a causal event, not a substitute final status.** It preserves basis, effective date, evidence and consequences; termination of legal effect does not itself mean Agreement `Closed`.
+
+60. **Research Need has its own lifecycle; Procurement execution progress is represented through related downstream objects and quantities.**
+
+61. **Effective Procurement Plan ≠ Approved Procurement Plan Version.** `Effective Procurement Plan` is current operational truth; `Approved Procurement Plan Version` is a formal immutable snapshot; `Consolidated Approved Procurement Plan` is the latest formally approved consolidated representation.
+
+62. **Procurement Case is the Procurement Office execution/consolidation context; Procurement Procedure is not a separate first-class Business Object.** Procurement Method-specific rules govern Case execution.
+
+63. **Heterogeneous Procurement Case / Request progress is primarily item/allocation-level.** Where Items can be at different stages simultaneously, aggregate progress/state should be concise and derived rather than manually pretending all Items share one detailed stage.
+
+64. **Goods Acceptance is item/quantity-based and one Delivery may have multiple actual receivers.** Aggregate acceptance outcomes should be derived from the underlying Item/Quantity facts where possible.
+
+65. **Advance Delivery Notice is a target supplier-control and ERP capability.** Where applicable, Supplier Contract terms should require advance identification of planned delivery contents and timing; ERP must still support fallback handling for unannounced/insufficiently described deliveries.
+
 ---
 
 ## Architecture Principles
@@ -527,6 +608,18 @@ Only items worth retaining to prevent accidental reintroduction:
 - `Only financial obligations = Post-Award Handover Required` — rejected as too narrow.
 - Hard-coding Research Contract ↔ Project as permanently 1:1 — rejected.
 - Treating Matching / Co-funding as necessarily a top-level Agreement Type — superseded; it is primarily a Funding Mechanism.
+- Fixed universal Agreement / Amendment chain `Draft → Internal Review → Counterparty Review → EDMS → Signed/Registered → Effective` — superseded by variable/cyclic action history, separate legal/document facts, legal effect and administrative closeout.
+- Mandatory `Counterparty Coordination` as a system lifecycle status — rejected where the external/manual activity is not reliably observable.
+- Treating Agreement `Effective` as merely the last manual workflow status — rejected; legal effect is derived from applicable facts and terms.
+- Treating Project Closure as Agreement Closure — rejected.
+- Closing an Agreement while an outstanding obligation can still create contractual penalty/refund/claim/dispute consequences — rejected.
+- Treating Supplier Contract signature as an absolute prohibition on later Procurement Request / Research Need change — rejected; post-contract change remains possible through Formal Request to Procurement and contractual assessment.
+- Research Need lifecycle continuing through Supplier Selection, Contract, Delivery, Acceptance, Payment and `Closed` — superseded; those are downstream progress facts.
+- Treating Approved Procurement Plan and Effective Procurement Plan as interchangeable concepts — rejected.
+- `Consolidated Current Procurement Plan` as the operational current truth — superseded by `Effective Procurement Plan` plus `Consolidated Approved Procurement Plan`.
+- Procurement Procedure as a required separate first-class Business Object — not adopted.
+- Procurement Case as merely an Announcement — rejected as too narrow.
+- One manually maintained aggregate Acceptance / Procurement Case detailed-progress state as the sole truth for heterogeneous Items — superseded by Item/Quantity-level facts and derived aggregate views.
 - Keeping Solution Architecture only implicitly distributed across Parts 00/03 — superseded by an explicit Part 07 Solution Architecture.
 
 ---
@@ -564,12 +657,12 @@ Items below are either intentionally unresolved or explicitly marked as resolved
 
    Issue #1 remains resolved at the architectural-concept level. Detailed `Project Type / Scenario → Authorizing Basis Requirement` rule mapping is tracked separately as a modeling/configuration item and does not reopen Issue #1.
 2. **RESOLVED — pending propagation/full rewrite:** Application lifecycle is separated from Pre-Award Application Check, external submission, scientific evaluation, Funding Decision and Handover.
-3. Decide Research Need own lifecycle versus derived downstream Procurement progress.
-4. Canonicalize Procurement Plan / Amendment / Version terminology across Parts.
-5. Decide whether Procurement Procedure is a first-class Business Object or Method-specific execution within Procurement Case.
-6. Propagate final Goods Acceptance rule consistently across all Parts.
+3. **RESOLVED — pending propagation/full rewrite:** Research Need has its own lifecycle; downstream Procurement execution is represented through related objects / quantities rather than Research Need lifecycle states. Exact final lifecycle labels and unresolved reverse cardinalities remain Part 05 detail under Issue #17.
+4. **RESOLVED — pending propagation/full rewrite:** Procurement Plan semantics are normalized: `Effective Procurement Plan` is current operational truth; `Approved Procurement Plan Version` is a formal immutable snapshot; `Procurement Plan Amendment` is the formal delta; `Consolidated Approved Procurement Plan` is the latest formally approved consolidated representation.
+5. **RESOLVED — pending propagation/full rewrite:** Procurement Procedure is not a separate first-class Business Object; target execution is `Procurement Case + Procurement Method-specific rules/workflow`.
+6. **RESOLVED — pending propagation/full rewrite:** Goods Acceptance is item/quantity-level, supports multiple actual receivers in one Delivery, and uses derived aggregate outcomes where possible. Advance Delivery Notice is added as a target supplier-control / ERP capability with operational fallback.
 7. **RESOLVED — pending propagation/full rewrite:** Project Closure semantics, closure-blocking vs post-closure obligations, Termination, Audit relationship, extension and controlled erroneous-closure reopening are established.
-8. Normalize Funding Agreement / Amendment state vocabulary across Process and System sections.
+8. **RESOLVED — pending propagation/full rewrite:** Agreement / Amendment preparation is variable/cyclic and action-based; processing, registration/signature facts, legal effect, `Not Concluded`, early-termination event and separate Agreement administrative closeout are established.
 
 ### Business clarification required
 
@@ -583,8 +676,8 @@ Items below are either intentionally unresolved or explicitly marked as resolved
 ### Data / financial logic still to formalize
 
 15. Finalize exact Commitment → Actual → Available Budget calculation and double-counting prevention. Established constraint: Unallocated Funding is not Available Budget and must not become spendable until it is allocated and approved.
-16. Exact Research Need / Procurement downstream status ownership.
-17. Final cardinalities and temporal constraints for unresolved relationships before Part 05.
+16. **RESOLVED at architecture-concept level:** Research Need owns only its own lifecycle; downstream procurement progress belongs to related Procurement objects / quantities. Exact Part 05 relationship/cardinality implementation remains under Issue #17.
+17. Final cardinalities and temporal constraints for unresolved relationships before Part 05. Scope explicitly includes unresolved reverse Research Need ↔ Procurement Request Item relationships, Procurement Case ↔ Supplier Contract cardinalities/constraints, Agreement closeout-obligation relationships and Delivery / Acceptance / Receiver / Advance Delivery Notice cardinalities.
 31. Determine the exact Part 04–05 representation for external research activities known to NURA but not administratively managed by NURA. Established principle: known by NURA ≠ administered by NURA.
 32. Formalize the configurable `Project Type / Scenario → Authorizing Basis Requirement` mapping, including applicable composite requirement structures, during rule / data design. The architectural concept is resolved; this is a deferred modeling/configuration detail needed for later Parts.
 
@@ -616,19 +709,19 @@ Items below are either intentionally unresolved or explicitly marked as resolved
 
 ### Part 00 — Scope & Architecture Principles
 
-Substantial architecture baseline. Core scope, boundaries, principles and SoR model are usable, but the Part requires full synchronization with accepted decisions. In particular, its universal lifecycle framing, Project creation / Authorizing Basis Requirement semantics, `Setup` / `Active` / `Not Proceeded`, Setup readiness, Operational Authorization and dynamic Operational Restrictions must reflect resolved Issue #1; its Project Closure model must reflect resolved Issue #7; and Agreement / Contract classification plus the Configurable Business Policy / Rule principle must reflect resolved Issues #11/#12 and the later rule-framework decision.
+Substantial architecture baseline. Core scope, boundaries, principles and SoR model are usable, but the Part requires full synchronization with accepted decisions. In particular, its universal lifecycle framing, Project creation / Authorizing Basis Requirement semantics, `Setup` / `Active` / `Not Proceeded`, Setup readiness, Operational Authorization and dynamic Operational Restrictions must reflect resolved Issue #1; its Project Closure model must reflect resolved Issue #7; Agreement / Contract classification, preparation / legal-effect / closeout semantics must reflect resolved Issues #8 and #11/#12; Procurement scope must reflect resolved Issues #3/#16, #4, #5 and #6; and the Configurable Business Policy / Rule principle must reflect the accepted rule-framework decision.
 
 ### Part 01 — Business Analysis
 
-Substantial business baseline covering context, stakeholders, business requirements, business rules and glossary. Current operating-scale values are planning estimates. Formal Process Ownership and some cardinalities remain unresolved. Business Rules / Glossary require synchronization for the resolved Project authorization model (#1), Application / Pre-Award Application Check and Handover model (#2), Closure semantics (#7), Agreement / Contract taxonomy and composite Authorizing Basis Requirement (#11/#12), and the authority/versioning semantics of the Configurable Business Policy / Rule framework.
+Substantial business baseline covering context, stakeholders, business requirements, business rules and glossary. Current operating-scale values are planning estimates. Formal Process Ownership and some cardinalities remain unresolved. Business Rules / Glossary require synchronization for the resolved Project authorization model (#1), Application / Pre-Award Application Check and Handover model (#2), Closure semantics (#7), Agreement / Contract taxonomy, preparation, termination and separate Agreement Closeout (#8, #11/#12), Research Need / Procurement Plan / Procurement Case / Goods Acceptance semantics (#3/#16, #4, #5, #6), and the authority/versioning semantics of the Configurable Business Policy / Rule framework.
 
 ### Part 02 — Process Architecture
 
-Substantial expanded baseline covering Pre-Award, Agreement / Project Initiation, Funding, Budget, Project Change, Research Team, Procurement, Services, Reporting, Payment, Reconciliation, Closure and cross-functional controls. It requires full synchronization of the Pre-Award Application Check / external evaluation / Handover flow (#2), Project initiation and composite authorizing-instrument logic (#1, #11/#12), Agreement / Contract routes, responsibility/waiting-time history, restriction/suspension handling, and the automatic Closure / post-closure / erroneous-Reopen model (#7). Legacy `Pending Activation` and manual-normal-closure semantics are stale.
+Substantial expanded baseline covering Pre-Award, Agreement / Project Initiation, Funding, Budget, Project Change, Research Team, Procurement, Services, Reporting, Payment, Reconciliation, Closure and cross-functional controls. It requires full synchronization of the Pre-Award Application Check / external evaluation / Handover flow (#2), Project initiation and composite authorizing-instrument logic (#1, #11/#12), variable/cyclic Agreement preparation plus termination and Agreement closeout (#8), responsibility/waiting-time history, restriction/suspension handling, the automatic Project Closure / post-closure / erroneous-Reopen model (#7), and the normalized Procurement model (#3/#16, #4, #5, #6). Legacy `Pending Activation`, fixed Agreement chains, Research Need downstream pseudo-lifecycle, old Procurement Plan terminology and manual-normal-closure semantics are stale.
 
 ### Part 03 — System Analysis
 
-Advanced current system-behavior baseline covering Functional Requirements, Use Cases, System Context, State Models, Validation, Roles / Permissions, Integration Requirements and NFR. It requires full normalization of the Application model (#2), Project State Model and composite Authorizing Basis Requirement (#1, #11/#12), Closure / extension / controlled erroneous-Reopen behavior (#7), Agreement / Contract profiles and rule-driven behavior, and the shared Configurable Business Policy / Rule framework. `Ready for Administration` as lifecycle status and other legacy mixed-state semantics are stale. Solution-level technical material currently embedded in Part 03 must later be normalized into the approved Part 07 Solution Architecture while preserving system-level requirements in Part 03.
+Advanced system-behavior baseline covering Functional Requirements, Use Cases, System Context, State Models, Validation, Roles / Permissions, Integration Requirements and NFR. For Procurement, Part 03 remains the strongest current design baseline, but it must not be treated as internally authoritative where later accepted decisions corrected it. It requires full normalization of the Application model (#2), Project State Model and composite Authorizing Basis Requirement (#1, #11/#12), Project Closure / extension / controlled erroneous-Reopen behavior (#7), Agreement / Amendment action history, legal facts/effect and separate closeout (#8), Research Need lifecycle and downstream quantity progress (#3/#16), Effective versus Approved Procurement Plan semantics (#4), Procurement Case / Method boundary and heterogeneous item progress (#5), and item/quantity Goods Acceptance plus Advance Delivery Notice (#6). `Ready for Administration` as lifecycle status and other legacy mixed-state semantics are stale. Solution-level technical material currently embedded in Part 03 must later be normalized into the approved Part 07 Solution Architecture while preserving system-level requirements in Part 03.
 
 ### Part 04 — Data Architecture
 
@@ -640,11 +733,13 @@ Not started.
 
 ### Readiness
 
-Parts 00–03 are not ready to be treated as semantically synchronized source documents.
+The current semantic reconciliation / question cycle required before the Parts 00–03 rewrite is complete at the architecture-concept level. Remaining Open Issues are either deferred to their applicable later Parts / verification activities or do not currently block the rewrite unless later analysis proves otherwise.
 
-After the remaining business-dependent Open Issues are resolved, Parts 00–03 must undergo a full controlled rewrite/synchronization pass rather than only local patching. The rewrite must preserve valid established content while incorporating all accepted lifecycle, terminology, rule-framework, process-route, authorization, closure and agreement-model corrections.
+Parts 00–03 are not yet ready to be treated as semantically synchronized source documents. They must undergo a full controlled rewrite/synchronization pass rather than local patching. The rewrite must preserve valid established content while incorporating all accepted lifecycle, terminology, rule-framework, process-route, authorization, agreement, procurement and closure corrections.
 
-Only after that rewrite and a cross-Part verification pass should Part 04 Data Architecture be formally developed.
+The rewrite must not begin merely because the question cycle is complete. Transition readiness is controlled by `ENGAGEMENT_CONTROL.md`; the current consolidated Engagement state must be canonically persisted / source-synchronized and the applicable gate verified before the material rewrite starts.
+
+Only after the rewrite and a cross-Part verification pass should Part 04 Data Architecture be formally developed.
 
 The approved master structure is:
 
@@ -658,22 +753,24 @@ The approved master structure is:
 07 Solution Architecture  
 08 Enterprise Architecture
 
----
-
 ## Important Cross-Part Dependencies
 
 Parts 04–05 must preserve and explicitly model:
 
 - Application and Project independent identity/history;
 - Funding Decision / Award → Project creation versus Project-Type/Scenario-specific `Authorizing Basis Requirement` → satisfaction by one or more authorizing instruments → business `Active` distinction;
-- Funding Agreement / Amendment / Funding / Project / Budget independent lifecycles;
+- Agreement / Amendment / Funding / Project / Budget independent lifecycles;
+- Agreement preparation/action history versus registration/signature facts versus legal effect versus administrative closeout;
+- `Not Concluded` Agreement-preparation outcome and causal relationship to pre-active Project `Not Proceeded`;
+- Agreement early-termination event with separate reason/basis, effective date, evidence and consequences;
+- Agreement closeout obligations / checklist and the possibility that the same underlying obligation has different closure significance for Project versus Agreement;
 - Project business lifecycle versus Setup readiness versus Operational Authorization versus dynamic Operational Restrictions;
 - `Project Created` as event, `Not Proceeded` pre-active outcome and controlled reopening of the same Project for the same Award;
 - external-grant `signed + registered Agreement recorded in ERP` activation trigger versus retroactive `Effective From`;
 - Operational Restriction scope/effective history, affected expenditure-object suspension, causal link to restriction, case-specific exception, mandatory Reason and audit trail;
 - suspension as source-object state / progress with derived views rather than a separate register;
 - Hard Business Validation versus overrideable Operational Restriction;
-- Agreement-preparation Target / Critical escalation thresholds, closure reason and refusal-letter evidence;
+- Agreement-preparation Target / Critical escalation thresholds, discontinuation reason and refusal-letter evidence;
 - Current / Proposed / Effective semantics;
 - decision/signature/registration dates versus `Effective From`;
 - causal links between formal changes and downstream consequences;
@@ -683,11 +780,15 @@ Parts 04–05 must preserve and explicitly model:
 - 1C Transaction → zero/one/many controlled ERP allocations without altering the source transaction;
 - Person / User Account / Project Participation separation;
 - unresolved same-Project multi-role cardinality;
-- Procurement Request / Request Item / Case / Item Allocation structure;
-- unresolved Procurement Procedure boundary;
-- Research Need versus downstream derived progress, while preserving Research Need / Procurement Planning availability during Setup/readiness work before Operational Authorization;
-- Procurement Plan / Amendment / Version / Consolidated Current Plan;
-- Supplier Contract / Shipment / Delivery / Acceptance / Payment distinctions;
+- Research Need own lifecycle versus downstream Procurement quantity/progress facts, including one Need feeding multiple downstream Request/Item allocations;
+- Procurement Request / Request Item / Procurement Case / Case Item or Lot / Item Allocation structure;
+- Procurement Case + Procurement Method-specific execution, with no separate required Procurement Procedure Business Object;
+- failed/non-resulting Case Item outcome and later re-allocation of remaining need to a new Case;
+- cross-project Request/Need consolidation while preserving source Project/Budget/Funding attribution;
+- Procurement Case → zero/one/multiple Supplier Contracts as an allowed architecture direction, with exact constraints deferred to Issue #17;
+- `Effective Procurement Plan` versus `Approved Procurement Plan Version` versus `Procurement Plan Amendment` versus `Consolidated Approved Procurement Plan`;
+- Supplier Contract / Advance Delivery Notice / Shipment / Delivery / Acceptance / Payment distinctions;
+- Delivery Item / Quantity-level Acceptance, multiple actual receivers and derived aggregate acceptance outcome;
 - Business Change / Data Correction / Reconciliation Exception / Controlled Exception Override distinctions;
 - Audit criteria, Period Type, resolved/frozen population and M:N relationships;
 - stable technical IDs, immutable Business Numbers and multiple External Identifiers;
@@ -699,8 +800,6 @@ Parts 04–05 must preserve and explicitly model:
 - effective rule / template / mapping versions used by historical transactions and reports.
 
 Do not finalize a Part 05 cardinality for any relationship that remains listed as unresolved here.
-
----
 
 ## Local NURA ERP Lessons
 
@@ -722,3 +821,7 @@ Do not finalize a Part 05 cardinality for any relationship that remains listed a
 - In NURA's small-organization operating model, ERP should provide Head of Post-Award the functional control needed to administer restrictions/exceptions and rely on explicit Reason + audit trail rather than add approval layers whose only purpose is to police managerial good faith. Hard business validations remain a separate non-bypassable boundary.
 - An archive view should not become a second data store: discontinued pre-active Projects retain their original Setup history and can be reopened when the same Award resumes.
 - Process SLA thresholds and escalation limits are governed control parameters; observed average duration is an analytical KPI and should not itself become the process rule.
+- An externally/manual activity that the ERP cannot reliably observe should not be forced into a mandatory lifecycle status merely because it is operationally useful to know that it happened; action/evidence history may be more truthful.
+- Effective operational planning state and periodically approved immutable plan snapshots are different truths and must not be collapsed.
+- A planning/demand change after a downstream contractual obligation exists is not a simple upstream edit; it must use the applicable controlled downstream change / termination path while preserving original history.
+- Some ERP improvements require changes to the surrounding operating or contractual environment: Advance Delivery Notice is both a system capability and, where applicable, a Supplier Contract / process expectation.
