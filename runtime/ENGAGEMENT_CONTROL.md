@@ -1,10 +1,9 @@
-\
 # ENGAGEMENT_CONTROL.md
 
 - **ENGAGEMENT_ID:** `ENG-NURA-ERP-001`
-- **CONTROL_VERSION:** `1.2`
+- **CONTROL_VERSION:** `1.5`
 - **CONTROL_STATUS:** ACTIVE
-- **LAST_UPDATED:** `2026-09-10`
+- **LAST_UPDATED:** `2026-09-11`
 
 ## 1. Purpose
 
@@ -47,10 +46,10 @@ Established Engagement knowledge belongs in `memory/ENGAGEMENT_MEMORY.md`, subje
 
 ### 3.1 Phase State
 
-- **CURRENT_PHASE:** Semantic Reconciliation / Question Cycle Complete — Consolidated; Checkpoint Finalization Deferred by Infrastructure
-- **NEXT_PHASE:** Full Rewrite / Synchronization of Parts 00–03
-- **NEXT_PHASE_GATE:** `READY_WITH_DEFERRED_CHECKPOINT`
-- **NEXT_PHASE_USER_CONTINUATION_DECISION:** `PENDING`
+- **CURRENT_PHASE:** Full Rewrite / Synchronization of Parts 00–03 — Parts 00–02 Rewritten; Accepted Refinements 68–84 Pending Targeted Source Propagation; Part 03 Pending
+- **NEXT_PHASE:** Cross-Part V&V of Parts 00–03 and CONTENT Synchronization
+- **NEXT_PHASE_GATE:** `NOT_READY`
+- **NEXT_PHASE_USER_CONTINUATION_DECISION:** `APPROVED`
 - **INFRASTRUCTURE_DEFERMENT:** `GITHUB_CANONICAL_WRITE / CHECKPOINT FINALIZATION TECHNICALLY UNAVAILABLE`
 
 ### 3.2 System State Checkpoint / Bootstrap State
@@ -77,7 +76,7 @@ The post-v1.3 material delta has now been reviewed and semantically consolidated
 - **UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK:** `NO`
 - **CONSOLIDATION_STATE:** `CURRENT`
 
-Reason: the catch-up Learning & Change Review from the v1.3 conservative baseline has been completed; accepted post-v1.3 design state has been consolidated into `ENGAGEMENT_MEMORY.md v1.4`; `LEARNING_CANDIDATES.md` has been updated; Professional Background and permanent ARCHITECT / governing implications were explicitly assessed; and the full-file Engagement Memory consistency check passed. Canonical checkpoint persistence/finalization is still pending.
+Reason: the catch-up Learning & Change Review from the v1.3 conservative baseline has been completed; accepted architecture state through the rewritten Parts 00–02 has been consolidated into `ENGAGEMENT_MEMORY.md v1.6`; `LEARNING_CANDIDATES.md` remains the applicable learning record; Professional Background and permanent ARCHITECT / governing implications were previously assessed. The current rewrite phase is in progress with Part 03 pending. Canonical checkpoint persistence/finalization is still pending.
 
 ### 3.4 Required State Invariant
 
@@ -644,7 +643,7 @@ This is a controlled continuation path, not a waiver of semantic consolidation.
 
 ---
 
-## 18. Exit Criteria — Ready for Full Rewrite / Synchronization of Parts 00–03
+## 18. Historical Exit Criteria — Gate Used to Start Full Rewrite / Synchronization of Parts 00–03
 
 ### 18.1 Semantic readiness criteria — blocking
 
@@ -676,19 +675,32 @@ If failure instead indicates uncertainty about which artifact/revision is correc
 
 ---
 
-## 19. Phase Gate Verification Evidence
+## 19. Historical Phase Gate Verification Evidence for Current Rewrite Phase
 
 - **GATE_VERIFIED_AT:** `2026-09-10`
 - **GATE_VERIFIED_BY:** `ARCHITECT runtime — semantic/source verification only`
 - **VERIFICATION_RESULT:** `READY_WITH_DEFERRED_CHECKPOINT`
 - **SEMANTIC_READINESS:** `PASS`
 - **CHECKPOINT_READINESS:** `DEFERRED — GITHUB/CANONICAL PERSISTENCE TECHNICALLY UNAVAILABLE`
-- **NEXT_PHASE_USER_CONTINUATION_DECISION:** `PENDING`
-- **VERIFICATION_EVIDENCE:** `Semantic consolidation requirements pass; current runtime-visible Engagement Memory v1.4 and Learning Candidates were verified as the intended consolidated artifacts; no blocking semantic ambiguity was found. CP-NURA-001 and canonical dependency revisions remain unverified because GitHub/canonical repository access is technically unavailable. This infrastructure deferment does not equal checkpoint completion and requires explicit user continuation decision before architecture work begins.`
+- **NEXT_PHASE_USER_CONTINUATION_DECISION:** `APPROVED`
+- **VERIFICATION_EVIDENCE:** `Semantic consolidation requirements passed and the user explicitly approved continuation of architecture work despite deferred GitHub/canonical checkpoint infrastructure. The Full Rewrite / Synchronization phase therefore started under the controlled infrastructure-deferment path. Parts 00–02 are now complete working baselines and Part 03 is pending. CP-NURA-001 and canonical dependency revisions remain unverified; no checkpoint completion is claimed.`
 
 A vague assertion such as “the latest files seem to be uploaded” is insufficient.
 
 ---
+
+
+### 19.1 Current rewrite progress
+
+- Part 00 — Scope & Architecture Principles: rewritten current working baseline.
+- Part 01 — Business Analysis: rewritten current working baseline.
+- Part 02 — Process Architecture: rewritten current working baseline.
+- Targeted refinement set after Part 02: Calendar Plan / Milestone / Research Output / TRL / AI-assisted extraction, lead/co-executor, reporting-period acceptance and Contract Financial Direction semantics accepted; source-document propagation pending in the user-maintained Parts 00–02.
+- Part 03 — System Analysis: pending controlled rewrite/synchronization.
+- Issue #14 (Calendar Plan / Milestone / Deliverable business structure) is RESOLVED at business-semantic / architecture level. Accepted Decisions 68–84 must be propagated into Parts 00–02 through the prepared targeted correction set and used as governing Engagement state in Part 03. Exact data-model cardinalities / lineage remain deferred to Parts 04–05.
+- The next phase (`Cross-Part V&V of Parts 00–03 and CONTENT Synchronization`) remains `NOT_READY` until Part 03 rewrite is complete enough to verify the four-Part set.
+
+The previously approved infrastructure-deferred continuation remains valid for ongoing architecture work. It does not convert the pending System State Checkpoint into a verified checkpoint.
 
 ## 20. Phase Gate State Change
 
@@ -743,30 +755,22 @@ Do not claim checkpoint finalization merely because architecture work continued 
 
 ## 22. Current Expected Sequence
 
-For current NURA ERP state, the normal path remains:
-
-**Catch-up delta review from v1.3 conservative baseline**
-→ **Engagement Memory consolidation**
-→ **Learning Candidates update where applicable**
-→ **Professional Background / permanent ARCHITECT assessment**
-→ **full-file Memory consistency check**
-→ **canonical persistence / checkpoint finalization when infrastructure is available**
-→ **phase-gate verification**
-→ **Full Rewrite / Synchronization of Parts 00–03**
-→ **cross-Part V&V**.
-
-When canonical GitHub/checkpoint infrastructure is technically unavailable after semantic consolidation, use this alternate controlled path:
+Current NURA ERP progress is:
 
 **semantic consolidation complete**
-→ **runtime-visible consolidated sources verified**
-→ **record canonical persistence / CP-NURA-001 as DEFERRED — INFRASTRUCTURE UNAVAILABLE**
-→ **phase-gate verification = READY_WITH_DEFERRED_CHECKPOINT**
-→ **inform user of the limitation and ask whether to continue**
-→ if user approves: **Full Rewrite / Synchronization of Parts 00–03**
-→ **cross-Part V&V**
-→ when GitHub becomes available: **resume canonical persistence / CP-NURA-001 finalization and record the actual dependency revisions**.
+→ **infrastructure-deferred continuation explicitly approved by user**
+→ **Part 00 rewritten**
+→ **Part 01 rewritten**
+→ **Part 02 rewritten**
+→ **accepted Calendar Plan / Research Output refinement set prepared for targeted propagation to Parts 00–02**
+→ **CURRENT: propagate those targeted corrections and perform Part 03 System Analysis controlled rewrite / synchronization**
+→ **NEXT: cross-Part V&V of Parts 00–03**
+→ **CONTENT synchronization**
+→ **Part 04 Data Architecture**.
 
-Architecture work performed during the infrastructure-deferred period must remain traceable to the runtime-visible consolidated baseline used to start that work.
+Canonical GitHub/checkpoint infrastructure remains technically unavailable. Therefore `CP-NURA-001` remains pending and must not be described as verified or complete.
+
+When GitHub becomes available, resume canonical persistence / checkpoint finalization and record the actual dependency revisions. Architecture work performed during the infrastructure-deferred period must remain traceable to the runtime-visible consolidated baseline used for that work.
 
 ---
 

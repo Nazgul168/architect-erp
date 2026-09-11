@@ -543,6 +543,59 @@ Broadens architecture from application-only design to socio-technical evidence s
 
 ---
 
+
+## CAND-NURA-017 — AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth
+
+**Type:** architecture principle / decision principle  
+**Status:** CANDIDATE ONLY  
+**Confidence:** high  
+**Origin:** NURA ERP Engagement clarification, 2026-09-11  
+
+### Proposed knowledge
+When an organization needs durable multi-year analytics from narrative reports or other unstructured evidence, AI may accelerate extraction, classification and summarization, but the long-term information architecture should not depend on continuing access to a particular AI capability.
+
+Material extracted facts should become structured records with provenance and an applicable confirmation / validation state. AI-generated proposals remain proposals until the governing business process makes them trusted institutional facts.
+
+### Recognition cues
+- valuable results exist mainly in PDFs, reports, emails or narrative documents;
+- retrospective analytics require repeated manual reading of large document sets;
+- AI can extract likely facts but access, model quality or cost may change over time;
+- the organization needs defensible institutional reporting rather than one-off summaries.
+
+### Applicability
+Research administration, knowledge management, compliance reporting, impact reporting, case management, grant administration and other domains that convert unstructured evidence into durable institutional data.
+
+### Limits
+Where the use case is intentionally exploratory and no durable institutional fact is created, formal confirmation may be unnecessary. The required validation level should remain proportional to the consequence of the extracted claim.
+
+### Evidence summary
+Derived from a research-administration need to identify meaningful research results across multi-year narrative reports while avoiding long-term dependence on AI availability.
+
+### Expected behavioral impact
+Encourages durable structured data capture with provenance, while using AI as an optional accelerator rather than an irreplaceable source of truth.
+
+---
+
+
+## CAND-NURA-018 — Legal Document Type and Economic Direction Are Independent Architecture Dimensions
+
+**Type:** architecture / domain-modeling principle  
+**Status:** CANDIDATE ONLY  
+**Confidence:** high  
+**Origin:** NURA ERP Engagement clarification, 2026-09-11  
+
+### Proposed knowledge
+In ERP and case-management domains, the legal type or name of a contract should not be assumed to determine the economic direction of the relationship or the workflow that originates it.
+
+A contract can be incoming relative to the organization, outgoing, non-monetary, or materially mixed. Financial direction is relative to the modeled organization and can invert across the two parties to the same relationship.
+
+Shared legal-document capabilities can be reused across contract classes, but a common Contract entity does not imply one universal creation workflow. Incoming contracts may originate in grants, legal intake or other funding/revenue processes; outgoing contracts may originate in procurement, project expenditure or service-purchasing processes.
+
+### Limits
+Financial direction must not be confused with accounting revenue recognition or expense classification. Exact role ownership remains organization-specific.
+
+---
+
 # Candidate Register
 
 | ID | Title | Status | Permanent ARCHITECT staging |
@@ -563,6 +616,8 @@ Broadens architecture from application-only design to socio-technical evidence s
 | CAND-NURA-014 | Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge | CANDIDATE ONLY | NOT TRANSFERRED |
 | CAND-NURA-015 | Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation | CANDIDATE ONLY | NOT TRANSFERRED |
 | CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-017 | AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-018 | Legal Document Type and Economic Direction Are Independent Architecture Dimensions | CANDIDATE ONLY | NOT TRANSFERRED |
 
 ---
 

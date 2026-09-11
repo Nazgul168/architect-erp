@@ -1,8 +1,8 @@
 # ENGAGEMENT_MEMORY.md
 
-- **MEMORY_VERSION:** `1.5`
-- **LAST_RECONCILED:** `2026-09-10`
-- **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles` and `Part 01 — Business Analysis` have been rewritten and semantically synchronized against this Engagement state as of 2026-09-10. `Part 02 — Process Architecture` and `Part 03 — System Analysis` remain the pre-rewrite baselines pending controlled rewrite/synchronization.
+- **MEMORY_VERSION:** `1.8`
+- **LAST_RECONCILED:** `2026-09-11`
+- **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis` and `Part 02 — Process Architecture` have been rewritten and are the current working baselines. Accepted Decisions 68–84 below introduce targeted refinements that are pending propagation into the user-maintained Parts 00–02; for those specific claims, this Engagement Memory governs until propagation. `Part 03 — System Analysis` remains the pre-rewrite baseline pending controlled rewrite/synchronization.
 - **BOOTSTRAP / RECONCILIATION reference:** QA Bootstrap Batches 1–8 + accepted Global Reconciliation, 2026-09-08.
 
 ## Engagement Identity / Status
@@ -10,8 +10,8 @@
 - **Engagement:** NURA ERP Architecture
 - **Engagement ID:** `ENG-NURA-ERP-001`
 - **Status:** ACTIVE
-- **Memory status:** CONSOLIDATED WORKING VERSION — ISSUES #1, #2, #3/#16, #4, #5, #6, #7, #8, #11/#12 RESOLVED AT ARCHITECTURE-DECISION LEVEL; PARTS 00–01 REWRITTEN / SEMANTICALLY SYNCHRONIZED; PARTS 02–03 CONTROLLED REWRITE / SYNCHRONIZATION PENDING
-- **Current architecture state:** Part 00 and Part 01 have been rewritten and passed semantic consistency review against the accepted Engagement architecture state. Part 02 and Part 03 remain materially stale against accepted post-v1.2/post-v1.3 decisions and are pending controlled rewrite/synchronization. This v1.5 incorporates the two accepted post-v1.4 refinements recorded in Decisions 66–67 below. Transition readiness remains governed by `ENGAGEMENT_CONTROL.md`. The master architecture structure includes future Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08.
+- **Memory status:** CONSOLIDATED WORKING VERSION — ISSUES #1, #2, #3/#16, #4, #5, #6, #7, #8, #11/#12, #14 RESOLVED AT ARCHITECTURE-DECISION LEVEL; PARTS 00–02 REWRITTEN / CURRENT WORKING BASELINES WITH ACCEPTED TARGETED REFINEMENTS 68–84 PENDING SOURCE PROPAGATION; PART 03 CONTROLLED REWRITE / SYNCHRONIZATION PENDING
+- **Current architecture state:** Parts 00–02 remain the current rewritten working baselines. After Part 02, additional business clarification resolved the Calendar Plan / Milestone / Deliverable question and expanded the institutional Research Output model. Decisions 68–84 below are accepted Engagement architecture refinements. Targeted corrections for Parts 00–02 have been prepared and those Parts are stale only for the specific claims covered by Decisions 68–84 until the corrections are propagated into the user-maintained source documents. Part 03 remains the next controlled rewrite/synchronization target. Transition readiness remains governed by `ENGAGEMENT_CONTROL.md`. The master architecture structure includes Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08.
 - **Purpose of this memory:** compact working memory of the current NURA ERP architecture. It is not a transcript, Bootstrap ledger, or substitute for the architecture Parts.
 - **Canonical baseline persistence:** baseline `ENGAGEMENT_MEMORY.md` v1.0 is user-confirmed as canonically persisted in the canonical Engagement Git repository. The same confirmation applies to the baseline `ARCHITECT_PROFESSIONAL_BACKGROUND.md` and updated `00_ENGAGEMENT_MANIFEST.md` referenced by this Engagement.
 - **Canonical persistence:** Canonical persistence of the current version is determined by the canonical Engagement repository and its version history. This runtime has no verified canonical write path and does not claim to perform canonical writes.
@@ -115,7 +115,24 @@ If Agreement preparation for an external Award is formally discontinued before t
 
 ### Agreements / Contracts and Authorizing Basis Requirements
 
-Agreement / Contract Type classifies the legal document. Purpose, conditional effect, obligations, Post-Award relevance and authorizing effect are separate structured dimensions.
+Agreement / Contract Type classifies the legal document. Purpose, conditional effect, obligations, Post-Award relevance, authorizing effect and **Contract Financial Direction** are separate structured dimensions.
+
+**Contract Financial Direction** is defined relative to NURA and must not be inferred only from Agreement / Contract Type:
+
+- **Incoming Contract** — NURA receives funding / remuneration or another incoming financial contribution and, in return, performs research, services, works or other contractual obligations.
+- **Outgoing Contract** — NURA acquires goods, services or works and assumes an obligation to pay or otherwise finance the Counterparty.
+- **Non-monetary Agreement** — the agreement creates relevant obligations without a direct payment flow between NURA and the Counterparty.
+- **Mixed Agreement** — the same agreement contains materially relevant incoming and outgoing financial obligations and therefore cannot be truthfully reduced to one direction.
+
+Financial direction is an operational / architectural characteristic and does not by itself determine the accounting classification of income, revenue, grant funding or expense.
+
+Incoming Contracts are normally initiated / prepared through the Legal-led agreement route and may exist without an Application. They may become the basis for Project creation, Funding, Calendar Plan and NURA performance / reporting obligations.
+
+Outgoing Contracts arise from the applicable expenditure, Project Services or Procurement process. Their business preparation is owned by the responsible Post-Award or Procurement route, while Legal participates where the Contract Type, risk, template, EDMS route or other Business Rules require legal review / coordination. An Outgoing Contract must preserve the applicable Budget, Commitment, Project, Business Purpose and Financial Attribution context.
+
+The same research collaboration can have opposite financial directions for different organizations. A co-executor Contract is outgoing for the lead organization that pays the co-executor and incoming for the co-executor that receives the payment. Therefore financial direction is always modeled from NURA's perspective.
+
+Shared Agreement / Contract data, templates, EDMS integration, legal facts and versioning do not imply one universal contract-creation workflow. Common legal/document capabilities may be reused while the process entry point, responsible function, controls and downstream consequences remain route-specific.
 
 Standard Agreement Types use configured profiles/defaults. Variable Agreement Types use controlled selections rather than repeated free-text entry.
 
@@ -200,6 +217,58 @@ Related Project / Obligation identifies business purpose and traceability.
 Funding Source / Funding Code / Budget identifies actual financial attribution.
 
 Use of NURA Own Funds or another alternative source requires the applicable Funding Authorization.
+
+### Calendar Plan, Calendar Plan Items, Milestones and Planned Results
+
+A **Calendar Plan** is a formal, versioned plan of Project work within a specific Agreement / Contract / Authorizing context. For grant-funded routes it normally originates from the successful Application and, where applicable, becomes an appendix or other formally incorporated part of the governing Agreement / Contract.
+
+A Calendar Plan must not be treated as an ordinary freely editable task list. Within one Calendar Plan, approved changes create a new **Calendar Plan Version** rather than silently overwriting the previously effective plan. At any point in time, the applicable business rules determine which version is effective.
+
+One Project may require more than one Calendar Plan where NURA has more than one distinct contractual / authorizing execution context. A Calendar Plan attached to a principal funding Agreement and a Calendar Plan attached to a separate service / co-executor Contract are separate plans, not versions of one another, even when the second covers a subset of work from the first.
+
+For a multi-organization externally funded Project where NURA is the lead organization, NURA may administer the full Project Calendar Plan under the principal Agreement and separate Calendar Plans under Contracts with co-executors. Where NURA is itself a co-executor, NURA administers the scope and Calendar Plan of its own Contract; the ERP must not require NURA to administer the complete external consortium Project if NURA is not responsible for it.
+
+The same external research initiative may therefore map to different NURA administrative scenarios depending on NURA's legal / contractual role. Where NURA is the lead organization and direct grant recipient, the route is the applicable external-grant route. Where NURA is a co-executor engaged by another lead organization under a service / research contract, NURA administers that contracted scope as a Research Contract / service-delivery context rather than pretending to own the full external grant.
+
+For the currently known state-funded consortium pattern, the grantor contracts with one lead organization, while co-executors are engaged through separate contracts. This is a confirmed current business pattern, not a permanent universal legal invariant; future Programme Rules may require a different route.
+
+Agreement / Contract creation is not dependent on an Application. Legal / other authorized roles must be able to create and process an Agreement / Contract independently; an Application / Award link is recorded only when it exists in the real business context.
+
+A **Calendar Plan Item / Task** is a hierarchical work item within the plan. It may have child Tasks to arbitrary practical depth and normally carries a planned period / deadline plus the applicable planned direct result. The architecture must not hard-code a three-level maximum solely because current documents commonly stop at `N.N.N`.
+
+A **Milestone** in NURA ERP is primarily an administrative control point meaningful to Research Administration — for example a report due date, governing-body decision, act-signing point, expected tranche, or other control event. It is not a synonym for a scientific Task / subtask in the Calendar Plan.
+
+A **Deliverable** is not established as a universal first-class Business Object. Where Programme Rules, an Agreement or another governing source uses that term, ERP preserves it as the applicable obligation / planned-result terminology. Core modeling distinguishes the planned result from the actual Research Output and from formal acceptance of a reporting period / work package.
+
+A formal change to an approved Calendar Plan is a managed **Project Change**. For an external Project, the applicable Business Rules determine whether the change requires funder approval and / or Agreement Amendment. For an internal grant, the applicable Research Council decision / approval governs the change. Operational clarification that does not alter the approved Calendar Plan is not a Project Change merely because work details evolved.
+
+### Research Outputs, Outcomes, TRL and Institutional Result Knowledge
+
+A **Research Output** is a durable structured Business Object representing an actual research result created or evidenced by NURA research activity. Examples include Publication, Dataset, Software, Patent / IP, Prototype, Method / Protocol, Report and other material research results.
+
+Research Output exists for more than current-project administration. It supports institutional knowledge and multi-year result analytics, including the ability to explain in understandable language what the University actually created, developed or advanced — not only how many Projects, publications or patents were recorded.
+
+Research Output must therefore not be constrained conceptually to exactly one Project. It may be linked to the Project(s), Calendar Plan Item(s), Project Obligation(s), Report(s), repository record(s) and other evidence that establish its origin, contribution or later development. Exact cardinalities, lineage and temporal constraints are deferred to Parts 04–05.
+
+The architecture distinguishes:
+- **planned result** — what an Application / Calendar Plan / Agreement says should be achieved;
+- **Research Output** — what was actually created;
+- **Research Outcome** — observed use, adoption, effect or other higher-level result enabled by one or more Outputs;
+- **formal acceptance / reporting outcome** — whether an authorized external or internal body accepted the applicable report, work period or other formal obligation.
+
+Formal acceptance of a Project reporting period must not automatically be modeled as an independent `Accepted` lifecycle state for every Research Output. Where a Programme or Agreement requires separate acceptance of a specific result, that requirement is applied explicitly.
+
+Where TRL or another maturity scale is required by Programme Rules, Application, Agreement, Calendar Plan or reporting requirements, ERP should store the relevant declared / target / reported / externally confirmed value as applicable, together with source and supporting evidence. NURA ERP does not independently determine scientific or technological maturity where that determination belongs to PI, scientific evaluation, the funder or another authorized body.
+
+Structured institutional result data must remain usable without dependency on AI availability. AI may assist by extracting candidate Outputs, summaries or attributes from reports and other evidence, especially for historical data, but AI-generated proposals are not authoritative facts by themselves. Provenance must be preserved and material extracted facts should be confirmed or otherwise validated through an authorized business process before they become trusted institutional records.
+
+### Reporting-period acceptance for current grant scenarios
+
+For applicable external state-funded grant routes, the user-confirmed current process is period-level rather than per-Output acceptance: the annual scientific report undergoes the applicable external scientific expertise; the competent scientific body (currently NNS in the described route) makes the applicable continuation / termination / final-report decision; and the grantor records acceptance of the period's work through the applicable act. The grantor's act must not be treated as independent from the preceding required scientific decision where current law / Programme Rules make that decision a prerequisite.
+
+For internal grants, annual reporting is submitted to Research Council, which may decide continuation, stopping / termination or another applicable outcome under the institution's internal rules. The route is more configurable and must not be hard-coded as identical to the external state-funded route.
+
+Because the statement about what a state body may legally accept is a legal / Programme Rule claim, the exact authoritative legal basis and current wording must be verified before implementing a non-configurable hard validation. The Engagement-level business semantics are nevertheless clear: formal acceptance is primarily a reporting-period / work-acceptance process, not an automatic independent acceptance lifecycle for each Research Output.
 
 ### Research Need
 
@@ -468,6 +537,40 @@ Stable fundamental invariants may remain Hard Business Validations. Configurabil
 
 67. **Agreement-preparation discontinuation evidence is not limited to a mandatory refusal letter.** When Agreement preparation is permanently discontinued, Legal records the `Not Concluded` outcome, structured reason and supporting evidence/documents. Legal records the decision but does not replace the role authorized to make the refusal decision. This supersedes only the mandatory-refusal-letter aspect of Decision 41; the remaining Decision 41 timing, escalation and notification semantics remain in force.
 
+68. **Calendar Plan is formal, contextual and versioned.** A Calendar Plan belongs to a specific Agreement / Contract / Authorizing context; approved changes create Calendar Plan Versions rather than silently overwriting the effective plan. Distinct contractual plans are separate Calendar Plans, not versions of one another.
+
+69. **One Project may have multiple Calendar Plans when distinct contractual execution contexts exist.** In a lead-organization scenario NURA may administer the full principal plan plus separate co-executor/service-contract plans; in a co-executor scenario NURA administers its own contractual scope and is not required to administer the complete external consortium Project.
+
+70. **Agreement / Contract creation is independent of Application.** Legal / authorized roles must be able to create and process Agreements / Contracts without an Application link. Application / Award is one possible upstream source, not a mandatory parent.
+
+71. **Calendar Plan Task and administrative Milestone are different concepts.** Calendar Plan Items / Tasks are hierarchical work items with planned timing and results; Milestones are administrative control points for Research Administration and are not automatically scientific Tasks.
+
+72. **Deliverable is not a mandatory universal first-class Business Object.** Preserve the term where an authoritative Programme / Agreement uses it, but core modeling separates planned results, actual Research Outputs and formal reporting / acceptance outcomes.
+
+73. **Research Output is a durable first-class Business Object with institutional analytical value.** It represents an actual research result, can outlive a Project and must not be conceptually constrained to exactly one Project. Exact cross-Project lineage / cardinalities are deferred to Parts 04–05.
+
+74. **Planned result, Research Output, Research Outcome and formal acceptance are distinct.** The system must not infer that every Research Output has an independent `Accepted` lifecycle merely because a reporting period or Project work was formally accepted.
+
+75. **TRL is a structured governed fact where applicable, not an ERP-generated scientific judgment.** Store applicable declared / target / reported / externally confirmed maturity information with provenance and evidence when required by Programme / Agreement / reporting rules.
+
+76. **AI-assisted extraction is optional support, not the institutional source of truth.** Durable result analytics must rely on structured records with provenance and applicable business confirmation / validation. AI may propose extracted Outputs, summaries or attributes but the architecture must remain operational if AI is unavailable.
+
+77. **NURA's contractual role determines the administrative route in multi-organization research.** When NURA is the lead organization / direct grant recipient, it administers the principal external-grant context and may contract co-executors. When NURA is a co-executor engaged by another lead organization, NURA administers its own Research Contract / service scope and Calendar Plan and is not required to own the full external grant administration.
+
+78. **Formal acceptance is primarily period/work acceptance, not universal per-Output acceptance.** For the currently described state-funded route, annual scientific reporting, required scientific/expert decision and the grantor's act form the applicable acceptance chain; for internal grants Research Council applies the internal route. Individual Research Output acceptance is modeled only where a specific Programme / Agreement requires it.
+
+79. **Contract Financial Direction is independent of Agreement / Contract Type.** NURA ERP must distinguish Incoming, Outgoing, Non-monetary and, where materially applicable, Mixed agreements from NURA's perspective. Financial direction is not inferred solely from the legal document type and does not itself define accounting revenue / expense classification.
+
+80. **Decision 70 does not mean Legal prepares every Contract.** Incoming Contracts and other Legal-led agreements may be created independently of Application and are normally initiated / prepared through the Legal route. Outgoing Contracts arise from the applicable expenditure / service / procurement process and use the responsible Post-Award or Procurement route.
+
+81. **Outgoing Contracts preserve expenditure controls and financial context.** Before an Outgoing Contract creates a valid financial / contractual obligation, the applicable Budget, Operational Authorization, Operational Restrictions, approval and other Business Rules must be satisfied. The Contract remains linked to the originating expense / procurement context, Commitment, Project, Business Purpose and Financial Attribution.
+
+82. **The same research collaboration may be outgoing for one organization and incoming for another.** When NURA is the lead organization and pays a co-executor, the co-executor Contract is Outgoing for NURA. When NURA is the co-executor receiving payment from another lead organization, the corresponding Research / Service Contract is Incoming for NURA.
+
+83. **Non-monetary and mixed agreements must not be forced into an artificial income/expense binary.** Where the real agreement has no direct payment flow or contains material two-way financial obligations, the model must preserve that fact and apply the appropriate route and controls.
+
+84. **Shared Contract capabilities do not imply one universal Contract workflow.** Common structured data, templates, EDMS integration, legal facts, versioning and closeout may be reused across Contract categories, while process origin, responsible function, required validations and downstream consequences remain specific to the contract route.
+
 ---
 
 ## Architecture Principles
@@ -510,7 +613,7 @@ Stable fundamental invariants may remain Hard Business Validations. Configurabil
 - Common Payment architecture with authoritative 1C payment confirmation.
 - Scientific and Financial Reporting.
 - Approved Reporting Form / Mapping operational consumption through Reporting / My Reports: select form + scope + period → apply mapping → interactive result → drill/filter/recalculate/export / official output as applicable.
-- Structured Research Output records linked to Project / Obligation / Report and institutional repository records where applicable.
+- Structured durable Research Output records with understandable summaries, provenance/evidence, applicable Project / Calendar Plan / Obligation / Report / repository links, and support for cross-Project lineage where justified; institutional result analytics must not depend solely on AI extraction.
 - Audit entity with explicit and criteria-based scope; started criteria-based Audit retains its resolved population and scope history.
 - Project Closure, Post-Closure traceability and Audit after closure without reopening a correctly Closed Project solely because of post-closure activity; controlled Reopen remains available to correct an erroneous Closure.
 - Role + assignment + context + delegation authorization.
@@ -675,7 +778,9 @@ Items below are either intentionally unresolved or explicitly marked as resolved
 11. **RESOLVED — propagated to Parts 00–01; pending propagation/full rewrite of Parts 02–03:** one Project may require/link multiple Agreements/official instruments; one Agreement may also cover multiple Projects where the business model requires it. Type-specific constraints remain for Part 05.
 12. **RESOLVED — propagated to Parts 00–01; pending propagation/full rewrite of Parts 02–03:** Agreement/Contract Type is separated from purpose, obligations, conditional effect, Post-Award relevance and Authorizing Basis role; Authorizing Basis Requirement may be composite.
 13. Confirm formal Process Owners / process accountability.
-14. Confirm the exact Calendar Plan / Milestone / Deliverable business structure.
+14. **RESOLVED at business-semantic / architecture level — accepted refinements 68–84 pending source propagation to Parts 00–02 and required in Part 03 rewrite:** Calendar Plan is contextual and versioned; Calendar Plan Items / Tasks are hierarchical; administrative Milestones are separate; Deliverable is not a mandatory universal first-class object; Research Output is a durable Business Object; NURA lead/co-executor route semantics and period-level acceptance semantics are established; exact cardinalities / lineage remain deferred to Parts 04–05.
+
+35. **RESOLVED at architecture level — pending propagation to Parts 00–02 and required in Part 03 rewrite:** Contract Financial Direction is a separate dimension from Contract Type. Incoming Contracts use a Legal-led route and may exist without Application; Outgoing Contracts originate from Post-Award / Procurement expenditure processes and retain Budget / Commitment / Financial Attribution controls. Non-monetary / Mixed agreements remain supported. Exact `Contract Type × Financial Direction × responsible route / approval profile` configuration is deferred to Part 03 rule design and Parts 04–05 data formalization where needed.
 
 ### Data / financial logic still to formalize
 
@@ -684,6 +789,9 @@ Items below are either intentionally unresolved or explicitly marked as resolved
 17. Final cardinalities and temporal constraints for unresolved relationships before Part 05. Scope explicitly includes unresolved reverse Research Need ↔ Procurement Request Item relationships, Procurement Case ↔ Supplier Contract cardinalities/constraints, Agreement closeout-obligation relationships and Delivery / Acceptance / Receiver / Advance Delivery Notice cardinalities.
 31. Determine the exact Part 04–05 representation for external research activities known to NURA but not administratively managed by NURA. Established principle: known by NURA ≠ administered by NURA.
 32. Formalize the configurable `Project Type / Scenario → Authorizing Basis Requirement` mapping, including applicable composite requirement structures, during rule / data design. The architectural concept is resolved; this is a deferred modeling/configuration detail needed for later Parts.
+33. Formalize Calendar Plan / Calendar Plan Version / Calendar Plan Item cardinalities and temporal constraints, including links between principal Project plans and separate co-executor/service-contract plans. Business semantics are resolved under Decisions 68–71.
+34. Formalize Research Output lineage and relationships across Project, Calendar Plan Item, Project Obligation, Report, repository/evidence, Research Outcome and maturity/TRL facts. The model must support cross-Project continuation without forcing every Output to belong to exactly one Project.
+
 
 ### Institutional verification required
 
@@ -721,7 +829,7 @@ Rewritten and semantically synchronized working baseline covering business conte
 
 ### Part 02 — Process Architecture
 
-Substantial expanded baseline covering Pre-Award, Agreement / Project Initiation, Funding, Budget, Project Change, Research Team, Procurement, Services, Reporting, Payment, Reconciliation, Closure and cross-functional controls. It requires full synchronization of the Pre-Award Application Check / external evaluation / Handover flow (#2), Project initiation and composite authorizing-instrument logic (#1, #11/#12), variable/cyclic Agreement preparation plus termination and Agreement closeout (#8), responsibility/waiting-time history, restriction/suspension handling, the automatic Project Closure / post-closure / erroneous-Reopen model (#7), and the normalized Procurement model (#3/#16, #4, #5, #6). Legacy `Pending Activation`, fixed Agreement chains, Research Need downstream pseudo-lifecycle, old Procurement Plan terminology and manual-normal-closure semantics are stale.
+Rewritten current working baseline covering Process Landscape, process-design principles, Pre-Award / Application, Agreement / Authorizing Basis / Project Initiation, Project Change and Funding, Budget and financial management, Research Team / Project Services, Goods Procurement, Reporting / Research Outputs / Closure / Audit, Research Administration Requests, cross-functional workflow controls, RACI, Process KPI and target end-to-end routes. It incorporates the accepted Application / Handover, Project authorization, Agreement preparation / closeout, Operational Authorization / Restrictions, Funding / Budget separation, normalized Research Need / Procurement Plan / Procurement Case / Delivery / Goods Acceptance model, automatic Project Closure logic and Decisions 66–67. Targeted consistency corrections identified during rewrite were incorporated. Subsequent accepted Decisions 68–84 refine Calendar Plan / Milestone / Research Output semantics and are pending propagation into the user-maintained Part 02 source; the prepared correction set governs those specific claims until propagation. At the user's direction, no separate additional re-check is required before proceeding; remaining minor defects may be corrected when encountered during downstream work.
 
 ### Part 03 — System Analysis
 
@@ -739,11 +847,13 @@ Not started.
 
 The current semantic reconciliation / question cycle required before the Parts 00–03 rewrite is complete at the architecture-concept level. Remaining Open Issues are either deferred to their applicable later Parts / verification activities or do not currently block the rewrite unless later analysis proves otherwise.
 
-Part 00 and Part 01 are now treated as semantically synchronized working source documents. Part 02 and Part 03 still require the controlled rewrite/synchronization pass rather than local patching. Their rewrite must preserve valid established content while incorporating all accepted lifecycle, terminology, rule-framework, process-route, authorization, agreement, procurement and closure corrections.
+Parts 00, 01 and 02 are now treated as the current rewritten working source documents. Part 03 still requires the controlled rewrite/synchronization pass rather than local patching. Its rewrite must preserve valid established content while incorporating all accepted lifecycle, terminology, rule-framework, process-route, authorization, agreement, procurement and closure corrections.
 
 Transition readiness for the remaining rewrite is controlled by the current `ENGAGEMENT_CONTROL.md`. Architecture work may continue under the accepted deferred-checkpoint path while canonical Git checkpoint verification remains unavailable; no verified canonical checkpoint is claimed by this memory.
 
-Only after the Part 02–03 rewrite and a cross-Part verification pass should Part 04 Data Architecture be formally developed.
+Issue #14 is resolved at the business-semantic / architecture level through Decisions 68–84. Part 03 must use this resolved semantics for Functional Requirements, Use Cases, state/acceptance logic, validations and change behavior. Exact Calendar Plan cardinalities, plan-to-plan mappings, Research Output lineage and detailed data structures remain for Parts 04–05 under Issues #33–34.
+
+Only after the Part 03 rewrite and a cross-Part verification pass should Part 04 Data Architecture be formally developed.
 
 The approved master structure is:
 
