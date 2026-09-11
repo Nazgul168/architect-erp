@@ -1,9 +1,9 @@
 # ENGAGEMENT_CONTROL.md
 
 - **ENGAGEMENT_ID:** `ENG-NURA-ERP-001`
-- **CONTROL_VERSION:** `1.5`
+- **CONTROL_VERSION:** `1.6`
 - **CONTROL_STATUS:** ACTIVE
-- **LAST_UPDATED:** `2026-09-11`
+- **LAST_UPDATED:** `2026-09-12`
 
 ## 1. Purpose
 
@@ -46,11 +46,13 @@ Established Engagement knowledge belongs in `memory/ENGAGEMENT_MEMORY.md`, subje
 
 ### 3.1 Phase State
 
-- **CURRENT_PHASE:** Full Rewrite / Synchronization of Parts 00–03 — Parts 00–02 Rewritten; Accepted Refinements 68–84 Pending Targeted Source Propagation; Part 03 Pending
-- **NEXT_PHASE:** Cross-Part V&V of Parts 00–03 and CONTENT Synchronization
+- **CURRENT_PHASE:** Part 04 — Data Architecture — initiation / design
+- **NEXT_PHASE:** Part 05 — Data Model
 - **NEXT_PHASE_GATE:** `NOT_READY`
-- **NEXT_PHASE_USER_CONTINUATION_DECISION:** `APPROVED`
+- **NEXT_PHASE_USER_CONTINUATION_DECISION:** `PENDING`
 - **INFRASTRUCTURE_DEFERMENT:** `GITHUB_CANONICAL_WRITE / CHECKPOINT FINALIZATION TECHNICALLY UNAVAILABLE`
+- **PARTS_00_03_SYNC_STATUS:** `CURRENT WORKING BASELINES / MATERIAL TRANSITION V&V PASS`
+- **CONTENT_SYNC_STATUS:** `PENDING — CURRENT CONTENT.pdf STILL SHOWS PRE-SOLUTION-ARCHITECTURE MASTER INDEX`
 
 ### 3.2 System State Checkpoint / Bootstrap State
 
@@ -76,7 +78,7 @@ The post-v1.3 material delta has now been reviewed and semantically consolidated
 - **UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK:** `NO`
 - **CONSOLIDATION_STATE:** `CURRENT`
 
-Reason: the catch-up Learning & Change Review from the v1.3 conservative baseline has been completed; accepted architecture state through the rewritten Parts 00–02 has been consolidated into `ENGAGEMENT_MEMORY.md v1.6`; `LEARNING_CANDIDATES.md` remains the applicable learning record; Professional Background and permanent ARCHITECT / governing implications were previously assessed. The current rewrite phase is in progress with Part 03 pending. Canonical checkpoint persistence/finalization is still pending.
+Reason: the Part 03 rewrite and final Parts 00–03 normalization have been reviewed and consolidated into proposed `ENGAGEMENT_MEMORY.md v1.9`; the current Parts 00–03 are treated as synchronized working baselines for Data Architecture. No new permanent-ARCHITECT change is proposed by this transition and no new transferable learning candidate is required solely to begin Part 04. `LEARNING_CANDIDATES.md` remains the applicable candidate backlog. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
 
 ### 3.4 Required State Invariant
 
@@ -562,10 +564,10 @@ Retain checkpoint evidence for architecture outputs even though they are not bun
 
 | Dependency | Canonical revision / pointer | Runtime-visible revision / pointer | Status |
 |---|---|---|---|
-| Part 00 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `7d794cf6891d5f4656243a5adb61c2887033aa3b5fc1828c89eeeae0bf09749e` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
-| Part 01 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `d6ed9260dbb818123b3ea0da26621f996d8ac6c3cd7dafeba9f13964ded5d533` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
-| Part 02 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `b00b6cd659ac1d33c2337e8157cf51061c16a2a5492df5d3d0e47f8b45884faf` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
-| Part 03 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `ed8eb22f8c81ab87bd889b9e6241c2452c5b2daf8ccec05dca52db9a6baa25e4` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
+| Part 00 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `b3feda08091715f50a9b004e951539bd0b818f113be8cffc1bcf4bc423647d9c` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
+| Part 01 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `4da41931ea8149f62d45311e2ebaf19bf57c1a356c0609456b0e950e583b46af` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
+| Part 02 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `733be3c92e057d9cff69e915ad532c3163b56221887f8f7c67d49da4c0a593c5` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
+| Part 03 | TO_RECORD — canonical repository currently inaccessible from this runtime | SHA-256 `95c8c55a42572b948d426370a321ac21f123f379de4cb6fdfba35df6c2d8607f` | RUNTIME_VERIFIED / CANONICAL_UNVERIFIED |
 
 Also record the applicable Runtime Deployment Record ID / revision where available.
 
@@ -690,17 +692,21 @@ A vague assertion such as “the latest files seem to be uploaded” is insuffic
 ---
 
 
-### 19.1 Current rewrite progress
+### 19.1 Rewrite completion / transition evidence — 2026-09-12
 
-- Part 00 — Scope & Architecture Principles: rewritten current working baseline.
-- Part 01 — Business Analysis: rewritten current working baseline.
-- Part 02 — Process Architecture: rewritten current working baseline.
-- Targeted refinement set after Part 02: Calendar Plan / Milestone / Research Output / TRL / AI-assisted extraction, lead/co-executor, reporting-period acceptance and Contract Financial Direction semantics accepted; source-document propagation pending in the user-maintained Parts 00–02.
-- Part 03 — System Analysis: pending controlled rewrite/synchronization.
-- Issue #14 (Calendar Plan / Milestone / Deliverable business structure) is RESOLVED at business-semantic / architecture level. Accepted Decisions 68–84 must be propagated into Parts 00–02 through the prepared targeted correction set and used as governing Engagement state in Part 03. Exact data-model cardinalities / lineage remain deferred to Parts 04–05.
-- The next phase (`Cross-Part V&V of Parts 00–03 and CONTENT Synchronization`) remains `NOT_READY` until Part 03 rewrite is complete enough to verify the four-Part set.
+- Part 00 — Scope & Architecture Principles: rewritten / synchronized current working baseline.
+- Part 01 — Business Analysis: rewritten / synchronized current working baseline.
+- Part 02 — Process Architecture: rewritten / synchronized current working baseline.
+- Part 03 — System Analysis: rewritten / synchronized current working baseline.
+- Accepted Calendar Plan / Milestone / Planned Result / Research Output / TRL / AI-assisted extraction, lead/co-executor, Contract Financial Direction and Incoming / Outgoing Contract route refinements are propagated across the applicable Parts.
+- Final route scoping correction is propagated: `Target Duration`, Legal reminder, `Critical Escalation Threshold`, `Not Concluded` timing stop and related Post-Award / COO / Director notifications belong to the Legal-led Incoming / Authorizing Agreement route and do not automatically govern Outgoing Contracts.
+- Final Project Closure wording is propagated: Closure-Blocking Conditions use Project Obligations / Planned Results and include Deliverables only where an applicable Programme Rule or Agreement uses that term.
+- A material transition check across Parts 00–03 found no known semantic contradiction that blocks Part 04. Remaining Issues #15, #17 and #31–34 are intentionally carried into Parts 04–05; institutional / technical verification items remain deferred to the layer where they become decision-relevant.
+- Current `CONTENT.pdf` is still stale as a master index: it lists `07. Enterprise Architecture` and does not yet reflect the approved distinct `07. Solution Architecture` + `08. Enterprise Architecture` structure. This is classified as a document-control synchronization delta, not a semantic blocker to Part 04.
 
-The previously approved infrastructure-deferred continuation remains valid for ongoing architecture work. It does not convert the pending System State Checkpoint into a verified checkpoint.
+The previously approved infrastructure-deferred continuation remains valid for architecture work. It does not convert the pending System State Checkpoint into a verified checkpoint.
+
+---
 
 ## 20. Phase Gate State Change
 
@@ -751,6 +757,23 @@ When substantive work on `NEXT_PHASE` actually starts, updating this Control is 
 
 Do not claim checkpoint finalization merely because architecture work continued under the deferred-infrastructure path.
 
+### 21.1 Current phase-start record — 2026-09-12
+
+The user has explicitly stated that Parts 00–03 in the current project sources are updated and directed ARCHITECT to proceed to Part 04.
+
+Transition assessment:
+
+- semantic consolidation of the current Parts 00–03 baseline: `PASS`;
+- material cross-Part transition V&V: `PASS` for starting Data Architecture;
+- Part 04 blocking ambiguity: `NONE IDENTIFIED`;
+- current `CONTENT.pdf` master-index synchronization: `PENDING / NON-BLOCKING FOR PART 04`;
+- canonical Git/checkpoint finalization: `DEFERRED — INFRASTRUCTURE UNAVAILABLE`;
+- current phase start authorization from the Engagement user: `APPROVED`.
+
+Accordingly, `Part 04 — Data Architecture` is the active architecture phase. `Part 05 — Data Model` remains the next material phase and its gate is `NOT_READY` until Part 04 is sufficiently complete and its relevant open data-architecture decisions are consolidated.
+
+No canonical write or verified System State Checkpoint is claimed by this update.
+
 ---
 
 ## 22. Current Expected Sequence
@@ -759,14 +782,18 @@ Current NURA ERP progress is:
 
 **semantic consolidation complete**
 → **infrastructure-deferred continuation explicitly approved by user**
-→ **Part 00 rewritten**
-→ **Part 01 rewritten**
-→ **Part 02 rewritten**
-→ **accepted Calendar Plan / Research Output refinement set prepared for targeted propagation to Parts 00–02**
-→ **CURRENT: propagate those targeted corrections and perform Part 03 System Analysis controlled rewrite / synchronization**
-→ **NEXT: cross-Part V&V of Parts 00–03**
-→ **CONTENT synchronization**
-→ **Part 04 Data Architecture**.
+→ **Part 00 rewritten / synchronized**
+→ **Part 01 rewritten / synchronized**
+→ **Part 02 rewritten / synchronized**
+→ **Part 03 rewritten / synchronized**
+→ **material cross-Part transition V&V PASS**
+→ **CURRENT: Part 04 Data Architecture**
+→ **NEXT: Part 05 Data Model**
+→ **Part 06 Information Architecture**
+→ **Part 07 Solution Architecture**
+→ **Part 08 Enterprise Architecture**.
+
+`CONTENT.pdf` synchronization to the approved master structure remains pending and must be completed before a later publication/checkpoint claims the master contents are synchronized. It does not currently block Part 04 semantic work.
 
 Canonical GitHub/checkpoint infrastructure remains technically unavailable. Therefore `CP-NURA-001` remains pending and must not be described as verified or complete.
 
