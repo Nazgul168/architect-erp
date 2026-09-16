@@ -1,9 +1,9 @@
 # ENGAGEMENT_CONTROL.md
 
 - **ENGAGEMENT_ID:** `ENG-NURA-ERP-001`
-- **CONTROL_VERSION:** `1.6`
+- **CONTROL_VERSION:** `1.8`
 - **CONTROL_STATUS:** ACTIVE
-- **LAST_UPDATED:** `2026-09-12`
+- **LAST_UPDATED:** `2026-09-16`
 
 ## 1. Purpose
 
@@ -18,7 +18,7 @@ It externalizes control state so that ARCHITECT does not rely only on conversati
 
 This is a textual control artifact, not a hard technical platform lock.
 
-It does not replace the Learning Protocol, Engagement Memory, applicable Engagement authority, or the clean ARCHITECT / Role Updater governance boundary.
+It does not replace the Learning Protocol, Engagement Memory, applicable Engagement authority, or permanent ARCHITECT governance.
 
 ---
 
@@ -46,13 +46,16 @@ Established Engagement knowledge belongs in `memory/ENGAGEMENT_MEMORY.md`, subje
 
 ### 3.1 Phase State
 
-- **CURRENT_PHASE:** Part 04 — Data Architecture — initiation / design
+- **CURRENT_PHASE:** Part 04 — Data Architecture — completion / V&V / Architecture-to-Delivery readiness
 - **NEXT_PHASE:** Part 05 — Data Model
 - **NEXT_PHASE_GATE:** `NOT_READY`
 - **NEXT_PHASE_USER_CONTINUATION_DECISION:** `PENDING`
 - **INFRASTRUCTURE_DEFERMENT:** `GITHUB_CANONICAL_WRITE / CHECKPOINT FINALIZATION TECHNICALLY UNAVAILABLE`
 - **PARTS_00_03_SYNC_STATUS:** `CURRENT WORKING BASELINES / MATERIAL TRANSITION V&V PASS`
 - **CONTENT_SYNC_STATUS:** `PENDING — CURRENT CONTENT.pdf STILL SHOWS PRE-SOLUTION-ARCHITECTURE MASTER INDEX`
+- **POST_ARCHITECTURE_DELIVERY_OBJECTIVE:** `ACCEPTED — ARCHITECTURE-TO-DELIVERY LAYER AFTER PARTS 00–08`
+- **ARCHITECTURE_PART_AUTHORING_STANDARD:** `ACTIVE — v1.0 — REQUIRED FOR PARTS 04–08`
+- **PART_04_DOWNSTREAM_READINESS:** `IN_PROGRESS — REQUIRED BEFORE PART 05 GATE MAY PASS`
 
 ### 3.2 System State Checkpoint / Bootstrap State
 
@@ -78,7 +81,7 @@ The post-v1.3 material delta has now been reviewed and semantically consolidated
 - **UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK:** `NO`
 - **CONSOLIDATION_STATE:** `CURRENT`
 
-Reason: the Part 03 rewrite and final Parts 00–03 normalization have been reviewed and consolidated into proposed `ENGAGEMENT_MEMORY.md v1.9`; the current Parts 00–03 are treated as synchronized working baselines for Data Architecture. No new permanent-ARCHITECT change is proposed by this transition and no new transferable learning candidate is required solely to begin Part 04. `LEARNING_CANDIDATES.md` remains the applicable candidate backlog. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
+Reason: the Part 03 rewrite and final Parts 00–03 normalization remain consolidated. Accepted Engagement objectives establish the post-Parts `Architecture-to-Delivery Layer`, per-increment implementation specification approach, independently acceptable end-to-end delivery increments and a machine-readable Architecture Control Model. The 2026-09-16 refinement additionally requires verification-aware but technology-agnostic Part authoring, deterministic/formal conformance where feasible, optional rather than constitutive AI assurance, and an explicit Architecture-to-Delivery Readiness Pass before Part transition. These are consolidated into proposed `ENGAGEMENT_MEMORY.md v2.1` and `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0`. Part 04 remains the current architecture phase. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
 
 ### 3.4 Required State Invariant
 
@@ -110,6 +113,7 @@ For System State Checkpoint / delta-reporting purposes, the NURA ERP System Stat
 - `memory/ENGAGEMENT_MEMORY.md`;
 - `memory/LEARNING_CANDIDATES.md`;
 - `runtime/ARCHITECT_PROFESSIONAL_BACKGROUND.md`;
+- `runtime/ARCHITECTURE_PART_AUTHORING_STANDARD.md`;
 - pointer to the applicable Runtime Deployment Record where available.
 
 If a formal Runtime Deployment Record is not yet available, the currently verified runtime-binding fields may be used as fallback evidence without creating a second independently maintained source of truth.
@@ -179,7 +183,7 @@ Required sequence:
 5. update Engagement Memory;
 6. update Learning Candidates where applicable;
 7. explicitly assess Professional Background implications;
-8. explicitly assess clean ARCHITECT / Role Updater implications;
+8. explicitly assess permanent ARCHITECT / governing implications;
 9. complete required Manifest / Control updates;
 10. canonically persist the coherent system-state bundle;
 11. synchronize / verify required runtime-visible sources;
@@ -337,7 +341,7 @@ When `CONSOLIDATION_STATE = DUE`, ARCHITECT must, at the next reasonable stoppin
 5. update `memory/LEARNING_CANDIDATES.md` where applicable;
 6. perform a full-file consistency check when Engagement Memory was materially patched;
 7. explicitly assess Professional Background implications;
-8. explicitly assess clean ARCHITECT / Role Updater implications;
+8. explicitly assess permanent ARCHITECT / governing implications;
 9. update this Control state.
 
 If the runtime has no verified canonical write path, it must not claim that canonical persistence occurred.
@@ -398,7 +402,7 @@ This distinguishes:
 - Open / Resolved / Deferred register: synchronized in Engagement Memory. Issues #3/#16, #4, #5, #6 and #8 are resolved at architecture-concept level; detailed Part 04–05 modeling/cardinality work is carried by Issue #17 and deferred Authorizing Basis mapping by Issue #32.
 - Full-file Engagement Memory consistency check: PASS. Established Architectural Decisions are sequential `1–65`; stale formulations occur only in explicit rejected/superseded or stale-Part descriptions; no blocking internal contradiction was found.
 - Professional Background implication: `NO CHANGE`.
-- Clean ARCHITECT / Role Updater implication: `NO GOVERNING CHANGE NEEDED`; candidates remain Engagement-side `CANDIDATE` unless separately reclassified through the RF lifecycle.
+- Permanent ARCHITECT / governing implication: `NO GOVERNING CHANGE NEEDED`; candidates remain Engagement-side `CANDIDATE ONLY`.
 - Runtime-source verification completed for the current Memory and Learning Candidates artifacts; canonical repository equivalence remains UNVERIFIED until repository access/write and read-back verification succeed.
 
 ---
@@ -657,7 +661,7 @@ This is a controlled continuation path, not a waiver of semantic consolidation.
 - [x] Full-file Engagement Memory consistency check is complete.
 - [x] Current Solution State / Readiness reflects latest accepted architecture state.
 - [x] Professional Background implications explicitly assessed.
-- [x] Clean ARCHITECT / Role Updater implications explicitly assessed.
+- [x] Permanent ARCHITECT / governing implications explicitly assessed.
 - [x] No unresolved ambiguity or conflict materially blocks rewrite.
 - [x] Runtime-visible `ENGAGEMENT_MEMORY.md` and `LEARNING_CANDIDATES.md` are verified as the intended consolidated artifacts for the next phase.
 
@@ -739,7 +743,7 @@ The architecture phase may then start while checkpoint state remains pending.
 
 If the user chooses not to continue, keep the phase unchanged and wait for infrastructure recovery / checkpoint completion.
 
-No RF Owner / clean-ROLE approval is required merely for this ordinary Engagement phase continuation. Authority for NURA business decisions, confidentiality decisions, candidate approval-for-review and clean ARCHITECT releases remains role-specific.
+No ARCHITECT Maintainer approval is required merely for this ordinary Engagement phase continuation. Authority for NURA business decisions, confidentiality decisions and permanent ARCHITECT changes remains role-specific.
 
 ---
 
@@ -814,3 +818,57 @@ If this Control itself is stale and the runtime cannot write it canonically, ARC
 - keep canonical persistence / checkpoint status explicitly `PENDING / DEFERRED`, never falsely `VERIFIED`;
 - if semantic consolidation or source integrity is incomplete, remain blocked;
 - if semantic consolidation is complete and GitHub/canonical persistence is the only technical blocker, apply Sections 17–21: inform the user, ask whether to continue architecture work, and proceed only after explicit user approval while preserving the deferred checkpoint state.
+
+---
+
+## 22. Architecture Part Authoring / Completion Gate — Parts 04–08
+
+`ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0` is an active controlled Engagement method for Parts 04–08.
+
+A Part is not ready for transition merely because a draft exists or the user has completed editorial review. Before `NEXT_PHASE_GATE` may pass, the applicable Part must satisfy the following semantic completion criteria:
+
+### 22.1 Required authoring inputs
+
+The working runtime/chat should use the intended current versions of:
+
+- relevant completed upstream Parts;
+- `ENGAGEMENT_MEMORY.md`;
+- `ENGAGEMENT_CONTROL.md`;
+- `00_ENGAGEMENT_MANIFEST.md`;
+- `ARCHITECTURE_PART_AUTHORING_STANDARD.md`;
+- `ARCHITECT_PROFESSIONAL_BACKGROUND.md`;
+- other authoritative Engagement sources required for the Part.
+
+If a material required source/revision is unavailable or conflicting, do not claim the corresponding readiness criterion passed.
+
+### 22.2 Part completion criteria — blocking for the next architecture Part
+
+- [ ] **Semantic coverage:** the Part adequately covers the architectural layer it owns.
+- [ ] **Layer boundary:** material decisions owned by later Parts are not prematurely frozen unless required by the current layer.
+- [ ] **Cross-Part consistency:** no unresolved contradiction with accepted upstream Parts / Engagement Memory materially affects the Part.
+- [ ] **Rule precision:** material requirements/invariants/authority rules are stated precisely enough for downstream derivation without semantic invention.
+- [ ] **Rule vs rationale/example:** normative meaning is distinguishable from explanation, example and open/deferred items.
+- [ ] **Stable traceability:** material identifiers are used where they improve downstream traceability and remain semantically stable.
+- [ ] **Authority / uncertainty:** unresolved institutional/technical authority is explicit rather than silently assumed.
+- [ ] **Verification awareness:** the Part supports later deterministic/formal/automated or evidence-based conformance where appropriate without embedding a specific future verification technology.
+- [ ] **Target-reader fit:** the primary intended users of the Part can understand and apply it without reverse-engineering missing semantics.
+- [ ] **Russian prose / terminology pass:** language is aligned with Parts 00–03; accepted English model terms are preserved without unnecessary English or calque.
+- [ ] **Architecture-to-Delivery Readiness Pass:** a future Requirements Catalogue / Implementation Specification / Acceptance / Conformance artifact can derive the intended downstream obligation without inventing new business meaning.
+- [ ] **Engagement-state synchronization:** accepted material decisions, open/deferred items, learning candidates and phase-control state are updated where applicable.
+
+Any material applicable failure keeps `NEXT_PHASE_GATE = NOT_READY`.
+
+### 22.3 Current Part 04 status
+
+Part 04 is currently in completion / V&V / Architecture-to-Delivery readiness work. No Part 04 completion or Part 05 transition is claimed by this Control revision.
+
+The Part 04 gate remains:
+
+```text
+NEXT_PHASE = Part 05 — Data Model
+NEXT_PHASE_GATE = NOT_READY
+PART_04_DOWNSTREAM_READINESS = IN_PROGRESS
+```
+
+When all applicable criteria in 22.2 pass, the transition evidence must be recorded before Part 05 is treated as started.
+

@@ -1,8 +1,8 @@
 # ENGAGEMENT_MEMORY.md
 
-- **MEMORY_VERSION:** `1.9`
-- **LAST_RECONCILED:** `2026-09-12`
-- **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis`, `Part 02 — Process Architecture` and `Part 03 — System Analysis` have been rewritten / synchronized and are the current working baselines. Accepted Decisions 68–86 are reflected in the current Parts 00–03 where applicable. `Part 04 — Data Architecture` is the active architecture-development phase; exact data-architecture / data-model details remain open only where explicitly listed below.
+- **MEMORY_VERSION:** `2.1`
+- **LAST_RECONCILED:** `2026-09-16`
+- **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis`, `Part 02 — Process Architecture` and `Part 03 — System Analysis` have been rewritten / synchronized and are the current working baselines. Accepted Decisions 68–86 are reflected in the current Parts 00–03 where applicable. `Part 04 — Data Architecture` is the active architecture-development phase. In addition, Decisions 87–99 below establish the accepted post-architecture `Architecture-to-Delivery Layer` objective and the verification-aware Part-authoring rules needed to support it. These decisions guide how Parts 04–08 are written but do not replace the Parts themselves. `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0` is the active Engagement authoring standard for Parts 04–08.
 - **BOOTSTRAP / RECONCILIATION reference:** QA Bootstrap Batches 1–8 + accepted Global Reconciliation, 2026-09-08.
 
 ## Engagement Identity / Status
@@ -10,8 +10,8 @@
 - **Engagement:** NURA ERP Architecture
 - **Engagement ID:** `ENG-NURA-ERP-001`
 - **Status:** ACTIVE
-- **Memory status:** CONSOLIDATED WORKING VERSION — PARTS 00–03 REWRITTEN / SYNCHRONIZED CURRENT WORKING BASELINES; ARCHITECTURE-NORMALIZATION ISSUES #1, #2, #3/#16, #4, #5, #6, #7, #8, #11/#12, #14 AND #35 PROPAGATED; PART 04 DATA ARCHITECTURE ACTIVE
-- **Current architecture state:** Parts 00–03 are the current rewritten / synchronized working baselines. The Calendar Plan / Milestone / Deliverable, Research Output / Outcome / TRL, lead/co-executor, Contract Financial Direction, Legal-led Incoming / Authorizing Agreement, Project Closure and procurement normalizations are now reflected across the applicable Parts. A material transition V&V found no known semantic contradiction that blocks Part 04. Remaining issues are intentionally deferred data / relationship / institutional / technical questions and must be resolved at the layer where they become decision-relevant. The approved master architecture structure includes Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08. The current `CONTENT.pdf` source still reflects the older index (`07. Enterprise Architecture`) and therefore remains a non-blocking document-control synchronization delta, not the governing architecture structure.
+- **Memory status:** CONSOLIDATED WORKING VERSION — PARTS 00–03 REWRITTEN / SYNCHRONIZED CURRENT WORKING BASELINES; ARCHITECTURE-NORMALIZATION ISSUES #1, #2, #3/#16, #4, #5, #6, #7, #8, #11/#12, #14 AND #35 PROPAGATED; PART 04 DATA ARCHITECTURE ACTIVE; POST-ARCHITECTURE ARCHITECTURE-TO-DELIVERY OBJECTIVE ACCEPTED
+- **Current architecture state:** Parts 00–03 are the current rewritten / synchronized working baselines and Part 04 is active. The Calendar Plan / Milestone / Deliverable, Research Output / Outcome / TRL, lead/co-executor, Contract Financial Direction, Legal-led Incoming / Authorizing Agreement, Project Closure and procurement normalizations are reflected across the applicable Parts. A material transition V&V found no known semantic contradiction that blocks Part 04. Remaining issues are intentionally deferred data / relationship / institutional / technical questions and must be resolved at the layer where they become decision-relevant. The approved master architecture structure includes Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08. After Parts 00–08, the Engagement will develop an `Architecture-to-Delivery Layer` that converts human-readable architecture into implementation specifications, independently acceptable end-to-end increments, acceptance/conformance controls and a machine-readable Architecture Control Model. Parts 04–08 are therefore authored under `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0`: human-readable architecture remains the source of meaning, while material rules are written precisely enough for later traceability, implementation specification, acceptance and deterministic/formal or evidence-based conformance without inventing new business meaning. The current `CONTENT.pdf` source still reflects the older index (`07. Enterprise Architecture`) and therefore remains a non-blocking document-control synchronization delta, not the governing architecture structure.
 - **Purpose of this memory:** compact working memory of the current NURA ERP architecture. It is not a transcript, Bootstrap ledger, or substitute for the architecture Parts.
 - **Canonical baseline persistence:** baseline `ENGAGEMENT_MEMORY.md` v1.0 is user-confirmed as canonically persisted in the canonical Engagement Git repository. The same confirmation applies to the baseline `ARCHITECT_PROFESSIONAL_BACKGROUND.md` and updated `00_ENGAGEMENT_MANIFEST.md` referenced by this Engagement.
 - **Canonical persistence:** Canonical persistence of the current version is determined by the canonical Engagement repository and its version history. This runtime has no verified canonical write path and does not claim to perform canonical writes.
@@ -577,6 +577,32 @@ Stable fundamental invariants may remain Hard Business Validations. Configurabil
 
 86. **Project Closure checks use Project Obligations / Planned Results, not a universal Deliverable entity.** Closure-Blocking Conditions may include required Project Obligations / Planned Results and may include Deliverables only where an applicable Programme Rule or Agreement uses that term. This preserves Decision 72: Deliverable is not a mandatory universal first-class Business Object.
 
+87. **Architecture must leave verifiable assertions, not only narrative descriptions.** Parts 00–08 remain human-readable architecture, but material requirements, invariants, authority rules, lifecycle/state constraints, permissions, integration boundaries, audit/provenance obligations and other consequential rules should be stated precisely enough to be translated into implementation requirements and objective conformance checks.
+
+88. **A post-architecture `Architecture-to-Delivery Layer` is an accepted Engagement objective.** After Parts 00–08, NURA will build a controlled layer that connects architecture to implementation specification, delivery decomposition, acceptance, traceability and automated architecture-conformance verification. This layer is downstream of the Parts and must not replace or silently reinterpret them.
+
+89. **`Implementation Specification Standard` and per-increment `Implementation Specification Pack` are distinct.** The Standard defines the mandatory structure, traceability and evidence expectations for any implementation specification. A Pack is the concrete developer-facing specification/evidence set for one independently acceptable end-to-end increment. NURA should not create one monolithic implementation specification for the entire ERP.
+
+90. **Delivery is decomposed into independently acceptable end-to-end increments.** Increments may reuse technical foundations created earlier, but acceptance of an increment must not depend on future, not-yet-delivered functionality. Each increment must deliver a usable end-to-end business procedure or coherent capability whose acceptance criteria can be satisfied at that stage; later increments add or improve capability rather than retroactively making earlier accepted work incomplete.
+
+91. **`Architecture Control Model` is part of the Architecture-to-Delivery Layer.** It is the formal machine-readable representation of architectural requirements, invariants and constraints needed for automated or assisted conformance checking. It should cover, where applicable, Business Rules, allowed dependencies, lifecycle/state transitions, permissions, ownership/authority, Data Model constraints, API/data contracts, integration boundaries and mandatory audit/provenance requirements. It is a formalized representation of the architecture, not a second independent architecture.
+
+92. **Architecture conformance uses multiple evidence levels.** Verification may combine static code/schema analysis, automated tests, API/integration tests, runtime evidence and business acceptance scenarios. A conformance mechanism must distinguish at least `PASS`, `VIOLATION`, `NOT IMPLEMENTED`, `INSUFFICIENT EVIDENCE`, and `MANUAL / RUNTIME VERIFICATION REQUIRED`; it must not claim that a requirement is proven merely because it cannot detect a violation in source code.
+
+93. **`Architecture Conformance Engine` is a consumer of the Architecture Control Model; AI is optional rather than constitutive.** The conformance mechanism examines submitted implementation artifacts such as code, database schema, APIs, tests, configuration, deployment artifacts and runtime evidence against the governed control model and produces traceable findings. AI may later assist with mapping, investigation, explanation or analysis of unstructured evidence, but it is not the source of architecture truth and is not required for rules that can be verified deterministically.
+
+94. **Deterministic / formal conformance is preferred where the rule can be expressed objectively.** The future Architecture Control Model and Conformance Engine should support deterministic constraint checking, model/state validation, static analysis, automated tests and other non-AI verification mechanisms where suitable. AI-assisted assurance may supplement these mechanisms but must not override a deterministic violation or convert absence of detected defects into proof.
+
+95. **Parts are verification-aware but technology-agnostic.** Parts 00–08 remain human-readable architecture. They should express material rules precisely enough for later formalization, but they must not embed or prematurely select the future Architecture Control Model language, Lean/TLA+/Alloy/Z3, YAML/JSON DSL or another specific conformance technology merely to appear machine-readable.
+
+96. **`ARCHITECTURE_PART_AUTHORING_STANDARD.md` is the controlled Engagement method for Parts 04–08.** The standard governs source-derived extraction, layer boundaries, targeted questioning, formulation of material architectural assertions, stable identifiers where useful, explicit uncertainty/authority, Architecture-to-Delivery Readiness and the final Russian prose/terminology pass. It does not override accepted architecture decisions.
+
+97. **Normative rule, rationale, example and unresolved item must remain distinguishable.** A downstream specification must be able to determine what is required / permitted / prohibited without guessing whether an explanatory example was intended as a mandatory rule. Examples illustrate; they do not silently broaden architecture.
+
+98. **Unresolved authority must remain explicit rather than being converted into false architectural precision.** Institutional policy, System-of-Record capability, retention/security rule or technical fact that lacks adequate authority/evidence remains `TO_CONFIRM`, `AUTHORITATIVE POLICY TO_CONFIRM`, `TECHNICAL CAPABILITY TO_VERIFY`, or another explicit deferred state until the appropriate layer/source resolves it.
+
+99. **Part completion includes Architecture-to-Delivery Readiness, not drafting alone.** Before transition to the next architecture Part, material assertions must pass semantic/cross-Part V&V and a readiness check that a later Requirements Catalogue / Implementation Specification / Acceptance / Conformance artifact can derive its downstream obligation without inventing new business meaning. Exact downstream verification technology remains a later design decision.
+
 ---
 
 ## Architecture Principles
@@ -736,6 +762,34 @@ Only items worth retaining to prevent accidental reintroduction:
 - Keeping Solution Architecture only implicitly distributed across Parts 00/03 — superseded by an explicit Part 07 Solution Architecture.
 
 ---
+
+
+## Architecture-to-Delivery Objective
+
+The accepted target delivery chain is:
+
+```text
+PARTS 00–08 — human-readable architecture
+        ↓
+ARCHITECTURE-TO-DELIVERY LAYER
+        ├── Requirements & Rules Catalogue
+        ├── Traceability Model
+        ├── Delivery / Increment Model
+        ├── Implementation Specification Standard + per-increment Packs
+        ├── Acceptance Scenarios
+        ├── Architecture Conformance Rules
+        └── Architecture Control Model
+                ↓
+        Development / Acceptance / Conformance
+                ├── deterministic / formal / automated verification where feasible
+                ├── runtime / manual evidence where required
+                └── optional AI-assisted assurance
+```
+
+Working design rule: every material architecture statement should be written so that a later delivery artifact can identify its source, implementation obligation, acceptance method and evidence type without inventing new business meaning. `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0` operationalizes this rule for Parts 04–08.
+
+The future `Architecture Control Model` remains subordinate to the approved human-readable architecture and must preserve traceability back to the originating Part / rule / requirement. It should support deterministic/formal verification where feasible and explicit evidence-based outcomes where a requirement cannot be proven statically; AI is an optional assurance aid rather than the authoritative verification kernel.
+
 
 ## Open Issues / Conflicts
 
