@@ -1,7 +1,7 @@
 # ENGAGEMENT_CONTROL.md
 
 - **ENGAGEMENT_ID:** `ENG-NURA-ERP-001`
-- **CONTROL_VERSION:** `1.10`
+- **CONTROL_VERSION:** `1.11`
 - **CONTROL_STATUS:** ACTIVE
 - **LAST_UPDATED:** `2026-09-16`
 
@@ -52,9 +52,9 @@ Established Engagement knowledge belongs in `memory/ENGAGEMENT_MEMORY.md`, subje
 - **NEXT_PHASE_USER_CONTINUATION_DECISION:** `PENDING`
 - **INFRASTRUCTURE_DEFERMENT:** `GITHUB_CANONICAL_WRITE / CHECKPOINT FINALIZATION TECHNICALLY UNAVAILABLE`
 - **PARTS_00_03_SYNC_STATUS:** `CURRENT WORKING BASELINES / MATERIAL TRANSITION V&V PASS`
-- **CONTENT_SYNC_STATUS:** `PENDING — CURRENT CONTENT.pdf STILL SHOWS PRE-SOLUTION-ARCHITECTURE MASTER INDEX`
+- **MASTER_INDEX_ARTIFACT_STATUS:** `NOT IN CURRENT CONTROLLED SOURCE SET — NO CONTENT.pdf SYNC GATE`
 - **POST_ARCHITECTURE_DELIVERY_OBJECTIVE:** `ACCEPTED — ARCHITECTURE-TO-DELIVERY LAYER AFTER PARTS 00–08`
-- **ARCHITECTURE_PART_AUTHORING_STANDARD:** `ACTIVE — v1.0 — REQUIRED FOR PARTS 04–08`
+- **ARCHITECTURE_PART_AUTHORING_STANDARD:** `ACTIVE — v1.1 — REQUIRED FOR PARTS 04–08`
 - **PART_04_DOWNSTREAM_READINESS:** `IN_PROGRESS — REQUIRED BEFORE PART 05 GATE MAY PASS`
 
 ### 3.2 System State Checkpoint / Bootstrap State
@@ -81,7 +81,7 @@ The post-v1.3 material delta has now been reviewed and semantically consolidated
 - **UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK:** `NO`
 - **CONSOLIDATION_STATE:** `CURRENT`
 
-Reason: the Part 03 rewrite and final Parts 00–03 normalization remain consolidated. Accepted Engagement objectives establish the post-Parts `Architecture-to-Delivery Layer`, per-increment implementation specification approach, independently acceptable end-to-end delivery increments and a machine-readable Architecture Control Model. The 2026-09-16 refinement additionally requires verification-aware but technology-agnostic Part authoring, deterministic/formal conformance where feasible, optional rather than constitutive AI assurance, and an explicit Architecture-to-Delivery Readiness Pass before Part transition. These are consolidated into current `ENGAGEMENT_MEMORY.md v2.1` and `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0`. Part 04 remains the current architecture phase. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
+Reason: the Part 03 rewrite and final Parts 00–03 normalization remain consolidated. Accepted Engagement objectives establish the post-Parts `Architecture-to-Delivery Layer`, per-increment implementation specification approach, independently acceptable end-to-end delivery increments and a machine-readable Architecture Control Model. The 2026-09-16 refinement additionally requires verification-aware but technology-agnostic Part authoring, deterministic/formal conformance where feasible, optional rather than constitutive AI assurance, and an explicit Architecture-to-Delivery Readiness Pass before Part transition. These are consolidated into current `ENGAGEMENT_MEMORY.md v2.2` and `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1`. Part 04 remains the current architecture phase. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
 
 ### 3.4 Required State Invariant
 
@@ -706,7 +706,7 @@ A vague assertion such as “the latest files seem to be uploaded” is insuffic
 - Final route scoping correction is propagated: `Target Duration`, Legal reminder, `Critical Escalation Threshold`, `Not Concluded` timing stop and related Post-Award / COO / Director notifications belong to the Legal-led Incoming / Authorizing Agreement route and do not automatically govern Outgoing Contracts.
 - Final Project Closure wording is propagated: Closure-Blocking Conditions use Project Obligations / Planned Results and include Deliverables only where an applicable Programme Rule or Agreement uses that term.
 - A material transition check across Parts 00–03 found no known semantic contradiction that blocks Part 04. Remaining Issues #15, #17 and #31–34 are intentionally carried into Parts 04–05; institutional / technical verification items remain deferred to the layer where they become decision-relevant.
-- Current `CONTENT.pdf` is still stale as a master index: it lists `07. Enterprise Architecture` and does not yet reflect the approved distinct `07. Solution Architecture` + `08. Enterprise Architecture` structure. This is classified as a document-control synchronization delta, not a semantic blocker to Part 04.
+- A previously referenced `CONTENT.pdf` is **not part of the current controlled source set** and is therefore not a current synchronization dependency. The approved architecture sequence remains 00–08 with distinct Part 07 — Solution Architecture and Part 08 — Enterprise Architecture.
 
 The previously approved infrastructure-deferred continuation remains valid for architecture work. It does not convert the pending System State Checkpoint into a verified checkpoint.
 
@@ -770,7 +770,7 @@ Transition assessment:
 - semantic consolidation of the current Parts 00–03 baseline: `PASS`;
 - material cross-Part transition V&V: `PASS` for starting Data Architecture;
 - Part 04 blocking ambiguity: `NONE IDENTIFIED`;
-- current `CONTENT.pdf` master-index synchronization: `PENDING / NON-BLOCKING FOR PART 04`;
+- separate master-index artifact: `NOT PRESENT IN CURRENT CONTROLLED SOURCE SET / NOT A CURRENT GATE`;
 - canonical Git/checkpoint finalization: `DEFERRED — INFRASTRUCTURE UNAVAILABLE`;
 - current phase start authorization from the Engagement user: `APPROVED`.
 
@@ -797,7 +797,7 @@ Current NURA ERP progress is:
 → **Part 07 Solution Architecture**
 → **Part 08 Enterprise Architecture**.
 
-`CONTENT.pdf` synchronization to the approved master structure remains pending and must be completed before a later publication/checkpoint claims the master contents are synchronized. It does not currently block Part 04 semantic work.
+No separate master-index artifact is part of the current controlled source set. The approved architecture sequence is governed by the current Parts / Engagement state and does not create a `CONTENT.pdf` synchronization gate.
 
 Canonical GitHub/checkpoint infrastructure remains technically unavailable. Therefore `CP-NURA-001` remains pending and must not be described as verified or complete.
 
@@ -913,3 +913,33 @@ Before a material Part handoff, phase transition, Learning & Change Review close
 
 This section controls learning continuity across chats. It does not change the claim-relative authority of Engagement business sources or Architecture Parts.
 
+---
+
+## 26. Active Source-Set Verification Discipline
+
+For source-consistency audits and Part handoffs, first establish the **actual current Project Source set**.
+
+Rules:
+
+1. only artifacts actually present in the current Project Sources / verified supplied source set are treated as active sources;
+2. a filename or canonical path mentioned inside another artifact does not prove that the referenced artifact is currently supplied or readable;
+3. historical uploads, earlier chat-generated files and proposed replacements are excluded unless the user has actually added them to the active source set;
+4. do not claim a “full source consistency pass” until every artifact in the established active source set has been included in the review scope;
+5. absent referenced artifacts may be recorded as unavailable/pointers where relevant, but must not be silently substituted with historical or assistant-created copies.
+
+### 26.1 Current reconciliation evidence — 2026-09-16
+
+The current runtime-visible Project Source set was explicitly bounded to **25 active files** before this reconciliation. The full pass covered:
+
+- 13 permanent ARCHITECT governance / system / EKB artifacts;
+- Parts 00–03;
+- 8 Engagement/runtime/learning artifacts.
+
+The pass found current-state edits required only in:
+
+- `ENGAGEMENT_MEMORY.md` — stale Authoring Standard v1.0 references, stale Part 04 draft status and phantom `CONTENT.pdf` references;
+- `ENGAGEMENT_CONTROL.md` — stale Authoring Standard v1.0 references and phantom `CONTENT.pdf` gate/reference;
+- `LEARNING_CANDIDATES.md` — RF approval-token mismatch against `_ROLE_LEARNING_EXPORT_TEMPLATE.md` and missing structured approval metadata for explicitly approved candidates;
+- `ROLE_PERFORMANCE_LOG.md` — user feedback about the repeated source-boundary/audit failure had not yet been recorded.
+
+No content change was identified as required by this consistency pass for the other active sources. This statement concerns source-set/version/control consistency only; it is not a new semantic V&V of every business rule in Parts 00–03.

@@ -1,6 +1,6 @@
 # LEARNING_CANDIDATES.md
 
-- **REVISION:** `2026-09-16-r3`
+- **REVISION:** `2026-09-16-r4`
 - **LAST_UPDATED:** `2026-09-16`
 
 Durable Engagement-side staging for transferable learning identified during NURA ERP work.
@@ -30,7 +30,7 @@ Purpose: preserve transferable-learning candidates identified during NURA ERP Le
 > Canonical promotion to EKB is a separate governed process.
 
 
-## Approval / Role Updater Tracking
+## Approval / Role Review Tracking
 
 This Engagement file also records the user's explicit disposition of transferable-learning candidates so that, at Engagement close or another agreed review point, ARCHITECT can produce an **approved-candidate export** for a separate Role Updater / permanent-role review process.
 
@@ -38,7 +38,7 @@ Allowed Engagement-side disposition values:
 
 - `NOT_REVIEWED` — no explicit user disposition has been recorded;
 - `APPROVED_FOR_ENGAGEMENT_USE` — the user explicitly accepted the method/principle for use in this Engagement;
-- `APPROVED_FOR_ROLE_UPDATER_REVIEW` — the user explicitly accepted the learning candidate as suitable to be submitted for later Role Updater review;
+- `APPROVED_FOR_ROLE_REVIEW` — the user explicitly accepted the learning candidate for the RF Role Learning Export / later Role Updater review;
 - `HOLD` — useful candidate, but the user does not yet want it advanced for Role Updater review;
 - `REJECTED_BY_USER` — the user explicitly rejected the proposed transferable learning.
 
@@ -51,7 +51,7 @@ Where a candidate materially changes Engagement artifacts, record the artifact i
 3. why the artifact change was made; and
 4. whether the user explicitly approved that change/learning.
 
-At final handoff, produce a separate export containing candidates marked `APPROVED_FOR_ROLE_UPDATER_REVIEW`, with their latest evidence, limits, artifact-change history and disposition record.
+At final handoff, produce a separate export containing candidates marked `APPROVED_FOR_ROLE_REVIEW`, with the fields required by `_ROLE_LEARNING_EXPORT_TEMPLATE.md`, including approval metadata, latest evidence, limits, artifact-change history and disposition record.
 
 ### Cross-runtime continuity rule
 
@@ -682,9 +682,10 @@ The candidate was operationalized in the NURA Engagement through a controlled au
 
 ### User disposition
 
-- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Disposition:** `APPROVED_FOR_ROLE_REVIEW`
+- **Approved by:** `RF_OWNER_CURRENT_HUMAN`
+- **Approved at:** `2026-09-16`
 - **Approval evidence:** on 2026-09-16 the user explicitly approved creation of `ARCHITECTURE_PART_AUTHORING_STANDARD.md`, the associated Memory / Control / Manifest changes, and requested that this methodology be captured in Learning Candidates for later Role Updater review.
-- **Governance note:** this is Engagement-side user approval and export eligibility only; it is not canonical EKB promotion or verified ARCHITECT Maintainer authorization.
 
 ---
 
@@ -720,9 +721,10 @@ Supports earlier real-world validation, clearer acceptance boundaries and lower 
 
 ### User disposition
 
-- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Disposition:** `APPROVED_FOR_ROLE_REVIEW`
+- **Approved by:** `RF_OWNER_CURRENT_HUMAN`
+- **Approved at:** `2026-09-14`
 - **Approval evidence:** the user explicitly accepted the independently acceptable end-to-end increment principle and the associated Architecture-to-Delivery model during the 2026-09-14 discussion.
-- **Governance note:** Engagement-side user approval only; no canonical ARCHITECT promotion is claimed.
 
 ---
 
@@ -762,9 +764,10 @@ Makes architecture conformance more repeatable and automatable while preserving 
 
 ### User disposition
 
-- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Disposition:** `APPROVED_FOR_ROLE_REVIEW`
+- **Approved by:** `RF_OWNER_CURRENT_HUMAN`
+- **Approved at:** `2026-09-14`
 - **Approval evidence:** the user explicitly accepted the Architecture Control Model definition, its place inside the Architecture-to-Delivery Layer, and its use as the basis for later conformance checking.
-- **Governance note:** Engagement-side user approval only; the candidate remains non-canonical.
 
 ---
 
@@ -819,9 +822,10 @@ Improves repeatability, auditability and trust in conformance findings while pre
 
 ### User disposition
 
-- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Disposition:** `APPROVED_FOR_ROLE_REVIEW`
+- **Approved by:** `RF_OWNER_CURRENT_HUMAN`
+- **Approved at:** `2026-09-16`
 - **Approval evidence:** after discussing a Lean-like, non-AI-based control approach, the user approved the subsequent Memory / Control / Manifest / Authoring Standard updates that incorporated deterministic/formal conformance as the preferred core where feasible.
-- **Governance note:** Engagement-side user approval only; no EKB validation/promotion is claimed.
 
 ---
 
@@ -870,12 +874,15 @@ Reduces loss or misattribution of learning across chats, preserves causality bet
 - `ENGAGEMENT_CONTROL.md` v1.10 adds an explicit cross-chat Learning Candidate Approval Trail section and makes trail currency part of the Part completion gate.
 - `ARCHITECTURE_PART_AUTHORING_STANDARD.md` v1.1 adds a Part-completion learning/approval-trail check so Parts 04–08 created in different chats apply the same method.
 - `LEARNING_CANDIDATES.md` revision `2026-09-16-r3` makes the candidate/artifact/disposition record continuous across runtimes and preserves `NOT_REVIEWED` when approval is absent.
+- Revision `2026-09-16-r4` aligns approved dispositions with RF canonical `APPROVED_FOR_ROLE_REVIEW` and records `approved_by` / `approved_at` metadata required by `_ROLE_LEARNING_EXPORT_TEMPLATE.md`, so approved candidates can be exported without reconstructing approval facts from chat history.
 
 **Why these file changes were needed:** the prior approval trail existed in the Learning Candidates artifact, but other chats were not yet normatively required to maintain it. Moving the rule into Manifest, Control and the Part Authoring Standard makes it a property of the Engagement workflow and handoff package rather than an accidental behavior of one chat.
 
 ### User disposition
 
-- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Disposition:** `APPROVED_FOR_ROLE_REVIEW`
+- **Approved by:** `RF_OWNER_CURRENT_HUMAN`
+- **Approved at:** `2026-09-16`
 - **Approval evidence:** the user explicitly approved making the candidate/artifact/disposition trail mandatory across other NURA ERP chats and approved the associated controlled-file updates on 2026-09-16.
 
 ---
@@ -902,11 +909,11 @@ Reduces loss or misattribution of learning across chats, preserves causality bet
 | CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
 | CAND-NURA-017 | AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
 | CAND-NURA-018 | Legal Document Type and Economic Direction Are Independent Architecture Dimensions | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
-| CAND-NURA-019 | Human-Readable Architecture Should Produce Verifiable Delivery Assertions | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
-| CAND-NURA-020 | Independently Acceptable End-to-End Increments | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
-| CAND-NURA-021 | Machine-Readable Architecture Control Model as a Conformance Interface | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
-| CAND-NURA-022 | Deterministic Conformance Core with Optional AI Assurance | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
-| CAND-NURA-023 | Explicit Learning Candidate Approval Trail as Cross-Runtime Engagement Control | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-019 | Human-Readable Architecture Should Produce Verifiable Delivery Assertions | CANDIDATE ONLY | APPROVED_FOR_ROLE_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-020 | Independently Acceptable End-to-End Increments | CANDIDATE ONLY | APPROVED_FOR_ROLE_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-021 | Machine-Readable Architecture Control Model as a Conformance Interface | CANDIDATE ONLY | APPROVED_FOR_ROLE_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-022 | Deterministic Conformance Core with Optional AI Assurance | CANDIDATE ONLY | APPROVED_FOR_ROLE_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-023 | Explicit Learning Candidate Approval Trail as Cross-Runtime Engagement Control | CANDIDATE ONLY | APPROVED_FOR_ROLE_REVIEW | NOT TRANSFERRED |
 ---
 
 ## Review Rule
@@ -919,6 +926,6 @@ After every Learning & Change Review:
 5. keep Engagement-side user approval separate from ARCHITECT Maintainer authorization and canonical EKB promotion;
 6. do not label any candidate as validated Expert Memory;
 7. record transfer/promotion separately if a governed permanent-ARCHITECT process is later executed;
-8. at agreed final handoff, produce an approved-only export for Role Updater review containing the latest versions of candidates explicitly marked `APPROVED_FOR_ROLE_UPDATER_REVIEW`.
+8. at agreed final handoff, produce an approved-only export for Role Updater review containing the latest versions of candidates explicitly marked `APPROVED_FOR_ROLE_REVIEW`.
 9. apply this same trail across all Engagement chats/runtimes using the current controlled sources; do not maintain separate informal approval histories.
 

@@ -1,8 +1,8 @@
 # ENGAGEMENT_MEMORY.md
 
-- **MEMORY_VERSION:** `2.1`
+- **MEMORY_VERSION:** `2.2`
 - **LAST_RECONCILED:** `2026-09-16`
-- **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis`, `Part 02 — Process Architecture` and `Part 03 — System Analysis` have been rewritten / synchronized and are the current working baselines. Accepted Decisions 68–86 are reflected in the current Parts 00–03 where applicable. `Part 04 — Data Architecture` is the active architecture-development phase. In addition, Decisions 87–99 below establish the accepted post-architecture `Architecture-to-Delivery Layer` objective and the verification-aware Part-authoring rules needed to support it. These decisions guide how Parts 04–08 are written but do not replace the Parts themselves. `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0` is the active Engagement authoring standard for Parts 04–08.
+- **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis`, `Part 02 — Process Architecture` and `Part 03 — System Analysis` have been rewritten / synchronized and are the current working baselines. Accepted Decisions 68–86 are reflected in the current Parts 00–03 where applicable. `Part 04 — Data Architecture` is the active architecture-development phase. In addition, Decisions 87–99 below establish the accepted post-architecture `Architecture-to-Delivery Layer` objective and the verification-aware Part-authoring rules needed to support it. These decisions guide how Parts 04–08 are written but do not replace the Parts themselves. `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1` is the active Engagement authoring standard for Parts 04–08.
 - **BOOTSTRAP / RECONCILIATION reference:** QA Bootstrap Batches 1–8 + accepted Global Reconciliation, 2026-09-08.
 
 ## Engagement Identity / Status
@@ -11,7 +11,7 @@
 - **Engagement ID:** `ENG-NURA-ERP-001`
 - **Status:** ACTIVE
 - **Memory status:** CONSOLIDATED WORKING VERSION — PARTS 00–03 REWRITTEN / SYNCHRONIZED CURRENT WORKING BASELINES; ARCHITECTURE-NORMALIZATION ISSUES #1, #2, #3/#16, #4, #5, #6, #7, #8, #11/#12, #14 AND #35 PROPAGATED; PART 04 DATA ARCHITECTURE ACTIVE; POST-ARCHITECTURE ARCHITECTURE-TO-DELIVERY OBJECTIVE ACCEPTED
-- **Current architecture state:** Parts 00–03 are the current rewritten / synchronized working baselines and Part 04 is active. The Calendar Plan / Milestone / Deliverable, Research Output / Outcome / TRL, lead/co-executor, Contract Financial Direction, Legal-led Incoming / Authorizing Agreement, Project Closure and procurement normalizations are reflected across the applicable Parts. A material transition V&V found no known semantic contradiction that blocks Part 04. Remaining issues are intentionally deferred data / relationship / institutional / technical questions and must be resolved at the layer where they become decision-relevant. The approved master architecture structure includes Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08. After Parts 00–08, the Engagement will develop an `Architecture-to-Delivery Layer` that converts human-readable architecture into implementation specifications, independently acceptable end-to-end increments, acceptance/conformance controls and a machine-readable Architecture Control Model. Parts 04–08 are therefore authored under `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0`: human-readable architecture remains the source of meaning, while material rules are written precisely enough for later traceability, implementation specification, acceptance and deterministic/formal or evidence-based conformance without inventing new business meaning. The current `CONTENT.pdf` source still reflects the older index (`07. Enterprise Architecture`) and therefore remains a non-blocking document-control synchronization delta, not the governing architecture structure.
+- **Current architecture state:** Parts 00–03 are the current rewritten / synchronized working baselines and Part 04 is active. The Calendar Plan / Milestone / Deliverable, Research Output / Outcome / TRL, lead/co-executor, Contract Financial Direction, Legal-led Incoming / Authorizing Agreement, Project Closure and procurement normalizations are reflected across the applicable Parts. A material transition V&V found no known semantic contradiction that blocks Part 04. Remaining issues are intentionally deferred data / relationship / institutional / technical questions and must be resolved at the layer where they become decision-relevant. The approved master architecture structure includes Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08. After Parts 00–08, the Engagement will develop an `Architecture-to-Delivery Layer` that converts human-readable architecture into implementation specifications, independently acceptable end-to-end increments, acceptance/conformance controls and a machine-readable Architecture Control Model. Parts 04–08 are therefore authored under `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1`: human-readable architecture remains the source of meaning, while material rules are written precisely enough for later traceability, implementation specification, acceptance and deterministic/formal or evidence-based conformance without inventing new business meaning.
 - **Purpose of this memory:** compact working memory of the current NURA ERP architecture. It is not a transcript, Bootstrap ledger, or substitute for the architecture Parts.
 - **Canonical baseline persistence:** baseline `ENGAGEMENT_MEMORY.md` v1.0 is user-confirmed as canonically persisted in the canonical Engagement Git repository. The same confirmation applies to the baseline `ARCHITECT_PROFESSIONAL_BACKGROUND.md` and updated `00_ENGAGEMENT_MANIFEST.md` referenced by this Engagement.
 - **Canonical persistence:** Canonical persistence of the current version is determined by the canonical Engagement repository and its version history. This runtime has no verified canonical write path and does not claim to perform canonical writes.
@@ -25,6 +25,12 @@ For current Engagement truth, use the following working order:
 4. historical QA only for rationale, lineage, rejected/superseded alternatives, and unresolved conflicts.
 
 Do not use QA chronology alone to infer current truth. Do not treat an expert-originated recommendation as user-originated merely because it appears in a later draft.
+
+### Active source-set boundary
+
+For runtime/source consistency work, an artifact is part of the active source set only when it is actually present in the current Project Sources / verified supplied source set. A filename or canonical path mentioned inside another artifact does not by itself make that referenced artifact an active source.
+
+Historical attachments, earlier chat-generated files and proposed replacement artifacts must not be treated as current sources unless the user has actually added them to the active source set.
 
 ### Accepted correction propagation rule
 
@@ -786,7 +792,7 @@ ARCHITECTURE-TO-DELIVERY LAYER
                 └── optional AI-assisted assurance
 ```
 
-Working design rule: every material architecture statement should be written so that a later delivery artifact can identify its source, implementation obligation, acceptance method and evidence type without inventing new business meaning. `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0` operationalizes this rule for Parts 04–08.
+Working design rule: every material architecture statement should be written so that a later delivery artifact can identify its source, implementation obligation, acceptance method and evidence type without inventing new business meaning. `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1` operationalizes this rule for Parts 04–08.
 
 The future `Architecture Control Model` remains subordinate to the approved human-readable architecture and must preserve traceability back to the originating Part / rule / requirement. It should support deterministic/formal verification where feasible and explicit evidence-based outcomes where a requirement cannot be proven statically; AI is an optional assurance aid rather than the authoritative verification kernel.
 
@@ -898,7 +904,7 @@ A material transition V&V across the current Parts 00–03 found no known cross-
 
 ### Part 04 — Data Architecture
 
-**CURRENT PHASE — not yet drafted in this memory revision.**
+**CURRENT PHASE — working draft exists; completion / V&V / Architecture-to-Delivery readiness is in progress. Part 04 is not yet an accepted completed baseline, and Part 05 has not started.**
 
 Part 04 must define the data-architecture view of the established business/system semantics: Data Domains, Master Data, Reference Data, claim-specific Systems of Record, Data Ownership / Stewardship boundaries, provenance / lineage, Data Lifecycle, Data Quality and Data Governance Rules. It must create a coherent basis for Part 05 without prematurely fixing physical database implementation.
 
@@ -924,7 +930,6 @@ The approved master architecture structure is:
 07 Solution Architecture  
 08 Enterprise Architecture
 
-The current `CONTENT.pdf` source still shows the older structure with `07. Enterprise Architecture` and no distinct Part 07 Solution Architecture. Treat that as a **non-blocking document-control synchronization delta**. It must be corrected before the next publication/checkpoint that claims the master contents are synchronized, but it does not alter the accepted architecture structure or block Part 04 design.
 
 Transition/control status is governed by the updated `ENGAGEMENT_CONTROL.md`. Canonical Git checkpoint verification remains unavailable in this runtime; no verified checkpoint or canonical write is claimed here.
 
