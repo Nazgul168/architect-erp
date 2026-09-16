@@ -1,6 +1,6 @@
 # ARCHITECTURE_PART_AUTHORING_STANDARD.md
 
-- **STANDARD_VERSION:** `1.0`
+- **STANDARD_VERSION:** `1.1`
 - **STATUS:** `ACTIVE — ENGAGEMENT-CONTROLLED AUTHORING STANDARD`
 - **ENGAGEMENT_ID:** `ENG-NURA-ERP-001`
 - **EFFECTIVE_DATE:** `2026-09-16`
@@ -208,7 +208,20 @@ A Part is ready for phase transition only after the applicable combination of:
 
 Completion of drafting alone is not sufficient.
 
-## 15. Handoff package for a new Part chat/runtime
+## 15. Learning Candidate / approval-trail check at Part completion
+
+Before a Part is treated as ready for handoff or phase transition, perform a proportional learning check in addition to semantic V&V:
+
+- identify whether significant work produced new transferable learning or materially changed an existing Learning Candidate;
+- update `LEARNING_CANDIDATES.md` where applicable;
+- if a candidate led to creation or material change of an Engagement artifact, record the artifact change and why it was needed;
+- record explicit user approval / hold / rejection when it occurs;
+- do not infer approval from silence, continued work, or acceptance of unrelated architecture content;
+- preserve `NOT_REVIEWED` where no explicit user disposition exists.
+
+This check exists so that Parts written in different chats preserve a continuous learning and approval trail without relying on conversational memory. It does not require a Learning Candidate for every Part edit or NURA-specific architecture decision.
+
+## 16. Handoff package for a new Part chat/runtime
 
 A chat/runtime asked to write a subsequent Part should receive, at minimum, the current runtime-visible versions of:
 
@@ -222,7 +235,7 @@ A chat/runtime asked to write a subsequent Part should receive, at minimum, the 
 
 The new runtime must not treat the authoring standard as authority to overwrite accepted business architecture. It is a method for producing the next Part consistently.
 
-## 16. Anti-patterns
+## 17. Anti-patterns
 
 Do not:
 
@@ -236,7 +249,7 @@ Do not:
 - assume that AI output is proof of conformance;
 - claim a Part is complete without the applicable semantic, cross-Part and downstream-readiness checks.
 
-## 17. Design intent
+## 18. Design intent
 
 The standard exists to preserve a deliberate separation:
 
