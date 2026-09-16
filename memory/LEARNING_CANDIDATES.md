@@ -2,56 +2,34 @@
 
 Durable Engagement-side staging for transferable learning identified during NURA ERP work.
 
-## RF v4.5 lifecycle
-
-Allowed candidate states:
-
-- `CANDIDATE`
-- `LOCAL_ONLY`
-- `REJECTED`
-- `RECOMMENDED_FOR_ROLE_REVIEW`
-- `APPROVED_FOR_ROLE_REVIEW`
-- `EXPORTED_TO_ROLE_UPDATER`
-
-ARCHITECT may create/update `CANDIDATE`, set `LOCAL_ONLY`, set `RECOMMENDED_FOR_ROLE_REVIEW`, or recommend rejection. ARCHITECT may **not** self-assign `APPROVED_FOR_ROLE_REVIEW`.
-
-In the current single-user deployment, the current human owner is the approval authority for `APPROVED_FOR_ROLE_REVIEW`.
-
-Approval means **review this candidate**, not **promote this learning**.
-
-Only `APPROVED_FOR_ROLE_REVIEW` candidates may enter a Role Learning Export. After successful export, mark the candidate `EXPORTED_TO_ROLE_UPDATER` while preserving approval/export metadata and audit history.
-
-No candidate state is authoritative NURA ERP business truth merely because it appears in this file.
-
 ## Maintenance Rule
 
 After each Learning & Change Review:
 
-- add all newly identified transferable candidates as `CANDIDATE`;
+- add all newly identified transferable candidates;
 - update existing candidates if new evidence materially changes them;
-- preserve candidate state and provenance;
-- do not treat any candidate as validated Expert Memory;
-- keep raw identifying/sensitive evidence Engagement-side;
-- de-identify and apply confidentiality/provenance review before Role Learning Export.
+- preserve candidate status and provenance;
+- do not treat a candidate as validated Expert Memory;
+- do not transfer it to permanent ARCHITECT candidate storage or EKB unless applicable confidentiality, transfer and Slow-Loop governance requirements are satisfied.
 
 # Learning Candidates
 
 Document status: ENGAGEMENT-SIDE CANDIDATE BACKLOG  
 Engagement: ENG-NURA-ERP-001  
-Candidate status: CANDIDATE  
-Clean ROLE status: NOT PROMOTED / NOT CHANGED  
+Candidate status: CANDIDATE ONLY  
+Canonical EKB status: NOT PROMOTED  
 Purpose: preserve transferable-learning candidates identified during NURA ERP Learning & Change Reviews so they are not lost between reviews.
 
 > This file is an Engagement-side staging/backlog artifact. Nothing in it is validated Expert Memory.  
-> Any Role Learning Export must first pass de-identification and applicable confidentiality/provenance review.  
-> Clean-role change is a separate Role Updater + System Validation + RF Owner release process.
+> Any transfer into permanent ARCHITECT `memory/candidates/` must first pass de-identification and applicable confidentiality/provenance review.  
+> Canonical promotion to EKB is a separate governed process.
 
 ---
 
 ## CAND-NURA-001 — Separate Lifecycle, Readiness and Operational Authorization
 
 **Type:** decision principle / modeling pattern  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -85,7 +63,7 @@ Improves lifecycle modeling and reduces overloaded status enums.
 ## CAND-NURA-002 — Planning Approval Is Not Transaction Authorization
 
 **Type:** decision principle  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -115,7 +93,7 @@ Prevents plans from silently becoming uncontrolled execution authority.
 ## CAND-NURA-003 — Changed Conditions Trigger Re-evaluation, Not Silent Reversal of Explicit Control
 
 **Type:** decision principle  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -143,7 +121,7 @@ Improves accountability and preserves causal auditability.
 ## CAND-NURA-004 — Composite Authorization Preconditions
 
 **Type:** pattern / decision principle  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -179,7 +157,7 @@ Avoids brittle one-document authorization models and supports explainable activa
 ## CAND-NURA-005 — Variable Policy as Versioned, Explainable Configuration
 
 **Type:** architecture principle / method component  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -217,7 +195,7 @@ Improves adaptability, versioning, explainability and auditability while reducin
 ## CAND-NURA-006 — Closure-Blocking Obligations vs Obligations That Outlive Closure
 
 **Type:** modeling pattern  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -254,7 +232,7 @@ Produces cleaner lifecycle semantics, avoids artificially open parent records, a
 ## CAND-NURA-007 — Business Purpose Is Not Financial Attribution
 
 **Type:** decision principle / data-modeling principle  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -282,7 +260,7 @@ Improves financial correctness and causal traceability.
 ## CAND-NURA-008 — Responsibility Duration Is Not Labor Effort
 
 **Type:** process-analytics heuristic  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -310,7 +288,7 @@ Prevents misleading productivity metrics while preserving useful workload/SLA an
 ## CAND-NURA-009 — Administrative Support Workflow Is Not Object Lifecycle
 
 **Type:** modeling pattern  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -344,7 +322,7 @@ Reduces overloaded state models, improves authority/observability semantics and 
 ## CAND-NURA-010 — Missing Architecture Layer Detection
 
 **Type:** methodology heuristic  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** medium-high
 
 ### Proposed knowledge
@@ -373,7 +351,7 @@ Improves architecture completeness, document-layer clarity and traceability from
 ## CAND-NURA-011 — Material Phase Transition Requires Explicit State Consolidation
 
 **Type:** methodology heuristic / decision principle  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** medium-high  
 **Origin:** NURA ERP Engagement control incident, 2026-09-09
 
@@ -407,7 +385,7 @@ Reduces premature movement into expensive downstream work while accepted upstrea
 ## CAND-NURA-012 — Significant Accepted Work Can Require Consolidation Without a Phase Transition
 
 **Type:** failure mode / methodology heuristic  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** medium  
 **Origin:** NURA ERP Engagement control incident, 2026-09-09
 
@@ -440,7 +418,7 @@ Reduces dependence on the model remembering an abstract significant-work rule an
 ## CAND-NURA-013 — Operational Current State Is Not the Same as Formal Approved Snapshot
 
 **Type:** decision principle / modeling pattern  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 **Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
 
@@ -472,7 +450,7 @@ Prevents stale formal snapshots from being misrepresented as live operational tr
 ## CAND-NURA-014 — Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge
 
 **Type:** modeling pattern / heuristic  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 **Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
 
@@ -504,7 +482,7 @@ Improves status truthfulness, analytics and exception handling while reducing ov
 ## CAND-NURA-015 — Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation
 
 **Type:** decision principle  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high
 **Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
 
@@ -536,7 +514,7 @@ Preserves causal history and prevents upstream edits from fabricating a false do
 ## CAND-NURA-016 — Automation May Require Changing the Evidence-Supply Environment, Not Only the Software
 
 **Type:** architecture principle / heuristic  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** medium-high
 **Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
 
@@ -569,7 +547,7 @@ Broadens architecture from application-only design to socio-technical evidence s
 ## CAND-NURA-017 — AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth
 
 **Type:** architecture principle / decision principle  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high  
 **Origin:** NURA ERP Engagement clarification, 2026-09-11  
 
@@ -602,7 +580,7 @@ Encourages durable structured data capture with provenance, while using AI as an
 ## CAND-NURA-018 — Legal Document Type and Economic Direction Are Independent Architecture Dimensions
 
 **Type:** architecture / domain-modeling principle  
-**Status:** CANDIDATE  
+**Status:** CANDIDATE ONLY  
 **Confidence:** high  
 **Origin:** NURA ERP Engagement clarification, 2026-09-11  
 
@@ -618,40 +596,171 @@ Financial direction must not be confused with accounting revenue recognition or 
 
 ---
 
+## CAND-NURA-019 — Architecture Documents Should Be Authored for Downstream Verifiability
+
+**Type:** methodology principle / architecture-authoring method component  
+**Status:** CANDIDATE ONLY  
+**Confidence:** medium-high  
+**Origin:** NURA ERP Engagement architecture-to-delivery design, refined 2026-09-16  
+
+### Proposed knowledge
+When substantial software architecture will later govern technical specification, incremental delivery, acceptance and conformance verification, human-readable architecture should be authored so that material architectural assertions can be transformed into downstream requirements, implementation obligations, acceptance criteria and conformance rules **without inventing new domain meaning**.
+
+A practical authoring method should preserve:
+
+- human-readable architecture as the source of meaning;
+- stable identification of material rules where useful;
+- separation of normative rule from rationale, explanation and example;
+- explicit subject/object, applicability, required/permitted/prohibited behavior, authority, temporal effect, exception semantics and evidence/provenance where relevant;
+- explicit unresolved authority rather than false precision;
+- layer discipline so downstream implementation detail is not prematurely embedded;
+- a downstream-readiness check before the architecture section is treated as complete.
+
+### Recognition cues
+- architecture will be handed to internal/external developers;
+- implementation specifications will be generated from the architecture;
+- delivery is split across multiple increments/vendors/teams;
+- acceptance must demonstrate architecture compliance;
+- machine-readable control or automated conformance is planned;
+- narrative architecture contains consequential statements that are difficult to translate into objective obligations.
+
+### Applicability
+ERP, enterprise systems, regulated systems, outsourced development, long-running solution programmes, contract-based software delivery and other environments where architecture must remain traceable into implementation and acceptance.
+
+### Limits
+Not every architectural judgment is mechanically testable or should be written as a pseudo-formal invariant. Narrative context, rationale, strategy and professional judgment may remain human-readable. Downstream verifiability must not force a Part to choose implementation detail owned by a later architecture layer or embed the future control-model DSL into the architecture document.
+
+### Evidence summary
+Derived from designing NURA ERP Parts 00–08 as human-readable architecture that must later support Requirements/Rules Catalogue, per-increment Implementation Specifications, Acceptance Scenarios and a machine-readable Architecture Control Model.
+
+### Expected behavioral impact
+Reduces semantic loss between architecture and delivery; improves traceability and specification quality; makes later deterministic/automated conformance more feasible; reduces the risk that downstream teams silently make new architecture decisions while claiming merely to implement existing architecture.
+---
+
+## CAND-NURA-020 — Independently Acceptable End-to-End Increments
+
+**Type:** delivery methodology heuristic / decision principle  
+**Status:** CANDIDATE ONLY  
+**Confidence:** medium-high  
+**Origin:** NURA ERP Engagement delivery-planning clarification, 2026-09-14  
+
+### Proposed knowledge
+When a complex system is delivered incrementally, decompose work so that each increment ends in a usable end-to-end procedure or coherent capability that can be accepted using the functionality available at that stage. Later increments may depend on earlier technical foundations, but acceptance of an earlier increment should not depend on future functionality that has not yet been delivered.
+
+### Recognition cues
+- long programmes are being split by technical layer (database/backend/frontend) rather than usable outcomes;
+- acceptance cannot occur until several later phases are complete;
+- each new phase retroactively reveals that the prior phase was not actually usable.
+
+### Limits
+Technical independence is not required. Shared platform capabilities and prior increments may be prerequisites. The rule concerns independent acceptability and completeness of the delivered business outcome, not absence of dependencies.
+
+### Expected behavioral impact
+Supports earlier real-world validation, clearer acceptance boundaries and lower rework risk.
+
+---
+
+## CAND-NURA-021 — Machine-Readable Architecture Control Model as a Conformance Interface
+
+**Type:** architecture / delivery-control pattern  
+**Status:** CANDIDATE ONLY  
+**Confidence:** medium  
+**Origin:** NURA ERP Engagement conformance-planning clarification, refined 2026-09-16  
+
+### Proposed knowledge
+A machine-readable Architecture Control Model can serve as a controlled interface between human-readable architecture and conformance checking when it formalizes requirements, invariants and constraints while preserving traceability to the governing human-readable source. The control model should not become a second independent architecture.
+
+The model may support several verification modes, including deterministic/formal constraint checking, static code/schema analysis, automated tests, API/integration tests, runtime evidence and business acceptance scenarios. It should preserve explicit non-binary outcomes where evidence is insufficient or a requirement is not statically/formally decidable.
+
+### Recognition cues
+- architecture contains state-transition, permission, authority, dependency, data, API or audit invariants;
+- multiple implementation artifacts must be checked against the same governed requirements;
+- acceptance evidence must remain traceable to architecture version/revision;
+- AI-assisted review is desired but must not become the sole source of truth.
+
+### Limits
+The control model cannot make inherently contextual or runtime-only requirements statically provable. It requires controlled synchronization/versioning with human-readable architecture. The exact formal language/solver/tool should be selected later based on rule classes and implementation constraints rather than fixed prematurely.
+
+### Expected behavioral impact
+Makes architecture conformance more repeatable and automatable while preserving source authority, traceability and epistemic honesty about what can and cannot be proven.
+
+---
+
+## CAND-NURA-022 — Deterministic Conformance Core with Optional AI Assurance
+
+**Type:** architecture / verification-control principle  
+**Status:** CANDIDATE ONLY  
+**Confidence:** medium  
+**Origin:** NURA ERP formal-conformance clarification, 2026-09-16  
+
+### Proposed knowledge
+Where architecture requirements can be expressed objectively, conformance should preferentially rely on deterministic/formal/automated mechanisms rather than an AI model deciding compliance from narrative context.
+
+Potential mechanisms include model/state checks, constraint solvers, static analysis, schema/API validation, dependency checks, generated contract tests and runtime assertions. AI may assist with mapping, investigation, explanation, unstructured evidence review or proposal generation, but should not override deterministic violations or be treated as proof merely because it found no problem.
+
+A robust conformance system should distinguish at least:
+
+- proven/verified within the selected deterministic check scope;
+- violation;
+- not implemented;
+- insufficient evidence;
+- manual/runtime verification required;
+- not formally verifiable by the current control mechanism.
+
+### Recognition cues
+- the same architecture rule must be checked repeatedly across releases;
+- objective invariants exist (state transitions, permissions, authority, cardinalities, dependencies, API/data contracts);
+- AI consistency/reproducibility would be insufficient for the assurance level required;
+- proprietary/vendor implementation must still produce auditable evidence.
+
+### Applicability
+Architecture conformance, regulated/controlled software delivery, outsourced development, CI/CD quality gates, platform-based implementations and systems requiring repeatable acceptance evidence.
+
+### Limits
+Deterministic verification proves only what has been formalized and what the available evidence exposes. Human judgment and runtime/manual evidence remain necessary for contextual requirements. Formal methods must remain proportionate; not every business rule requires theorem proving.
+
+### Evidence summary
+Derived from examining whether a future NURA ERP Architecture Control Model should work conceptually like a formal proof/checking system rather than depend on an AI-based reviewer.
+
+### Expected behavioral impact
+Improves repeatability, auditability and trust in conformance findings while preserving AI as an optional productivity/assurance layer instead of the verification authority.
+
+---
+
 # Candidate Register
 
-| ID | Title | Status | Role Updater export |
+| ID | Title | Status | Permanent ARCHITECT staging |
 |---|---|---|---|
-| CAND-NURA-001 | Separate Lifecycle, Readiness and Operational Authorization | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-002 | Planning Approval Is Not Transaction Authorization | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-003 | Changed Conditions Trigger Re-evaluation, Not Silent Reversal of Explicit Control | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-004 | Composite Authorization Preconditions | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-005 | Variable Policy as Versioned, Explainable Configuration | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-006 | Closure-Blocking Obligations vs Obligations That Outlive Closure | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-007 | Business Purpose Is Not Financial Attribution | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-008 | Responsibility Duration Is Not Labor Effort | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-009 | Administrative Support Workflow Is Not Object Lifecycle | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-010 | Missing Architecture Layer Detection | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-011 | Material Phase Transition Requires Explicit State Consolidation | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-012 | Significant Accepted Work Can Require Consolidation Without a Phase Transition | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-013 | Operational Current State Is Not the Same as Formal Approved Snapshot | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-014 | Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-015 | Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-017 | AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth | CANDIDATE | NOT EXPORTED |
-| CAND-NURA-018 | Legal Document Type and Economic Direction Are Independent Architecture Dimensions | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-001 | Separate Lifecycle, Readiness and Operational Authorization | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-002 | Planning Approval Is Not Transaction Authorization | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-003 | Changed Conditions Trigger Re-evaluation, Not Silent Reversal of Explicit Control | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-004 | Composite Authorization Preconditions | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-005 | Variable Policy as Versioned, Explainable Configuration | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-006 | Closure-Blocking Obligations vs Obligations That Outlive Closure | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-007 | Business Purpose Is Not Financial Attribution | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-008 | Responsibility Duration Is Not Labor Effort | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-009 | Administrative Support Workflow Is Not Object Lifecycle | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-010 | Missing Architecture Layer Detection | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-011 | Material Phase Transition Requires Explicit State Consolidation | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-012 | Significant Accepted Work Can Require Consolidation Without a Phase Transition | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-013 | Operational Current State Is Not the Same as Formal Approved Snapshot | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-014 | Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-015 | Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-017 | AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-018 | Legal Document Type and Economic Direction Are Independent Architecture Dimensions | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-019 | Human-Readable Architecture Should Produce Verifiable Delivery Assertions | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-020 | Independently Acceptable End-to-End Increments | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-021 | Machine-Readable Architecture Control Model as a Conformance Interface | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-022 | Deterministic Conformance Core with Optional AI Assurance | CANDIDATE ONLY | NOT TRANSFERRED |
 
 ---
 
 ## Review Rule
 
 After every Learning & Change Review:
-1. add every newly identified transferable candidate as `CANDIDATE`;
+1. add every newly identified transferable candidate to this file;
 2. update existing candidates when new evidence materially confirms, limits, contradicts or refines them;
-3. classify as `LOCAL_ONLY`, `REJECTED`, or `RECOMMENDED_FOR_ROLE_REVIEW` when evidence supports that disposition;
-4. never self-assign `APPROVED_FOR_ROLE_REVIEW`;
-5. after explicit human approval, record `approved_by` and `approved_at`;
-6. export only `APPROVED_FOR_ROLE_REVIEW` candidates using `memory/role_learning_exports/`;
-7. after a successful export, record export metadata and set `EXPORTED_TO_ROLE_UPDATER`;
-8. do not label any candidate as validated Expert Memory merely because it was approved/exported.
+3. do not label any candidate as validated Expert Memory;
+4. record transfer/promotion separately if a governed permanent-ARCHITECT process is later executed.
 
