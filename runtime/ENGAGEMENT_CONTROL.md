@@ -18,7 +18,7 @@ It externalizes control state so that ARCHITECT does not rely only on conversati
 
 This is a textual control artifact, not a hard technical platform lock.
 
-It does not replace the Learning Protocol, Engagement Memory, applicable Engagement authority, or permanent ARCHITECT governance.
+It does not replace the Learning Protocol, Engagement Memory, applicable Engagement authority, or the clean ARCHITECT / Role Updater governance boundary.
 
 ---
 
@@ -179,7 +179,7 @@ Required sequence:
 5. update Engagement Memory;
 6. update Learning Candidates where applicable;
 7. explicitly assess Professional Background implications;
-8. explicitly assess permanent ARCHITECT / governing implications;
+8. explicitly assess clean ARCHITECT / Role Updater implications;
 9. complete required Manifest / Control updates;
 10. canonically persist the coherent system-state bundle;
 11. synchronize / verify required runtime-visible sources;
@@ -337,7 +337,7 @@ When `CONSOLIDATION_STATE = DUE`, ARCHITECT must, at the next reasonable stoppin
 5. update `memory/LEARNING_CANDIDATES.md` where applicable;
 6. perform a full-file consistency check when Engagement Memory was materially patched;
 7. explicitly assess Professional Background implications;
-8. explicitly assess permanent ARCHITECT / governing implications;
+8. explicitly assess clean ARCHITECT / Role Updater implications;
 9. update this Control state.
 
 If the runtime has no verified canonical write path, it must not claim that canonical persistence occurred.
@@ -398,7 +398,7 @@ This distinguishes:
 - Open / Resolved / Deferred register: synchronized in Engagement Memory. Issues #3/#16, #4, #5, #6 and #8 are resolved at architecture-concept level; detailed Part 04–05 modeling/cardinality work is carried by Issue #17 and deferred Authorizing Basis mapping by Issue #32.
 - Full-file Engagement Memory consistency check: PASS. Established Architectural Decisions are sequential `1–65`; stale formulations occur only in explicit rejected/superseded or stale-Part descriptions; no blocking internal contradiction was found.
 - Professional Background implication: `NO CHANGE`.
-- Permanent ARCHITECT / governing implication: `NO GOVERNING CHANGE NEEDED`; candidates remain Engagement-side `CANDIDATE ONLY`.
+- Clean ARCHITECT / Role Updater implication: `NO GOVERNING CHANGE NEEDED`; candidates remain Engagement-side `CANDIDATE` unless separately reclassified through the RF lifecycle.
 - Runtime-source verification completed for the current Memory and Learning Candidates artifacts; canonical repository equivalence remains UNVERIFIED until repository access/write and read-back verification succeed.
 
 ---
@@ -657,7 +657,7 @@ This is a controlled continuation path, not a waiver of semantic consolidation.
 - [x] Full-file Engagement Memory consistency check is complete.
 - [x] Current Solution State / Readiness reflects latest accepted architecture state.
 - [x] Professional Background implications explicitly assessed.
-- [x] Permanent ARCHITECT / governing implications explicitly assessed.
+- [x] Clean ARCHITECT / Role Updater implications explicitly assessed.
 - [x] No unresolved ambiguity or conflict materially blocks rewrite.
 - [x] Runtime-visible `ENGAGEMENT_MEMORY.md` and `LEARNING_CANDIDATES.md` are verified as the intended consolidated artifacts for the next phase.
 
@@ -739,7 +739,7 @@ The architecture phase may then start while checkpoint state remains pending.
 
 If the user chooses not to continue, keep the phase unchanged and wait for infrastructure recovery / checkpoint completion.
 
-No ARCHITECT Maintainer approval is required merely for this ordinary Engagement phase continuation. Authority for NURA business decisions, confidentiality decisions and permanent ARCHITECT changes remains role-specific.
+No RF Owner / clean-ROLE approval is required merely for this ordinary Engagement phase continuation. Authority for NURA business decisions, confidentiality decisions, candidate approval-for-review and clean ARCHITECT releases remains role-specific.
 
 ---
 

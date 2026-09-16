@@ -2,34 +2,56 @@
 
 Durable Engagement-side staging for transferable learning identified during NURA ERP work.
 
+## RF v4.5 lifecycle
+
+Allowed candidate states:
+
+- `CANDIDATE`
+- `LOCAL_ONLY`
+- `REJECTED`
+- `RECOMMENDED_FOR_ROLE_REVIEW`
+- `APPROVED_FOR_ROLE_REVIEW`
+- `EXPORTED_TO_ROLE_UPDATER`
+
+ARCHITECT may create/update `CANDIDATE`, set `LOCAL_ONLY`, set `RECOMMENDED_FOR_ROLE_REVIEW`, or recommend rejection. ARCHITECT may **not** self-assign `APPROVED_FOR_ROLE_REVIEW`.
+
+In the current single-user deployment, the current human owner is the approval authority for `APPROVED_FOR_ROLE_REVIEW`.
+
+Approval means **review this candidate**, not **promote this learning**.
+
+Only `APPROVED_FOR_ROLE_REVIEW` candidates may enter a Role Learning Export. After successful export, mark the candidate `EXPORTED_TO_ROLE_UPDATER` while preserving approval/export metadata and audit history.
+
+No candidate state is authoritative NURA ERP business truth merely because it appears in this file.
+
 ## Maintenance Rule
 
 After each Learning & Change Review:
 
-- add all newly identified transferable candidates;
+- add all newly identified transferable candidates as `CANDIDATE`;
 - update existing candidates if new evidence materially changes them;
-- preserve candidate status and provenance;
-- do not treat a candidate as validated Expert Memory;
-- do not transfer it to permanent ARCHITECT candidate storage or EKB unless applicable confidentiality, transfer and Slow-Loop governance requirements are satisfied.
+- preserve candidate state and provenance;
+- do not treat any candidate as validated Expert Memory;
+- keep raw identifying/sensitive evidence Engagement-side;
+- de-identify and apply confidentiality/provenance review before Role Learning Export.
 
 # Learning Candidates
 
 Document status: ENGAGEMENT-SIDE CANDIDATE BACKLOG  
 Engagement: ENG-NURA-ERP-001  
-Candidate status: CANDIDATE ONLY  
-Canonical EKB status: NOT PROMOTED  
+Candidate status: CANDIDATE  
+Clean ROLE status: NOT PROMOTED / NOT CHANGED  
 Purpose: preserve transferable-learning candidates identified during NURA ERP Learning & Change Reviews so they are not lost between reviews.
 
 > This file is an Engagement-side staging/backlog artifact. Nothing in it is validated Expert Memory.  
-> Any transfer into permanent ARCHITECT `memory/candidates/` must first pass de-identification and applicable confidentiality/provenance review.  
-> Canonical promotion to EKB is a separate governed process.
+> Any Role Learning Export must first pass de-identification and applicable confidentiality/provenance review.  
+> Clean-role change is a separate Role Updater + System Validation + RF Owner release process.
 
 ---
 
 ## CAND-NURA-001 — Separate Lifecycle, Readiness and Operational Authorization
 
 **Type:** decision principle / modeling pattern  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -63,7 +85,7 @@ Improves lifecycle modeling and reduces overloaded status enums.
 ## CAND-NURA-002 — Planning Approval Is Not Transaction Authorization
 
 **Type:** decision principle  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -93,7 +115,7 @@ Prevents plans from silently becoming uncontrolled execution authority.
 ## CAND-NURA-003 — Changed Conditions Trigger Re-evaluation, Not Silent Reversal of Explicit Control
 
 **Type:** decision principle  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -121,7 +143,7 @@ Improves accountability and preserves causal auditability.
 ## CAND-NURA-004 — Composite Authorization Preconditions
 
 **Type:** pattern / decision principle  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -157,7 +179,7 @@ Avoids brittle one-document authorization models and supports explainable activa
 ## CAND-NURA-005 — Variable Policy as Versioned, Explainable Configuration
 
 **Type:** architecture principle / method component  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -195,7 +217,7 @@ Improves adaptability, versioning, explainability and auditability while reducin
 ## CAND-NURA-006 — Closure-Blocking Obligations vs Obligations That Outlive Closure
 
 **Type:** modeling pattern  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -232,7 +254,7 @@ Produces cleaner lifecycle semantics, avoids artificially open parent records, a
 ## CAND-NURA-007 — Business Purpose Is Not Financial Attribution
 
 **Type:** decision principle / data-modeling principle  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -260,7 +282,7 @@ Improves financial correctness and causal traceability.
 ## CAND-NURA-008 — Responsibility Duration Is Not Labor Effort
 
 **Type:** process-analytics heuristic  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -288,7 +310,7 @@ Prevents misleading productivity metrics while preserving useful workload/SLA an
 ## CAND-NURA-009 — Administrative Support Workflow Is Not Object Lifecycle
 
 **Type:** modeling pattern  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 
 ### Proposed knowledge
@@ -322,7 +344,7 @@ Reduces overloaded state models, improves authority/observability semantics and 
 ## CAND-NURA-010 — Missing Architecture Layer Detection
 
 **Type:** methodology heuristic  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** medium-high
 
 ### Proposed knowledge
@@ -351,7 +373,7 @@ Improves architecture completeness, document-layer clarity and traceability from
 ## CAND-NURA-011 — Material Phase Transition Requires Explicit State Consolidation
 
 **Type:** methodology heuristic / decision principle  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** medium-high  
 **Origin:** NURA ERP Engagement control incident, 2026-09-09
 
@@ -385,7 +407,7 @@ Reduces premature movement into expensive downstream work while accepted upstrea
 ## CAND-NURA-012 — Significant Accepted Work Can Require Consolidation Without a Phase Transition
 
 **Type:** failure mode / methodology heuristic  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** medium  
 **Origin:** NURA ERP Engagement control incident, 2026-09-09
 
@@ -418,7 +440,7 @@ Reduces dependence on the model remembering an abstract significant-work rule an
 ## CAND-NURA-013 — Operational Current State Is Not the Same as Formal Approved Snapshot
 
 **Type:** decision principle / modeling pattern  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 **Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
 
@@ -450,7 +472,7 @@ Prevents stale formal snapshots from being misrepresented as live operational tr
 ## CAND-NURA-014 — Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge
 
 **Type:** modeling pattern / heuristic  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 **Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
 
@@ -482,7 +504,7 @@ Improves status truthfulness, analytics and exception handling while reducing ov
 ## CAND-NURA-015 — Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation
 
 **Type:** decision principle  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high
 **Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
 
@@ -514,7 +536,7 @@ Preserves causal history and prevents upstream edits from fabricating a false do
 ## CAND-NURA-016 — Automation May Require Changing the Evidence-Supply Environment, Not Only the Software
 
 **Type:** architecture principle / heuristic  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** medium-high
 **Origin:** NURA ERP Engagement Learning & Change Review, 2026-09-10  
 
@@ -547,7 +569,7 @@ Broadens architecture from application-only design to socio-technical evidence s
 ## CAND-NURA-017 — AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth
 
 **Type:** architecture principle / decision principle  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high  
 **Origin:** NURA ERP Engagement clarification, 2026-09-11  
 
@@ -580,7 +602,7 @@ Encourages durable structured data capture with provenance, while using AI as an
 ## CAND-NURA-018 — Legal Document Type and Economic Direction Are Independent Architecture Dimensions
 
 **Type:** architecture / domain-modeling principle  
-**Status:** CANDIDATE ONLY  
+**Status:** CANDIDATE  
 **Confidence:** high  
 **Origin:** NURA ERP Engagement clarification, 2026-09-11  
 
@@ -598,34 +620,38 @@ Financial direction must not be confused with accounting revenue recognition or 
 
 # Candidate Register
 
-| ID | Title | Status | Permanent ARCHITECT staging |
+| ID | Title | Status | Role Updater export |
 |---|---|---|---|
-| CAND-NURA-001 | Separate Lifecycle, Readiness and Operational Authorization | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-002 | Planning Approval Is Not Transaction Authorization | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-003 | Changed Conditions Trigger Re-evaluation, Not Silent Reversal of Explicit Control | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-004 | Composite Authorization Preconditions | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-005 | Variable Policy as Versioned, Explainable Configuration | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-006 | Closure-Blocking Obligations vs Obligations That Outlive Closure | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-007 | Business Purpose Is Not Financial Attribution | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-008 | Responsibility Duration Is Not Labor Effort | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-009 | Administrative Support Workflow Is Not Object Lifecycle | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-010 | Missing Architecture Layer Detection | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-011 | Material Phase Transition Requires Explicit State Consolidation | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-012 | Significant Accepted Work Can Require Consolidation Without a Phase Transition | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-013 | Operational Current State Is Not the Same as Formal Approved Snapshot | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-014 | Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-015 | Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-017 | AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-018 | Legal Document Type and Economic Direction Are Independent Architecture Dimensions | CANDIDATE ONLY | NOT TRANSFERRED |
+| CAND-NURA-001 | Separate Lifecycle, Readiness and Operational Authorization | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-002 | Planning Approval Is Not Transaction Authorization | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-003 | Changed Conditions Trigger Re-evaluation, Not Silent Reversal of Explicit Control | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-004 | Composite Authorization Preconditions | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-005 | Variable Policy as Versioned, Explainable Configuration | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-006 | Closure-Blocking Obligations vs Obligations That Outlive Closure | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-007 | Business Purpose Is Not Financial Attribution | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-008 | Responsibility Duration Is Not Labor Effort | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-009 | Administrative Support Workflow Is Not Object Lifecycle | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-010 | Missing Architecture Layer Detection | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-011 | Material Phase Transition Requires Explicit State Consolidation | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-012 | Significant Accepted Work Can Require Consolidation Without a Phase Transition | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-013 | Operational Current State Is Not the Same as Formal Approved Snapshot | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-014 | Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-015 | Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-017 | AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth | CANDIDATE | NOT EXPORTED |
+| CAND-NURA-018 | Legal Document Type and Economic Direction Are Independent Architecture Dimensions | CANDIDATE | NOT EXPORTED |
 
 ---
 
 ## Review Rule
 
 After every Learning & Change Review:
-1. add every newly identified transferable candidate to this file;
+1. add every newly identified transferable candidate as `CANDIDATE`;
 2. update existing candidates when new evidence materially confirms, limits, contradicts or refines them;
-3. do not label any candidate as validated Expert Memory;
-4. record transfer/promotion separately if a governed permanent-ARCHITECT process is later executed.
+3. classify as `LOCAL_ONLY`, `REJECTED`, or `RECOMMENDED_FOR_ROLE_REVIEW` when evidence supports that disposition;
+4. never self-assign `APPROVED_FOR_ROLE_REVIEW`;
+5. after explicit human approval, record `approved_by` and `approved_at`;
+6. export only `APPROVED_FOR_ROLE_REVIEW` candidates using `memory/role_learning_exports/`;
+7. after a successful export, record export metadata and set `EXPORTED_TO_ROLE_UPDATER`;
+8. do not label any candidate as validated Expert Memory merely because it was approved/exported.
 

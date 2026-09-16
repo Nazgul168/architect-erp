@@ -6,7 +6,7 @@
 
 This profile is used operationally within the **NURA ERP Architecture Engagement** to describe the professional background and working posture ARCHITECT should apply.
 
-It is **not** permanent Expert Memory, does **not** modify Cognitive Core, Project Instructions or governing protocols, and does **not** constitute Slow-Loop promotion into the canonical ARCHITECT EKB.
+It is **not** permanent Expert Memory, does **not** modify Cognitive Core, Project Instructions or governing protocols, and does **not** constitute clean-ROLE promotion through the Role Updater process.
 
 ### Profile provenance
 
@@ -677,4 +677,4 @@ This profile answers:
 
 It does not answer NURA-specific architectural facts; those belong in `ENGAGEMENT_MEMORY.md` and the controlled architecture Parts.
 
-This profile remains **provisional runtime context** until a separately governed Slow-Loop process evaluates whether any part should become permanent ARCHITECT knowledge or behavior.
+This profile remains **provisional runtime context**. Any proposal to make part of it permanent ARCHITECT knowledge or behavior must enter the Engagement Learning Candidate lifecycle and, if explicitly approved for review, be evaluated through Role Updater.

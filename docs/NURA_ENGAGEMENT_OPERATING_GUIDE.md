@@ -1,4 +1,3 @@
-\
 # NURA ERP — ENGAGEMENT CONTROL OPERATING GUIDE
 
 This is the user-facing operating guide for maintaining the NURA ERP Engagement control artifacts.
@@ -19,10 +18,14 @@ nura-erp-architecture/
 ├── 00_ENGAGEMENT_MANIFEST.md
 ├── memory/
 │   ├── ENGAGEMENT_MEMORY.md
-│   └── LEARNING_CANDIDATES.md
+│   ├── LEARNING_CANDIDATES.md
+│   ├── ROLE_PERFORMANCE_LOG.md
+│   ├── ROLE_CHANGE_LOG.md
+│   └── role_learning_exports/
 ├── runtime/
 │   ├── ARCHITECT_PROFESSIONAL_BACKGROUND.md
-│   └── ENGAGEMENT_CONTROL.md
+│   ├── ENGAGEMENT_CONTROL.md
+│   └── RUNTIME_DEPLOYMENT_RECORD.md
 ├── context/
 ├── working/
 └── outputs/
@@ -31,10 +34,14 @@ nura-erp-architecture/
 Functions:
 
 - `ENGAGEMENT_MEMORY.md` = established NURA ERP / architecture knowledge;
-- `LEARNING_CANDIDATES.md` = transferable learning candidates, not permanent EKB;
+- `LEARNING_CANDIDATES.md` = transferable learning candidates using the RF lifecycle;
+- `ROLE_PERFORMANCE_LOG.md` = feedback about ARCHITECT behavior/performance only;
+- `ROLE_CHANGE_LOG.md` = parent-role adoption/change lineage;
+- `role_learning_exports/` = approved-for-review exports to Role Updater;
 - `ARCHITECT_PROFESSIONAL_BACKGROUND.md` = runtime professional profile;
 - `ENGAGEMENT_CONTROL.md` = phase, consolidation, checkpoint, delta-reporting and transition-readiness control;
-- `00_ENGAGEMENT_MANIFEST.md` = binds roles, files and authority boundaries.
+- `RUNTIME_DEPLOYMENT_RECORD.md` = runtime parent-binding/synchronization evidence;
+- `00_ENGAGEMENT_MANIFEST.md` = binds parent ROLE, files, learning policy and authority boundaries.
 
 ---
 
@@ -74,7 +81,7 @@ First:
 2. update Engagement Memory;
 3. update Learning Candidates where applicable;
 4. assess Professional Background implications;
-5. assess permanent ARCHITECT implications;
+5. assess clean ARCHITECT / Role Updater implications;
 6. complete Memory consistency verification;
 7. finalize required Control / Manifest state;
 8. only then prepare `CP-NURA-001`.
@@ -168,7 +175,7 @@ REVIEW_TO
 5. Engagement Memory delta
 6. Learning Candidates delta
 7. Professional Background assessment
-8. Permanent ARCHITECT assessment
+8. Clean ARCHITECT / Role Updater assessment
 9. Required system-state updates
 10. Checkpoint readiness
 ```
@@ -481,7 +488,7 @@ Before the transition:
 5. a separate verification pass must be recorded;
 6. only then may `NEXT_PHASE_GATE = READY`.
 
-You do not manually approve every ordinary gate merely because you are ARCHITECT Maintainer.
+You do not manually approve every ordinary gate merely because you are the current RF Owner / legacy ARCHITECT Maintainer.
 
 ---
 
@@ -502,9 +509,37 @@ Do not continue materially while Control still shows the previous phase as curre
 
 - NURA business decision → applicable Engagement / business authority;
 - confidentiality / transfer permission → Engagement Confidentiality Authority;
-- permanent ARCHITECT governance, EKB promotion and governing-behavior change → ARCHITECT Maintainer.
+- `APPROVED_FOR_ROLE_REVIEW` → current human owner acting as the applicable Engagement-side approval authority;
+- clean ARCHITECT change/release approval → RF Owner / current human AUTH-ROLE;
+- clean ARCHITECT change execution → Role Updater.
+
+`ARCH-MAINT-001` is a legacy/local label for the same current human owner, not an independent clean-ROLE release authority.
 
 Ordinary checkpoint or phase-gate verification does not create authority over another domain.
+
+---
+
+## 16.1 RF v4.5 Learning Handoff
+
+The Engagement learning path is:
+
+```text
+Learning & Change Review
+→ CANDIDATE
+→ LOCAL_ONLY / REJECTED / RECOMMENDED_FOR_ROLE_REVIEW
+→ explicit human APPROVED_FOR_ROLE_REVIEW
+→ Role Learning Export
+→ Role Updater
+→ NO_ROLE_CHANGE / REQUEST_MORE_EVIDENCE / ROLE_CHANGE_PROPOSAL
+```
+
+ARCHITECT cannot self-assign `APPROVED_FOR_ROLE_REVIEW`.
+
+A user approval at this stage means only "send this candidate to Role Updater for evaluation". It is not clean-ROLE release approval.
+
+ROLE behavior feedback belongs in `memory/ROLE_PERFORMANCE_LOG.md`; parent-role adoption/change events belong in `memory/ROLE_CHANGE_LOG.md`.
+
+Canonical parent adoption and ChatGPT runtime synchronization remain separate.
 
 ---
 
@@ -521,7 +556,7 @@ Ordinary checkpoint or phase-gate verification does not create authority over an
 - post-finalization Control commit is not synchronized to the active runtime / Project Sources → `CURRENT_CONTROL_RUNTIME_SYNC_FAILURE`;
 - tag resolves to a commit different from recorded checkpoint hash → `CHECKPOINT_INTEGRITY_FAILURE`.
 
-Repeated materially similar failures should become Slow-Loop evidence rather than triggering ad hoc permanent-ARCHITECT edits.
+Repeated materially similar failures should be logged as ROLE-performance evidence and, where transferable, become Learning Candidates rather than triggering ad hoc clean-ARCHITECT edits.
 
 ---
 
