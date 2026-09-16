@@ -8,40 +8,32 @@ PLATFORM / CONTAINER: ChatGPT Project
 RUNTIME PURPOSE: ENGAGEMENT  
 RECORD STATUS: MIGRATION BASELINE / VERIFICATION REQUIRED
 
-## Current Observed Legacy Binding
+## Current Canonical Parent Binding
 
-ARCHITECT_RELEASE_ID: ARCH-0.2.1-RC5  
+CLEAN_ROLE_ID: architect  
 CLEAN_ROLE_REPO: Nazgul168/architect  
-CLEAN_ROLE_REVISION_OBSERVED: 6f843575253c35312d24d03bd6fe9560045b8e95  
-PROJECT_INSTRUCTIONS_ID: ARCH-PI-0.2.1-RC5  
-PROJECT_INSTRUCTIONS_CONTENT_VERIFICATION: UNVERIFIED
-
-This section preserves the last recorded runtime/binding state. It does not prove that the active ChatGPT Project currently matches it.
-
-## RF v4.5 Parent Migration Target
-
-TARGET_ARCHITECT_RELEASE: 1.0.0  
-TARGET_ARCHITECT_REVISION: UNVERIFIED  
-TARGET_RELEASE_STATE: PREPARED / VALIDATION_REQUIRED  
+BOUND_ARCHITECT_RELEASE: ARCH-0.2.1-RC5  
+BOUND_ARCHITECT_REVISION: 6f843575253c35312d24d03bd6fe9560045b8e95  
+PARENT_BINDING_STATUS: CURRENT  
 PARENT_UPDATE_POLICY: CONTROLLED_UPDATE  
 PARENT_UPDATE_AUTHORITY_REF: RF_OWNER_CURRENT_HUMAN  
-PARENT_UPDATE_STATUS: BLOCKED  
-BLOCK_REASON: Clean ARCHITECT 1.0.0 is not yet a validated/published immutable release.
 
-When the clean parent is published, move to `UPDATE_AVAILABLE`; adoption requires the recorded authority decision.
+This is the current RF baseline for this already-working Engagement. It does not block ongoing NURA ERP work.
+
+A newer clean ARCHITECT release, when actually available, is handled as a separate controlled-update event through Role Updater. The existence or preparation state of a future release does not change the current binding status.
 
 ## Runtime synchronization
 
 RUNTIME_SYNC_STATUS: UNKNOWN  
-SYNCED_PARENT_RELEASE: ARCH-0.2.1-RC5 / LEGACY RECORD ONLY  
-SYNCED_PARENT_REVISION: 6f843575253c35312d24d03bd6fe9560045b8e95 / UNVERIFIED IN ACTIVE RUNTIME  
+OBSERVED_RUNTIME_PARENT_RELEASE: ARCH-0.2.1-RC5 / UNVERIFIED IN ACTIVE RUNTIME  
+OBSERVED_RUNTIME_PARENT_REVISION: 6f843575253c35312d24d03bd6fe9560045b8e95 / UNVERIFIED IN ACTIVE RUNTIME  
 ACTIVE_PROJECT_INSTRUCTIONS_ID: ARCH-PI-0.2.1-RC5 / UNVERIFIED  
 END_SENTINEL_PRESENT: UNVERIFIED  
-FULL_TEXT_TRUNCATION_CHECK: UNVERIFIED
+FULL_TEXT_TRUNCATION_CHECK: UNVERIFIED  
 
-Canonical parent-binding adoption and runtime synchronization are separate operations.
+Canonical parent binding and ChatGPT runtime synchronization are separate facts.
 
-Do not set runtime sync to `VERIFIED` until the active ChatGPT Project's Project Instructions and required parent sources have been checked against the exact adopted clean ARCHITECT release/revision.
+Do not set `RUNTIME_SYNC_STATUS: VERIFIED` until the active ChatGPT Project Instructions and required parent sources have been checked against the bound parent release/revision.
 
 ## Material capabilities
 
@@ -72,4 +64,4 @@ ISOLATION_STATUS: UNVERIFIED
 
 VERIFIED_BY: UNVERIFIED  
 VERIFIED_AT: UNVERIFIED  
-NOTES: Current Engagement remains operational. Re-verify runtime synchronization whenever the ChatGPT Project Instructions or adopted parent revision changes.
+NOTES: Current Engagement is operational. Re-verify runtime synchronization whenever the ChatGPT Project Instructions or canonical parent binding changes.
