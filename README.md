@@ -1,37 +1,61 @@
-# NURA ERP Architecture — Engagement Repository
+# NURA ERP Architecture — Task-Specific ARCHITECT Engagement
 
-Status: BOOTSTRAP
+Canonical private Engagement repository for `ENG-NURA-ERP-001`.
 
-This repository is the **Engagement-owned canonical store** for the NURA ERP Architecture initiative.
+This repository contains NURA ERP-specific state, evidence, architecture outputs, learning candidates and runtime/control records. It is separate from the clean ARCHITECT repository.
 
-It is separate from the permanent ARCHITECT repository.
+## RF v4.5 relationship
 
-## Permanent ARCHITECT binding
+```text
+clean ROLE
+Nazgul168/architect
+        ↓ parent of
+task-specific ROLE / Engagement
+Nazgul168/nura-erp-architecture
+```
 
-ARCHITECT_RELEASE_ID: ARCH-0.2.1-RC5  
-PROJECT_INSTRUCTIONS_ID: ARCH-PI-0.2.1-RC5  
-GOVERNING_PACK_REVISION: 6f843575253c35312d24d03bd6fe9560045b8e95
+The Engagement is an **ACTIVE RF-managed task-specific ARCHITECT system**.
 
-## Repository roles
+Current operational parent binding:
 
-- `context/` — source material supplied to or created during the Engagement.
-- `context/chat_qa/` — raw ChatGPT question/answer dialogue exports used as evidence of how the work evolved.
-- `context/source_documents/` — regulations, institutional documents, requirements, references and other source material.
-- `memory/ENGAGEMENT_MEMORY.md` — canonical established Engagement knowledge. It is **not a transcript**.
-- `working/` — temporary analysis, reconciliation and bootstrap artifacts.
-- `outputs/architecture/` — current NURA ERP Architecture deliverables / Parts.
+- parent role: `architect`;
+- parent repository: `Nazgul168/architect`;
+- bound release: `ARCH-0.2.1-RC5`;
+- bound revision: `6f843575253c35312d24d03bd6fe9560045b8e95`;
+- binding origin: existing operational baseline imported into RF;
+- parent update policy: `CONTROLLED_UPDATE`;
+- runtime synchronization evidence: tracked separately and currently `UNKNOWN` / not verified.
 
-## Bootstrap rule
+This RF migration does not block normal NURA ERP work. Future clean ARCHITECT releases are handled later as separate controlled updates through Role Updater.
 
-Raw QA dialogue must not be copied wholesale into Engagement Memory.
+See `00_ENGAGEMENT_MANIFEST.md` and `runtime/RUNTIME_DEPLOYMENT_RECORD.md`.
 
-ARCHITECT must:
-1. inventory the dialogue and current architecture documents;
-2. reconstruct chronology and document/decision evolution;
-3. distinguish accepted, superseded, rejected, unresolved and source-only material;
-4. cross-check conclusions against current deliverables and authoritative source material;
-5. write only established current knowledge into `memory/ENGAGEMENT_MEMORY.md`;
-6. preserve rationale, supersession and unresolved conflicts;
-7. keep raw QA files unchanged as source evidence.
+## Canonical Engagement artifacts
 
-Potentially transferable learning may be identified, but it is not automatically promoted into permanent ARCHITECT Expert Memory.
+- `00_ENGAGEMENT_MANIFEST.md` — task-specific ROLE identity, parent binding, authority boundaries and canonical paths;
+- `memory/ENGAGEMENT_MEMORY.md` — established Engagement knowledge;
+- `memory/LEARNING_CANDIDATES.md` — transferable-learning candidates using the RF lifecycle;
+- `memory/ROLE_PERFORMANCE_LOG.md` — feedback about ARCHITECT behavior/performance only;
+- `memory/ROLE_CHANGE_LOG.md` — parent-role adoption/change lineage;
+- `memory/role_learning_exports/` — exports approved for Role Updater review;
+- `runtime/ARCHITECT_PROFESSIONAL_BACKGROUND.md` — Engagement runtime professional profile;
+- `runtime/ENGAGEMENT_CONTROL.md` — phase/checkpoint/consolidation control;
+- `runtime/RUNTIME_DEPLOYMENT_RECORD.md` — ChatGPT runtime binding/sync evidence.
+
+## Learning boundary
+
+ARCHITECT may recommend learning for clean-role review but may not self-approve or self-promote it.
+
+Only the current human owner may explicitly set a candidate to `APPROVED_FOR_ROLE_REVIEW` in the current single-user deployment.
+
+Only approved-for-review candidates may be exported to Role Updater. Role Updater then independently returns one of:
+
+- `NO_ROLE_CHANGE`;
+- `REQUEST_MORE_EVIDENCE`;
+- `ROLE_CHANGE_PROPOSAL`.
+
+No Engagement learning automatically changes the clean ARCHITECT ROLE.
+
+## Engagement isolation
+
+NURA-specific truth, raw evidence, outputs and decisions remain in this repository. Parent clean-role updates must not overwrite Engagement Memory, sources, outputs, learning/feedback records, update policy or update authority.
