@@ -1,14 +1,19 @@
 # LEARNING_CANDIDATES.md
 
+- **REVISION:** `2026-09-16-r3`
+- **LAST_UPDATED:** `2026-09-16`
+
 Durable Engagement-side staging for transferable learning identified during NURA ERP work.
 
 ## Maintenance Rule
 
-After each Learning & Change Review:
+After significant work, at each Learning & Change Review, and before material Part/phase handoff where learning may have changed:
 
-- add all newly identified transferable candidates;
+- add all newly identified transferable candidates that meet the proportional candidate threshold;
 - update existing candidates if new evidence materially changes them;
-- preserve candidate status and provenance;
+- record material Engagement artifacts created/changed because of a candidate and why;
+- record explicit user disposition when it occurs; preserve `NOT_REVIEWED` when it does not;
+- preserve candidate status and provenance across chats/runtimes;
 - do not treat a candidate as validated Expert Memory;
 - do not transfer it to permanent ARCHITECT candidate storage or EKB unless applicable confidentiality, transfer and Slow-Loop governance requirements are satisfied.
 
@@ -23,6 +28,34 @@ Purpose: preserve transferable-learning candidates identified during NURA ERP Le
 > This file is an Engagement-side staging/backlog artifact. Nothing in it is validated Expert Memory.  
 > Any transfer into permanent ARCHITECT `memory/candidates/` must first pass de-identification and applicable confidentiality/provenance review.  
 > Canonical promotion to EKB is a separate governed process.
+
+
+## Approval / Role Updater Tracking
+
+This Engagement file also records the user's explicit disposition of transferable-learning candidates so that, at Engagement close or another agreed review point, ARCHITECT can produce an **approved-candidate export** for a separate Role Updater / permanent-role review process.
+
+Allowed Engagement-side disposition values:
+
+- `NOT_REVIEWED` — no explicit user disposition has been recorded;
+- `APPROVED_FOR_ENGAGEMENT_USE` — the user explicitly accepted the method/principle for use in this Engagement;
+- `APPROVED_FOR_ROLE_UPDATER_REVIEW` — the user explicitly accepted the learning candidate as suitable to be submitted for later Role Updater review;
+- `HOLD` — useful candidate, but the user does not yet want it advanced for Role Updater review;
+- `REJECTED_BY_USER` — the user explicitly rejected the proposed transferable learning.
+
+An Engagement-side approval recorded here is **evidence of user acceptance**, not canonical ARCHITECT Maintainer authorization and not EKB validation/promotion. Permanent ARCHITECT change remains governed by the applicable Slow-Loop process.
+
+Where a candidate materially changes Engagement artifacts, record the artifact implementation evidence and rationale so that the Role Updater can distinguish:
+
+1. the transferable learning itself;
+2. how it was operationalized in the Engagement;
+3. why the artifact change was made; and
+4. whether the user explicitly approved that change/learning.
+
+At final handoff, produce a separate export containing candidates marked `APPROVED_FOR_ROLE_UPDATER_REVIEW`, with their latest evidence, limits, artifact-change history and disposition record.
+
+### Cross-runtime continuity rule
+
+This approval/artifact trail is Engagement-wide. A new chat/runtime using the current controlled NURA ERP sources must continue the same record rather than starting a separate informal learning history. Explicit user disposition is recorded as evidence; silence or ordinary continuation is not approval.
 
 ---
 
@@ -635,6 +668,24 @@ Derived from designing NURA ERP Parts 00–08 as human-readable architecture tha
 
 ### Expected behavioral impact
 Reduces semantic loss between architecture and delivery; improves traceability and specification quality; makes later deterministic/automated conformance more feasible; reduces the risk that downstream teams silently make new architecture decisions while claiming merely to implement existing architecture.
+
+### Engagement implementation / artifact evidence
+
+The candidate was operationalized in the NURA Engagement through a controlled authoring standard and related state/control updates:
+
+- **Created** `runtime/ARCHITECTURE_PART_AUTHORING_STANDARD.md` v1.0 to make downstream-verifiable authoring an explicit reusable rule for Parts 04–08 rather than leaving the method only in chat history.
+- **Updated** `ENGAGEMENT_MEMORY.md` to v2.1 so the cross-Part rule is part of established Engagement state: human-readable Parts remain the source of architectural meaning; material assertions must be precise enough for later transformation into requirements, implementation obligations, acceptance criteria and conformance rules without inventing new business meaning.
+- **Updated** `ENGAGEMENT_CONTROL.md` (v1.8, then corrective v1.9) to make the Authoring Standard and an Architecture-to-Delivery Readiness Check part of the completion gate for Parts 04–08. This prevents a Part from being treated as complete merely because it is narratively polished.
+- **Updated** `00_ENGAGEMENT_MANIFEST.md` (v1.2, then merged/corrected v1.3) so the new Authoring Standard is a controlled Engagement artifact, is included in the System State Bundle, and remains available to future chats working on Parts 05–08.
+
+**Why these file changes were needed:** the method affects how multiple future Parts must be authored. Keeping it only in one chat would create a high risk that later chats reproduce the content but lose the downstream-verifiability constraint.
+
+### User disposition
+
+- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Approval evidence:** on 2026-09-16 the user explicitly approved creation of `ARCHITECTURE_PART_AUTHORING_STANDARD.md`, the associated Memory / Control / Manifest changes, and requested that this methodology be captured in Learning Candidates for later Role Updater review.
+- **Governance note:** this is Engagement-side user approval and export eligibility only; it is not canonical EKB promotion or verified ARCHITECT Maintainer authorization.
+
 ---
 
 ## CAND-NURA-020 — Independently Acceptable End-to-End Increments
@@ -657,6 +708,21 @@ Technical independence is not required. Shared platform capabilities and prior i
 
 ### Expected behavioral impact
 Supports earlier real-world validation, clearer acceptance boundaries and lower rework risk.
+
+
+### Engagement implementation / artifact evidence
+
+- The principle was recorded in `ENGAGEMENT_MEMORY.md` as an accepted Architecture-to-Delivery objective: each delivery increment should end in a usable end-to-end procedure/capability whose acceptance does not depend on functionality planned only for future increments.
+- `ENGAGEMENT_CONTROL.md` preserves this downstream objective as part of the transition from human-readable Architecture toward later delivery tooling and specifications.
+- No final `Delivery / Increment Model` artifact has yet been created; that artifact belongs to later Architecture-to-Delivery work after Parts are sufficiently complete.
+
+**Why these file changes were needed:** the principle changes how future delivery specifications will be decomposed. It therefore had to be preserved before the delivery-model artifacts themselves exist, so later roles do not default to horizontal database/backend/frontend phases that cannot be independently accepted.
+
+### User disposition
+
+- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Approval evidence:** the user explicitly accepted the independently acceptable end-to-end increment principle and the associated Architecture-to-Delivery model during the 2026-09-14 discussion.
+- **Governance note:** Engagement-side user approval only; no canonical ARCHITECT promotion is claimed.
 
 ---
 
@@ -683,6 +749,22 @@ The control model cannot make inherently contextual or runtime-only requirements
 
 ### Expected behavioral impact
 Makes architecture conformance more repeatable and automatable while preserving source authority, traceability and epistemic honesty about what can and cannot be proven.
+
+
+### Engagement implementation / artifact evidence
+
+- `ENGAGEMENT_MEMORY.md` records the Architecture Control Model as an accepted future Architecture-to-Delivery artifact that formalizes requirements, invariants and constraints while preserving traceability to human-readable Parts.
+- `00_ENGAGEMENT_MANIFEST.md` includes the Architecture-to-Delivery objective and conformance direction in Engagement scope/state so later tool-design chats can work from the same accepted target.
+- `ARCHITECTURE_PART_AUTHORING_STANDARD.md` requires Parts 04–08 to remain precise enough for later machine-readable formalization while prohibiting premature embedding of the future DSL/control representation into the Parts themselves.
+- The actual Architecture Control Model schema/DSL has **not** been created in this Engagement phase; only its required role and authoring prerequisites have been established.
+
+**Why these file changes were needed:** a machine-readable control model can only be derived reliably if the source architecture preserves clear normative meaning, identifiers, authority, conditions and exceptions. The current changes prepare the Parts for that later derivation without prematurely fixing the control technology.
+
+### User disposition
+
+- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Approval evidence:** the user explicitly accepted the Architecture Control Model definition, its place inside the Architecture-to-Delivery Layer, and its use as the basis for later conformance checking.
+- **Governance note:** Engagement-side user approval only; the candidate remains non-canonical.
 
 ---
 
@@ -725,35 +807,106 @@ Derived from examining whether a future NURA ERP Architecture Control Model shou
 ### Expected behavioral impact
 Improves repeatability, auditability and trust in conformance findings while preserving AI as an optional productivity/assurance layer instead of the verification authority.
 
+
+### Engagement implementation / artifact evidence
+
+- `ENGAGEMENT_MEMORY.md` v2.1 records the refinement that future conformance should support deterministic/formal verification where architecture statements are objectively formalizable, with AI as an optional supporting assurance/interpretation layer rather than the sole compliance authority.
+- `ENGAGEMENT_CONTROL.md` v1.9 preserves this downstream direction while keeping current Parts technology-neutral.
+- `00_ENGAGEMENT_MANIFEST.md` v1.3 preserves the Architecture-to-Delivery / conformance objective after the later RF v4.5 manifest merge.
+- `ARCHITECTURE_PART_AUTHORING_STANDARD.md` explicitly requires architecture to support both deterministic/formal verification and evidence-based runtime/manual verification without selecting Lean, TLA+, Alloy, Z3, a custom DSL or another concrete engine during Part authoring.
+
+**Why these file changes were needed:** the earlier conformance concept could be read as AI-centric. The refinement prevents future roles from treating probabilistic model judgment as proof where deterministic checks are possible, while also preventing premature commitment to a particular formal-method technology.
+
+### User disposition
+
+- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Approval evidence:** after discussing a Lean-like, non-AI-based control approach, the user approved the subsequent Memory / Control / Manifest / Authoring Standard updates that incorporated deterministic/formal conformance as the preferred core where feasible.
+- **Governance note:** Engagement-side user approval only; no EKB validation/promotion is claimed.
+
+---
+
+
+## CAND-NURA-023 — Explicit Learning Candidate Approval Trail as Cross-Runtime Engagement Control
+
+**Type:** methodology / learning-governance heuristic  
+**Status:** CANDIDATE ONLY  
+**Confidence:** medium-high  
+**Origin:** NURA ERP multi-chat learning continuity refinement, 2026-09-16  
+
+### Proposed knowledge
+In a substantial multi-chat or multi-runtime Engagement, transferable learning should not depend on conversational memory. Maintain one controlled candidate trail that records not only the candidate knowledge but, where material, how it was operationalized in Engagement artifacts, why those artifact changes were made, and the user's explicit disposition.
+
+The process should distinguish:
+
+- candidate discovery / refinement;
+- artifact implementation evidence;
+- rationale for material artifact changes;
+- explicit user disposition;
+- absence of disposition (`NOT_REVIEWED`).
+
+A later runtime should continue the same trail rather than reconstruct approval history from chat chronology.
+
+### Recognition cues
+- substantial work is intentionally distributed across several chats/runtimes;
+- candidate learning influences methods, controls, templates or other durable Engagement artifacts;
+- a later role/updater/reviewer must distinguish model-generated ideas from user-approved findings;
+- chat history alone is too fragile to serve as the learning/approval system of record.
+
+### Applicability
+Long-running architecture, methodology, research, consulting and design Engagements that use multiple runtimes/roles and may later distill transferable professional learning.
+
+### Limits
+Do not create a candidate for every editorial change or local fact. The trail records explicit disposition but does not infer it. Candidate approval history does not replace evidence, transferability assessment, confidentiality review or whatever downstream role-governance process is applicable.
+
+### Evidence summary
+Derived from the NURA ERP Engagement after accepted methodology changes were spread across multiple controlled artifacts and the user required later chats to preserve the same explicit learning-approval history for eventual Role Updater review.
+
+### Expected behavioral impact
+Reduces loss or misattribution of learning across chats, preserves causality between a reusable insight and the artifacts it changed, and gives downstream reviewers a cleaner evidence trail of what the user actually approved.
+
+### Engagement implementation / artifact evidence
+
+- `00_ENGAGEMENT_MANIFEST.md` v1.4 establishes the Learning Candidate approval trail as an Engagement-wide cross-chat control rather than a convention of one conversation.
+- `ENGAGEMENT_CONTROL.md` v1.10 adds an explicit cross-chat Learning Candidate Approval Trail section and makes trail currency part of the Part completion gate.
+- `ARCHITECTURE_PART_AUTHORING_STANDARD.md` v1.1 adds a Part-completion learning/approval-trail check so Parts 04–08 created in different chats apply the same method.
+- `LEARNING_CANDIDATES.md` revision `2026-09-16-r3` makes the candidate/artifact/disposition record continuous across runtimes and preserves `NOT_REVIEWED` when approval is absent.
+
+**Why these file changes were needed:** the prior approval trail existed in the Learning Candidates artifact, but other chats were not yet normatively required to maintain it. Moving the rule into Manifest, Control and the Part Authoring Standard makes it a property of the Engagement workflow and handoff package rather than an accidental behavior of one chat.
+
+### User disposition
+
+- **Disposition:** `APPROVED_FOR_ROLE_UPDATER_REVIEW`
+- **Approval evidence:** the user explicitly approved making the candidate/artifact/disposition trail mandatory across other NURA ERP chats and approved the associated controlled-file updates on 2026-09-16.
+
 ---
 
 # Candidate Register
 
-| ID | Title | Status | Permanent ARCHITECT staging |
-|---|---|---|---|
-| CAND-NURA-001 | Separate Lifecycle, Readiness and Operational Authorization | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-002 | Planning Approval Is Not Transaction Authorization | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-003 | Changed Conditions Trigger Re-evaluation, Not Silent Reversal of Explicit Control | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-004 | Composite Authorization Preconditions | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-005 | Variable Policy as Versioned, Explainable Configuration | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-006 | Closure-Blocking Obligations vs Obligations That Outlive Closure | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-007 | Business Purpose Is Not Financial Attribution | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-008 | Responsibility Duration Is Not Labor Effort | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-009 | Administrative Support Workflow Is Not Object Lifecycle | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-010 | Missing Architecture Layer Detection | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-011 | Material Phase Transition Requires Explicit State Consolidation | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-012 | Significant Accepted Work Can Require Consolidation Without a Phase Transition | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-013 | Operational Current State Is Not the Same as Formal Approved Snapshot | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-014 | Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-015 | Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-017 | AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-018 | Legal Document Type and Economic Direction Are Independent Architecture Dimensions | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-019 | Human-Readable Architecture Should Produce Verifiable Delivery Assertions | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-020 | Independently Acceptable End-to-End Increments | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-021 | Machine-Readable Architecture Control Model as a Conformance Interface | CANDIDATE ONLY | NOT TRANSFERRED |
-| CAND-NURA-022 | Deterministic Conformance Core with Optional AI Assurance | CANDIDATE ONLY | NOT TRANSFERRED |
-
+| ID | Title | Status | User disposition | Permanent ARCHITECT staging |
+|---|---|---|---|---|
+| CAND-NURA-001 | Separate Lifecycle, Readiness and Operational Authorization | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-002 | Planning Approval Is Not Transaction Authorization | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-003 | Changed Conditions Trigger Re-evaluation, Not Silent Reversal of Explicit Control | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-004 | Composite Authorization Preconditions | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-005 | Variable Policy as Versioned, Explainable Configuration | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-006 | Closure-Blocking Obligations vs Obligations That Outlive Closure | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-007 | Business Purpose Is Not Financial Attribution | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-008 | Responsibility Duration Is Not Labor Effort | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-009 | Administrative Support Workflow Is Not Object Lifecycle | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-010 | Missing Architecture Layer Detection | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-011 | Material Phase Transition Requires Explicit State Consolidation | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-012 | Significant Accepted Work Can Require Consolidation Without a Phase Transition | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-013 | Operational Current State Is Not the Same as Formal Approved Snapshot | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-014 | Aggregate Progress Should Be Derived from Item-Level Outcomes When Children Diverge | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-015 | Upstream Planning Change Must Not Silently Rewrite an Existing Downstream Obligation | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-016 | Automation May Require Changing the Evidence-Supply Environment, Not Only the Software | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-017 | AI-Assisted Extraction Must Not Be the Sole Institutional Source of Truth | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-018 | Legal Document Type and Economic Direction Are Independent Architecture Dimensions | CANDIDATE ONLY | NOT_REVIEWED | NOT TRANSFERRED |
+| CAND-NURA-019 | Human-Readable Architecture Should Produce Verifiable Delivery Assertions | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-020 | Independently Acceptable End-to-End Increments | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-021 | Machine-Readable Architecture Control Model as a Conformance Interface | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-022 | Deterministic Conformance Core with Optional AI Assurance | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
+| CAND-NURA-023 | Explicit Learning Candidate Approval Trail as Cross-Runtime Engagement Control | CANDIDATE ONLY | APPROVED_FOR_ROLE_UPDATER_REVIEW | NOT TRANSFERRED |
 ---
 
 ## Review Rule
@@ -761,6 +914,11 @@ Improves repeatability, auditability and trust in conformance findings while pre
 After every Learning & Change Review:
 1. add every newly identified transferable candidate to this file;
 2. update existing candidates when new evidence materially confirms, limits, contradicts or refines them;
-3. do not label any candidate as validated Expert Memory;
-4. record transfer/promotion separately if a governed permanent-ARCHITECT process is later executed.
+3. record material Engagement artifact changes that operationalize a candidate, including what file was created/changed and why;
+4. record explicit user disposition when it occurs, without inferring approval from silence or ordinary continuation;
+5. keep Engagement-side user approval separate from ARCHITECT Maintainer authorization and canonical EKB promotion;
+6. do not label any candidate as validated Expert Memory;
+7. record transfer/promotion separately if a governed permanent-ARCHITECT process is later executed;
+8. at agreed final handoff, produce an approved-only export for Role Updater review containing the latest versions of candidates explicitly marked `APPROVED_FOR_ROLE_UPDATER_REVIEW`.
+9. apply this same trail across all Engagement chats/runtimes using the current controlled sources; do not maintain separate informal approval histories.
 

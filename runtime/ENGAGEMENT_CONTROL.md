@@ -1,7 +1,7 @@
 # ENGAGEMENT_CONTROL.md
 
 - **ENGAGEMENT_ID:** `ENG-NURA-ERP-001`
-- **CONTROL_VERSION:** `1.8`
+- **CONTROL_VERSION:** `1.10`
 - **CONTROL_STATUS:** ACTIVE
 - **LAST_UPDATED:** `2026-09-16`
 
@@ -81,7 +81,7 @@ The post-v1.3 material delta has now been reviewed and semantically consolidated
 - **UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK:** `NO`
 - **CONSOLIDATION_STATE:** `CURRENT`
 
-Reason: the Part 03 rewrite and final Parts 00–03 normalization remain consolidated. Accepted Engagement objectives establish the post-Parts `Architecture-to-Delivery Layer`, per-increment implementation specification approach, independently acceptable end-to-end delivery increments and a machine-readable Architecture Control Model. The 2026-09-16 refinement additionally requires verification-aware but technology-agnostic Part authoring, deterministic/formal conformance where feasible, optional rather than constitutive AI assurance, and an explicit Architecture-to-Delivery Readiness Pass before Part transition. These are consolidated into proposed `ENGAGEMENT_MEMORY.md v2.1` and `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0`. Part 04 remains the current architecture phase. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
+Reason: the Part 03 rewrite and final Parts 00–03 normalization remain consolidated. Accepted Engagement objectives establish the post-Parts `Architecture-to-Delivery Layer`, per-increment implementation specification approach, independently acceptable end-to-end delivery increments and a machine-readable Architecture Control Model. The 2026-09-16 refinement additionally requires verification-aware but technology-agnostic Part authoring, deterministic/formal conformance where feasible, optional rather than constitutive AI assurance, and an explicit Architecture-to-Delivery Readiness Pass before Part transition. These are consolidated into current `ENGAGEMENT_MEMORY.md v2.1` and `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0`. Part 04 remains the current architecture phase. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
 
 ### 3.4 Required State Invariant
 
@@ -821,13 +821,13 @@ If this Control itself is stale and the runtime cannot write it canonically, ARC
 
 ---
 
-## 22. Architecture Part Authoring / Completion Gate — Parts 04–08
+## 24. Architecture Part Authoring / Completion Gate — Parts 04–08
 
-`ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.0` is an active controlled Engagement method for Parts 04–08.
+`ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1` is an active controlled Engagement method for Parts 04–08.
 
 A Part is not ready for transition merely because a draft exists or the user has completed editorial review. Before `NEXT_PHASE_GATE` may pass, the applicable Part must satisfy the following semantic completion criteria:
 
-### 22.1 Required authoring inputs
+### 24.1 Required authoring inputs
 
 The working runtime/chat should use the intended current versions of:
 
@@ -841,7 +841,7 @@ The working runtime/chat should use the intended current versions of:
 
 If a material required source/revision is unavailable or conflicting, do not claim the corresponding readiness criterion passed.
 
-### 22.2 Part completion criteria — blocking for the next architecture Part
+### 24.2 Part completion criteria — blocking for the next architecture Part
 
 - [ ] **Semantic coverage:** the Part adequately covers the architectural layer it owns.
 - [ ] **Layer boundary:** material decisions owned by later Parts are not prematurely frozen unless required by the current layer.
@@ -855,10 +855,11 @@ If a material required source/revision is unavailable or conflicting, do not cla
 - [ ] **Russian prose / terminology pass:** language is aligned with Parts 00–03; accepted English model terms are preserved without unnecessary English or calque.
 - [ ] **Architecture-to-Delivery Readiness Pass:** a future Requirements Catalogue / Implementation Specification / Acceptance / Conformance artifact can derive the intended downstream obligation without inventing new business meaning.
 - [ ] **Engagement-state synchronization:** accepted material decisions, open/deferred items, learning candidates and phase-control state are updated where applicable.
+- [ ] **Learning Candidate approval trail:** transferable learning identified or materially refined during the Part is recorded with artifact-impact rationale and any explicit user disposition; absence of explicit disposition remains `NOT_REVIEWED`.
 
 Any material applicable failure keeps `NEXT_PHASE_GATE = NOT_READY`.
 
-### 22.3 Current Part 04 status
+### 24.3 Current Part 04 status
 
 Part 04 is currently in completion / V&V / Architecture-to-Delivery readiness work. No Part 04 completion or Part 05 transition is claimed by this Control revision.
 
@@ -870,5 +871,45 @@ NEXT_PHASE_GATE = NOT_READY
 PART_04_DOWNSTREAM_READINESS = IN_PROGRESS
 ```
 
-When all applicable criteria in 22.2 pass, the transition evidence must be recorded before Part 05 is treated as started.
+When all applicable criteria in 24.2 pass, the transition evidence must be recorded before Part 05 is treated as started.
+
+## 25. Learning Candidate Approval Trail — Cross-Chat Requirement
+
+The Learning Candidate approval trail is a controlled Engagement-wide process and applies to every chat/runtime working from the current NURA ERP controlled source set. It must not depend on one conversation retaining ambient memory of prior approvals.
+
+### 25.1 Trigger
+
+Update `memory/LEARNING_CANDIDATES.md` when significant work:
+
+- identifies a new potentially transferable method, principle, heuristic, pattern, failure mode or other candidate knowledge;
+- materially confirms, limits, contradicts or refines an existing candidate;
+- causes a candidate-derived method/control to be implemented through creation or material revision of Engagement artifacts; or
+- receives an explicit user disposition that changes candidate review status.
+
+Do not create Learning Candidates for every ordinary editorial correction or NURA-specific fact. Apply the Learning Protocol and transferability threshold proportionally.
+
+### 25.2 Required trail
+
+For an applicable candidate, preserve where relevant:
+
+- the transferable learning itself;
+- evidence / structural context / limits;
+- Engagement artifacts created or materially changed because of the learning;
+- why each material artifact change was required;
+- explicit user disposition when given;
+- `NOT_REVIEWED` when no explicit user disposition exists.
+
+User approval must not be inferred from silence, routine continuation, use of a draft, or acceptance of unrelated Engagement work.
+
+### 25.3 Handoff / completion check
+
+Before a material Part handoff, phase transition, Learning & Change Review close, or agreed Engagement-close export, verify that:
+
+1. newly identified transferable learning has been assessed for candidate treatment;
+2. existing candidates materially affected by the work have been updated;
+3. candidate-related artifact changes and rationale are recorded where applicable;
+4. explicit user dispositions are current; and
+5. the next runtime receives the current `LEARNING_CANDIDATES.md` whenever learning / transferability context is relevant to its work.
+
+This section controls learning continuity across chats. It does not change the claim-relative authority of Engagement business sources or Architecture Parts.
 

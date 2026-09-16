@@ -1,19 +1,25 @@
-\
 # Engagement Manifest — NURA ERP Architecture
 
+Manifest Version: 1.4  
+Last Updated: 2026-09-16  
 Engagement ID: ENG-NURA-ERP-001  
+RF System ID: architect-nura-erp  
+RF System Type: TASK_SPECIFIC_ROLE  
 Title / Approved Alias: NURA ERP Architecture  
 Status: ACTIVE  
-Canonical Store: private GitHub repository `nura-erp-architecture`  
+Canonical Store: private GitHub repository `Nazgul168/nura-erp-architecture`  
 Runtime Context: dedicated Engagement runtime — VERIFICATION STATUS UNVERIFIED  
 Confidentiality: TO_CONFIRM  
 Engagement Owner: Project owner / applicable Engagement authority  
 Engagement Confidentiality Authority: TO_CONFIRM  
-ARCHITECT Maintainer ID: ARCH-MAINT-001  
+RF Owner / current clean-ROLE AUTH-ROLE: RF_OWNER_CURRENT_HUMAN  
+Legacy ARCHITECT Maintainer ID: ARCH-MAINT-001 — same current human owner; no independent clean-ROLE release authority  
 
 ## 1. Purpose
 
-Develop and maintain the conceptual, logical and governing architecture for the NURA ERP system, preserving the history of architectural decisions and enabling continued work with ARCHITECT across sessions and runtimes. After completion of the human-readable architecture Parts, develop the governed Architecture-to-Delivery Layer needed to translate the architecture into implementation specifications, independently acceptable delivery increments, acceptance/conformance controls and machine-readable architecture-conformance artifacts. Conformance is expected to use deterministic/formal/automated verification where feasible, runtime/manual evidence where required, and optional AI-assisted assurance rather than depending on AI as the verification authority.
+Develop and maintain the conceptual, logical and governing architecture for the NURA ERP system, preserving the history of architectural decisions and enabling continued work with ARCHITECT across sessions and runtimes.
+
+The Engagement also prepares Parts 00–08 to serve as a controlled human-readable source for the later **Architecture-to-Delivery Layer**: requirements/specification derivation, independently acceptable end-to-end delivery increments, acceptance/traceability, a machine-readable Architecture Control Model, and deterministic/formal or other evidence-based architecture conformance verification where feasible. Detailed downstream tools are designed outside the architecture Parts; the Parts must preserve sufficient semantic precision for those tools to be derived without inventing new business meaning.
 
 ## 2. Scope
 
@@ -28,32 +34,74 @@ Develop and maintain the conceptual, logical and governing architecture for the 
 - Engagement-specific lessons and unresolved issues;
 - Engagement-side learning candidates;
 - current Engagement phase / consolidation / checkpoint / transition-readiness control;
-- controlled Architecture Part Authoring Standard for Parts 04–08;
-- Architecture-to-Delivery Layer design after Parts 00–08, including implementation-specification standards/packs, traceability, delivery-increment modeling, acceptance scenarios, architecture-conformance rules and the machine-readable Architecture Control Model;
-- design of the Architecture Conformance Engine, deterministic/formal verification mechanisms and evidence model as downstream consumers of governed architecture/control artifacts; optional AI-assisted assurance may be added where useful but is not the source of architecture truth.
+- Architecture-to-Delivery readiness of Parts 04–08, including downstream-verifiable architectural assertions without embedding future implementation/control technology into the Parts;
+- controlled authoring methodology for Parts 04–08 through `runtime/ARCHITECTURE_PART_AUTHORING_STANDARD.md`.
 
 ### Out of scope
 
 - permanent ARCHITECT Expert Memory itself;
 - raw material from unrelated Engagements;
-- automatic promotion of NURA-specific knowledge into permanent ARCHITECT candidate storage or global EKB.
+- automatic promotion of NURA-specific knowledge into clean ARCHITECT or its Expert Memory / EKB.
 
-## 3. ARCHITECT Runtime Binding
+## 3. ARCHITECT Parent Binding and Runtime Binding
 
-RUNTIME_ID: TO_BE_ASSIGNED / VERIFIED  
-ARCHITECT_RELEASE_ID: ARCH-0.2.1-RC5  
-PROJECT_INSTRUCTIONS_ID: ARCH-PI-0.2.1-RC5  
-PI_CONTENT_VERIFICATION: UNVERIFIED  
-GOVERNING_PACK_REVISION: 6f843575253c35312d24d03bd6fe9560045b8e95  
-EXECUTION_PROFILE_ID: TO_BE_ASSIGNED / VERIFIED  
-EKB_UPDATE_POLICY: CONTROLLED_UPDATE  
-EKB_REVISION_CURRENT: 6f843575253c35312d24d03bd6fe9560045b8e95  
-RUNTIME_DEPLOYMENT_RECORD_ID: TO_BE_ASSIGNED / VERIFIED  
-RUNTIME_STATE: UNVERIFIED  
-ISOLATION_REQUIRED: YES  
-ISOLATION_STATUS: UNVERIFIED  
+This Engagement is an **ACTIVE task-specific ARCHITECT system** managed under RF v4.5.
 
-Where a canonical Runtime Deployment Record exists, it owns the detailed runtime configuration. Engagement checkpoint state should reference that record rather than duplicating independently maintained runtime configuration.
+The RF migration records the parent relationship that already existed operationally. It does **not** stop or suspend the Engagement while future clean-ROLE validation work is pending.
+
+```yaml
+parent_role:
+  role_id: architect
+  core_repo: Nazgul168/architect
+  binding_state: ACTIVE
+  bound_release: ARCH-0.2.1-RC5
+  bound_revision: 6f843575253c35312d24d03bd6fe9560045b8e95
+  binding_origin: LEGACY_OPERATIONAL_BASELINE_IMPORTED_TO_RF
+  update_policy: CONTROLLED_UPDATE
+  update_authority_ref: RF_OWNER_CURRENT_HUMAN
+
+parent_role_update_authority:
+  type: USER
+  identity_ref: RF_OWNER_CURRENT_HUMAN
+
+resolved_role_learning:
+  enabled: true
+  resolved_by: RF_OWNER_CURRENT_HUMAN
+  resolution_basis: Preserve existing Engagement learning behavior under clean ARCHITECT policy.
+  resolved_at: 2026-09-16
+
+runtime_binding:
+  runtime_id: TO_BE_ASSIGNED / VERIFIED
+  platform: ChatGPT Project
+  execution_profile_id: TO_BE_ASSIGNED / VERIFIED
+  observed_project_instructions_id: ARCH-PI-0.2.1-RC5
+  project_instructions_verification: UNVERIFIED
+  observed_parent_revision: 6f843575253c35312d24d03bd6fe9560045b8e95
+  runtime_sync_status: UNKNOWN
+  runtime_record: runtime/RUNTIME_DEPLOYMENT_RECORD.md
+```
+
+The current parent binding is therefore **operational now**.
+
+Future clean ARCHITECT releases are handled separately by `CONTROLLED_UPDATE`. A future release becomes an update candidate only when it is actually available for adoption; there is no reason to mark the currently working Engagement itself `BLOCKED` while that future release is still being prepared.
+
+Canonical parent-binding changes and ChatGPT runtime synchronization remain separate. A later Role Updater adoption changes the canonical parent binding only after the required human approval; ChatGPT runtime synchronization is then verified separately.
+
+### Canonical RF v4.5 Engagement paths
+
+```yaml
+canonical_paths:
+  engagement_memory: memory/ENGAGEMENT_MEMORY.md
+  learning_candidates: memory/LEARNING_CANDIDATES.md
+  role_performance_log: memory/ROLE_PERFORMANCE_LOG.md
+  role_change_log: memory/ROLE_CHANGE_LOG.md
+  role_learning_exports: memory/role_learning_exports/
+  engagement_control: runtime/ENGAGEMENT_CONTROL.md
+  architecture_part_authoring_standard: runtime/ARCHITECTURE_PART_AUTHORING_STANDARD.md
+  runtime_record: runtime/RUNTIME_DEPLOYMENT_RECORD.md
+```
+
+Expert Memory / EKB belongs to the bound clean ARCHITECT release. It no longer has an independent Engagement-side floating update policy.
 
 ## 4. Canonical Engagement Memory
 
@@ -79,36 +127,55 @@ It is subordinate to Project Instructions, Cognitive Core and governing System P
 
 It does not constitute permanent Expert Memory / EKB promotion and does not independently create governance authority or permissions.
 
-## 6. Learning Candidate Staging
+## 5A. Architecture Part Authoring Standard
+
+`runtime/ARCHITECTURE_PART_AUTHORING_STANDARD.md`
+
+Status: **ACTIVE CONTROLLED ENGAGEMENT METHOD — v1.1**
+
+This standard governs authoring and completion-readiness of Parts 04–08. It requires the architecture Parts to remain human-readable and layer-appropriate while expressing material architectural rules precisely enough for later derivation into requirements, implementation specifications, acceptance criteria, traceability and architecture-conformance controls without inventing new business meaning.
+
+The standard is **verification-aware but technology-neutral**. It may require an architectural assertion to be suitable for deterministic/formal/automated or evidence-based verification where appropriate, but it does not embed a future Architecture Control Model DSL, proof technology, AI mechanism or implementation design into the Parts.
+
+It does not override authoritative Engagement business truth or governing ARCHITECT sources. It controls **how Parts 04–08 are authored and assessed for completion**, not the substantive business authority of the claims they contain.
+
+## 6. Learning / ROLE Feedback Artifacts
+
+This Engagement has learning enabled.
 
 Canonical Engagement-side candidate staging:
 
 `memory/LEARNING_CANDIDATES.md`
 
-After each Learning & Change Review, newly identified or materially updated transferable learning candidates must be recorded in this file.
+RF lifecycle:
 
-Engagement-side candidate staging does not constitute transfer to permanent ARCHITECT candidate storage or promotion to Expert Memory / EKB.
+`CANDIDATE → LOCAL_ONLY / REJECTED / RECOMMENDED_FOR_ROLE_REVIEW → explicit human approval → APPROVED_FOR_ROLE_REVIEW → Role Learning Export → EXPORTED_TO_ROLE_UPDATER`
+
+ARCHITECT may create/update candidates, mark them `LOCAL_ONLY`, recommend rejection, or set `RECOMMENDED_FOR_ROLE_REVIEW`. ARCHITECT may **not** self-assign `APPROVED_FOR_ROLE_REVIEW`.
+
+In the current single-user deployment, only the current human owner may explicitly approve a candidate for Role Updater review. Approval means "review this candidate", not "promote this learning".
+
+Additional Engagement-side ROLE feedback artifacts:
+
+- `memory/ROLE_PERFORMANCE_LOG.md` — user feedback about ARCHITECT behavior/performance; not NURA domain truth;
+- `memory/ROLE_CHANGE_LOG.md` — clean-role adoption/change events affecting this Engagement; not NURA domain truth;
+- `memory/role_learning_exports/` — safe exports containing only candidates that were explicitly `APPROVED_FOR_ROLE_REVIEW`.
+
+Engagement-side candidate staging or export does not itself change clean ARCHITECT Expert Memory / EKB. Clean-role evaluation and change are owned by Role Updater.
 
 Candidate staging is not authoritative for established NURA ERP business truth merely because an item appears there.
 
-## 6A. Architecture Part Authoring Standard
+### Cross-chat Learning Candidate Approval Trail
 
-Canonical Engagement-side authoring-method artifact:
+The learning-candidate trail is an **Engagement-wide control**, not a convention of one chat. Any runtime/chat working on this Engagement from the current controlled source set must:
 
-`runtime/ARCHITECTURE_PART_AUTHORING_STANDARD.md`
+- create or materially update a Learning Candidate when significant work produces transferable learning that justifies candidate treatment;
+- record which Engagement artifacts were created or materially changed because of that learning, and why;
+- record an explicit user disposition when the user approves, holds or rejects the candidate or associated method/change;
+- preserve `NOT_REVIEWED` when no explicit disposition exists rather than inferring approval from silence, ordinary continuation or use of the output;
+- verify the Learning Candidate trail at material Part handoff, phase transition or Engagement-close review so that later chats do not depend on conversational continuity to reconstruct learning history.
 
-Status: **ACTIVE — v1.0**
-
-This standard governs how Parts 04–08 are written so that:
-
-- human-readable architecture remains the source of meaning;
-- material architectural assertions are precise enough for later Requirements / Implementation Specification / Acceptance / Conformance derivation;
-- normative rule, rationale, example and unresolved item remain distinguishable;
-- unresolved authority is preserved explicitly;
-- Parts remain verification-aware but do not prematurely embed a future formal DSL or conformance technology;
-- each Part receives an Architecture-to-Delivery Readiness Pass before phase transition.
-
-The standard is methodological. It does not override accepted NURA business architecture or higher-authority Engagement sources.
+This requirement governs the **recording and continuity of Engagement learning**. It does not make Learning Candidates authoritative for NURA business truth.
 
 ## 7. Engagement Control State
 
@@ -155,7 +222,7 @@ The operative sensor rules are maintained in `runtime/ENGAGEMENT_CONTROL.md`.
 
 ### 8.1 System State Bundle
 
-For checkpoint / delta-reporting purposes, the System State Bundle consists of:
+For checkpoint / delta-reporting purposes, the System State Bundle remains:
 
 - `00_ENGAGEMENT_MANIFEST.md`;
 - `runtime/ENGAGEMENT_CONTROL.md`;
@@ -163,9 +230,11 @@ For checkpoint / delta-reporting purposes, the System State Bundle consists of:
 - `memory/LEARNING_CANDIDATES.md`;
 - `runtime/ARCHITECT_PROFESSIONAL_BACKGROUND.md`;
 - `runtime/ARCHITECTURE_PART_AUTHORING_STANDARD.md`;
-- pointer to the applicable Runtime Deployment Record where available.
+- pointer to `runtime/RUNTIME_DEPLOYMENT_RECORD.md`.
 
-If no formal Runtime Deployment Record exists, verified runtime-binding fields may be used as fallback evidence.
+`ROLE_PERFORMANCE_LOG.md`, `ROLE_CHANGE_LOG.md` and Role Learning Exports are canonical Engagement-side RF artifacts, but they are not automatically checkpoint-bundle members. Reference them in checkpoint evidence only when a material ROLE-state event requires it.
+
+The Runtime Deployment Record owns detailed runtime configuration and synchronization state; the checkpoint bundle stores/reference-points to it rather than duplicating that state.
 
 ### 8.2 Architecture Outputs
 
@@ -262,9 +331,12 @@ Do not infer authority merely from file age, chat order, document format, or the
 
 - `ENGAGEMENT_MEMORY.md` — established Engagement knowledge, subject to the hierarchy above;
 - `ENGAGEMENT_CONTROL.md` — phase, consolidation, checkpoint, delta-reporting and transition-readiness state;
-- `LEARNING_CANDIDATES.md` — candidate staging status only;
+- `LEARNING_CANDIDATES.md` — candidate staging/status only;
+- `ROLE_PERFORMANCE_LOG.md` — user feedback about ROLE behavior/performance only;
+- `ROLE_CHANGE_LOG.md` — parent-role adoption/change lineage only;
 - `ARCHITECT_PROFESSIONAL_BACKGROUND.md` — runtime professional formation/working profile, subordinate to governing ARCHITECT sources;
-- `ARCHITECTURE_PART_AUTHORING_STANDARD.md` — controlled method for authoring/completing Parts 04–08; it does not override accepted business architecture.
+- `ARCHITECTURE_PART_AUTHORING_STANDARD.md` — controlled method for authoring and completion-readiness of Parts 04–08; it does not override substantive Engagement authority;
+- `RUNTIME_DEPLOYMENT_RECORD.md` — runtime binding/synchronization evidence only.
 
 ### Role-specific authority
 
@@ -272,7 +344,11 @@ Authority arises from the applicable role, not merely from the person occupying 
 
 - NURA / Engagement business decisions → applicable Engagement / business authority;
 - confidentiality / transfer permission → Engagement Confidentiality Authority;
-- permanent ARCHITECT governance, permanent EKB promotion and governing-behavior changes → ARCHITECT Maintainer under the applicable permanent governance process.
+- `APPROVED_FOR_ROLE_REVIEW` → current human owner acting as the applicable Engagement-side approval authority;
+- clean ARCHITECT change/release approval → RF Owner / current human AUTH-ROLE;
+- clean ARCHITECT change execution → Role Updater.
+
+`ARCH-MAINT-001` is retained only as a legacy/local label for the same current human owner. It does not independently authorize clean-ROLE modification or release.
 
 One person may occupy more than one role, but the authority basis remains role-specific.
 
@@ -318,16 +394,18 @@ Context isolation does not by itself establish organizational approval for confi
 
 ## 14. Confidentiality / Transfer Rules
 
-Before anything leaves the Engagement for permanent ARCHITECT candidate/EKB storage, de-identify unnecessary:
+Before anything leaves the Engagement in a Role Learning Export for Role Updater review, de-identify unnecessary:
 
 - personal names;
 - internal document names;
 - financial figures;
 - sensitive institutional details.
 
+Raw identifying/sensitive evidence remains Engagement-side. Export safe summaries or opaque evidence references.
+
 Processes/cases: ASK ENGAGEMENT CONFIDENTIALITY AUTHORITY until explicitly classified.
 
-Permission to transfer out of the Engagement does not authorize permanent EKB promotion.
+Permission to transfer out of the Engagement does not authorize clean ARCHITECT promotion/change. `APPROVED_FOR_ROLE_REVIEW` authorizes review only; Role Updater and the RF Owner release process remain required.
 
 ## 15. Provenance Mapping
 
@@ -335,10 +413,12 @@ Opaque IDs used in EKB: none yet
 Identifiable mapping location: Engagement-side only  
 Access control: private repository / Engagement runtime
 
-## 16. Open Governance Issues
+## 16. Open Governance / Migration Issues
 
 - Confirm confidentiality classification.
 - Confirm Engagement Confidentiality Authority.
 - Complete runtime/source verification where current values remain UNVERIFIED.
-- Establish / verify Runtime Deployment Record if adopted as the canonical runtime-binding owner.
+- Continue normal NURA ERP architecture work with the current active parent binding.
+- When a newer clean ARCHITECT release becomes available for adoption, handle it as a separate `CONTROLLED_UPDATE` decision through Role Updater.
+- After canonical parent adoption, synchronize the ChatGPT runtime and verify the active Project Instructions/content separately.
 - Configure or verify checkpoint-tag protection for `nura-checkpoint/*` if repository controls permit it.
