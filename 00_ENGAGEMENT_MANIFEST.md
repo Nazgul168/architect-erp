@@ -1,13 +1,16 @@
 # Engagement Manifest — NURA ERP Architecture
 
-Manifest Version: 1.4  
-Last Updated: 2026-09-16  
+Manifest Version: 1.5  
+Last Updated: 2026-09-18  
 Engagement ID: ENG-NURA-ERP-001  
 RF System ID: architect-nura-erp  
 RF System Type: TASK_SPECIFIC_ROLE  
 Title / Approved Alias: NURA ERP Architecture  
 Status: ACTIVE  
 Canonical Store: private GitHub repository `Nazgul168/nura-erp-architecture`  
+Current Working Source of Truth: private GitHub repository `Nazgul168/architect-erp`, branch `main`  
+Working Source Override Status: `TEMPORARY — USER-ESTABLISHED CURRENT SOURCE OF TRUTH AS OF 2026-09-18`  
+Source Reconciliation Status: `TO_RECONCILE — do not silently treat Nazgul168/nura-erp-architecture and Nazgul168/architect-erp as the same repository`  
 Runtime Context: dedicated Engagement runtime — VERIFICATION STATUS UNVERIFIED  
 Confidentiality: TO_CONFIRM  
 Engagement Owner: Project owner / applicable Engagement authority  

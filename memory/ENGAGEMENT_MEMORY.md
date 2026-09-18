@@ -1,8 +1,8 @@
 # ENGAGEMENT_MEMORY.md
 
-- **MEMORY_VERSION:** `2.2`
-- **LAST_RECONCILED:** `2026-09-16`
-- **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis`, `Part 02 — Process Architecture` and `Part 03 — System Analysis` have been rewritten / synchronized and are the current working baselines. Accepted Decisions 68–86 are reflected in the current Parts 00–03 where applicable. `Part 04 — Data Architecture` is the active architecture-development phase. In addition, Decisions 87–99 below establish the accepted post-architecture `Architecture-to-Delivery Layer` objective and the verification-aware Part-authoring rules needed to support it. These decisions guide how Parts 04–08 are written but do not replace the Parts themselves. `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1` is the active Engagement authoring standard for Parts 04–08.
+- **MEMORY_VERSION:** `2.3`
+- **LAST_RECONCILED:** `2026-09-18`
+- **SOURCE_PARTS_BASELINE:** Current Project Sources `Part 00 — Scope & Architecture Principles`, `Part 01 — Business Analysis`, `Part 02 — Process Architecture`, `Part 03 — System Analysis` and `Part 04 — Data Architecture` are the verified upstream working baselines for Part 05. `Part 05 — Data Model` has completed scoped gates through `PASS 08 SAFE TO CONTINUE` and is in final semantic coverage / completion review; full `MODEL PASS` is not yet claimed. Accepted Decisions 68–99 and `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1` continue to govern the applicable cross-Part and Architecture-to-Delivery rules.
 - **BOOTSTRAP / RECONCILIATION reference:** QA Bootstrap Batches 1–8 + accepted Global Reconciliation, 2026-09-08.
 
 ## Engagement Identity / Status
@@ -10,8 +10,8 @@
 - **Engagement:** NURA ERP Architecture
 - **Engagement ID:** `ENG-NURA-ERP-001`
 - **Status:** ACTIVE
-- **Memory status:** CONSOLIDATED WORKING VERSION — PARTS 00–03 REWRITTEN / SYNCHRONIZED CURRENT WORKING BASELINES; ARCHITECTURE-NORMALIZATION ISSUES #1, #2, #3/#16, #4, #5, #6, #7, #8, #11/#12, #14 AND #35 PROPAGATED; PART 04 DATA ARCHITECTURE ACTIVE; POST-ARCHITECTURE ARCHITECTURE-TO-DELIVERY OBJECTIVE ACCEPTED
-- **Current architecture state:** Parts 00–03 are the current rewritten / synchronized working baselines and Part 04 is active. The Calendar Plan / Milestone / Deliverable, Research Output / Outcome / TRL, lead/co-executor, Contract Financial Direction, Legal-led Incoming / Authorizing Agreement, Project Closure and procurement normalizations are reflected across the applicable Parts. A material transition V&V found no known semantic contradiction that blocks Part 04. Remaining issues are intentionally deferred data / relationship / institutional / technical questions and must be resolved at the layer where they become decision-relevant. The approved master architecture structure includes Part 07 — Solution Architecture and renumbers Enterprise Architecture to Part 08. After Parts 00–08, the Engagement will develop an `Architecture-to-Delivery Layer` that converts human-readable architecture into implementation specifications, independently acceptable end-to-end increments, acceptance/conformance controls and a machine-readable Architecture Control Model. Parts 04–08 are therefore authored under `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1`: human-readable architecture remains the source of meaning, while material rules are written precisely enough for later traceability, implementation specification, acceptance and deterministic/formal or evidence-based conformance without inventing new business meaning.
+- **Memory status:** CONSOLIDATED WORKING VERSION — PARTS 00–04 CURRENT UPSTREAM BASELINES FOR PART 05; PART 05 DATA MODEL AT FINAL SEMANTIC COVERAGE / COMPLETION REVIEW; SCOPED GATES THROUGH PASS 08 SAFE TO CONTINUE; FULL PART 05 MODEL PASS NOT YET ESTABLISHED; POST-ARCHITECTURE ARCHITECTURE-TO-DELIVERY OBJECTIVE ACCEPTED
+- **Current architecture state:** Parts 00–04 are the current upstream working baselines for Part 05. Part 05 has completed the scoped identity, relationship, cardinality/optionality, temporal/version, Logical Entity Model, identifiers/attributes/provenance, Reference/Configuration + logical integrity and Data Dictionary gates through `PASS 08 SAFE TO CONTINUE`. The current work is the final Part 05 semantic coverage / completion review; a full `MODEL PASS` and transition to Part 06 are not yet claimed. Remaining items are explicitly classified as business, authoritative-policy or technical inputs where Part 05 must not invent missing authority. The approved master architecture structure includes Part 07 — Solution Architecture and Part 08 — Enterprise Architecture. After Parts 00–08, the Engagement will develop an `Architecture-to-Delivery Layer` that converts human-readable architecture into implementation specifications, independently acceptable end-to-end increments, acceptance/conformance controls and a machine-readable Architecture Control Model. Parts 04–08 continue to be authored under `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1`.
 - **Purpose of this memory:** compact working memory of the current NURA ERP architecture. It is not a transcript, Bootstrap ledger, or substitute for the architecture Parts.
 - **Canonical baseline persistence:** baseline `ENGAGEMENT_MEMORY.md` v1.0 is user-confirmed as canonically persisted in the canonical Engagement Git repository. The same confirmation applies to the baseline `ARCHITECT_PROFESSIONAL_BACKGROUND.md` and updated `00_ENGAGEMENT_MANIFEST.md` referenced by this Engagement.
 - **Canonical persistence:** Canonical persistence of the current version is determined by the canonical Engagement repository and its version history. This runtime has no verified canonical write path and does not claim to perform canonical writes.
@@ -109,7 +109,7 @@ Established examples:
 - external grant: signed + registered Funding Agreement recorded in ERP with its official registration details → the applicable Authorizing Basis Requirement is satisfied → Project lifecycle = `Active`;
 - internal grant: Research Council Decision serves as the required authorizing instrument and satisfies the applicable Authorizing Basis Requirement → Project lifecycle = `Active`.
 
-Other Project Types / Scenarios use the applicable approved agreement(s), decision(s) or other official instrument(s). The exact configurable `Project Type / Scenario → Authorizing Basis Requirement` mapping remains to be formalized during rule / data design and is tracked separately as a deferred modeling/configuration item. This does not reopen the resolved architectural concept or Agreement taxonomy decision.
+Other Project Types / Scenarios use the applicable approved agreement(s), decision(s) or other official instrument(s). Part 05 formalizes the configurable structure through versioned Authorizing Basis Requirement Profiles / Configuration, applicability and Requirement Components; exact institutional profile contents remain authoritative/business configuration inputs. This does not reopen the resolved architectural concept or Agreement taxonomy decision.
 
 Actual Funding receipt is separate from Project lifecycle. A delayed or missing tranche does not make an otherwise authorized Project non-active.
 
@@ -256,7 +256,7 @@ A **Research Output** is a durable structured Business Object representing an ac
 
 Research Output exists for more than current-project administration. It supports institutional knowledge and multi-year result analytics, including the ability to explain in understandable language what the University actually created, developed or advanced — not only how many Projects, publications or patents were recorded.
 
-Research Output must therefore not be constrained conceptually to exactly one Project. It may be linked to the Project(s), Calendar Plan Item(s), Project Obligation(s), Report(s), repository record(s) and other evidence that establish its origin, contribution or later development. Exact cardinalities, lineage and temporal constraints are deferred to Parts 04–05.
+Research Output must therefore not be constrained conceptually to exactly one Project. It may be linked to the Project(s), Calendar Plan Item(s), Project Obligation(s), Report(s), repository record(s) and other evidence that establish its origin, contribution or later development. Part 05 formalizes this lineage through typed provenance/contribution associations and supports cross-Project continuation without forcing exactly one Project.
 
 The architecture distinguishes:
 - **planned result** — what an Application / Calendar Plan / Agreement says should be achieved;
@@ -290,7 +290,7 @@ Research Need may be revised or cancelled with history preserved. If downstream 
 
 After Supplier Contract signature, PI may still request a material change or withdrawal, but it requires a **Formal Request to Procurement**. Procurement Office may approve or reject it based on supplier agreement, amendment/termination feasibility, penalties/cost and other contractual consequences. Contract signature is therefore not an absolute prohibition on change; it is the boundary after which change becomes a controlled downstream obligation-change process.
 
-Exact final Research Need lifecycle labels and unresolved reverse cardinalities are deferred to Part 05 / Issue #17 and do not reopen the resolved architectural concept.
+Part 05 resolves the Research Need relationship/cardinality model to the extent supported by authoritative upstream semantics; any remaining route-specific institutional rule is kept explicitly `BUSINESS TO_CONFIRM` and does not reopen the resolved architectural concept.
 
 ### Procurement Plan
 
@@ -329,7 +329,7 @@ Announcement, sourcing round or other market-facing activity is an activity or a
 
 A failed/non-resulting attempt for an Item preserves its outcome in the original Case. Remaining need may subsequently be allocated to another Procurement Case.
 
-The architecture must not force one Procurement Case to exactly one Supplier Contract. A Case may result in zero, one or multiple Supplier Contracts depending on Lots, Winners, Method and outcome. Exact logical cardinalities remain subject to Part 05 / Issue #17.
+The architecture must not force one Procurement Case to exactly one Supplier Contract. A Case may result in zero, one or multiple Supplier Contracts depending on Lots, Winners, Method and outcome. Part 05 preserves this multiplicity and does not narrow it without authoritative business evidence.
 
 Detailed heterogeneous progress belongs primarily to Case Items / Lots / Allocations and downstream objects. Case-level progress/state should be coarse or derived where Items are at different execution stages.
 
@@ -555,7 +555,7 @@ Stable fundamental invariants may remain Hard Business Validations. Configurabil
 
 72. **Deliverable is not a mandatory universal first-class Business Object.** Preserve the term where an authoritative Programme / Agreement uses it, but core modeling separates planned results, actual Research Outputs and formal reporting / acceptance outcomes.
 
-73. **Research Output is a durable first-class Business Object with institutional analytical value.** It represents an actual research result, can outlive a Project and must not be conceptually constrained to exactly one Project. Exact cross-Project lineage / cardinalities are deferred to Parts 04–05.
+73. **Research Output is a durable first-class Business Object with institutional analytical value.** It represents an actual research result, can outlive a Project and must not be conceptually constrained to exactly one Project. Part 05 formalizes cross-Project lineage through typed provenance/contribution associations.
 
 74. **Planned result, Research Output, Research Outcome and formal acceptance are distinct.** The system must not infer that every Research Output has an independent `Accepted` lifecycle merely because a reporting period or Project work was formally accepted.
 
@@ -692,7 +692,7 @@ Stable fundamental invariants may remain Hard Business Validations. Configurabil
 - Internal users are expected to require secure remote access, subject to institutional security policy.
 - Tablet is expected to support most ordinary work; smartphone use is primarily targeted at lightweight actions, viewing and approvals rather than complex editing.
 - Current Part 01 operating-volume figures are working planning estimates only, not verified institutional KPIs.
-- Parts 04–05 are expected to formalize Data Domains, lineage, entities, cardinalities, constraints and financial logic from the reconciled Business / Process / System semantics; they must not invent independent semantics that contradict the reconciled Parts 00–03 state.
+- Parts 04–05 formalize Data Domains, lineage, entities, cardinalities, constraints and financial logic from the reconciled Business / Process / System semantics; Part 05 must not invent independent semantics that contradict the accepted upstream state.
 
 ### PROVISIONAL IMPLEMENTATION ASSUMPTIONS
 
@@ -799,7 +799,7 @@ The future `Architecture Control Model` remains subordinate to the approved huma
 
 ## Open Issues / Conflicts
 
-Items below are either intentionally unresolved or resolved architecture-normalization items whose source propagation is complete in Parts 00–03. Open downstream modeling / institutional / technical questions remain active only where stated. None is currently classified as a semantic blocker to starting Part 04; if a Part 04 decision depends on unresolved authority or evidence, that claim must remain explicit and unresolved.
+Items below are either intentionally unresolved or resolved architecture-normalization/modeling items. Open business, institutional and technical questions remain active only where stated. None is currently classified as a blocking Part 05 Data Model defect; if a downstream decision depends on unresolved authority or evidence, that claim must remain explicit and unresolved.
 
 ### Architecture normalization completed before Part 04
 
@@ -829,7 +829,7 @@ Items below are either intentionally unresolved or resolved architecture-normali
 
    Issue #1 remains resolved at the architectural-concept level. Detailed `Project Type / Scenario → Authorizing Basis Requirement` rule mapping is tracked separately as a modeling/configuration item and does not reopen Issue #1.
 2. **RESOLVED — propagated to Parts 00–03:** Application lifecycle is separated from Pre-Award Application Check, external submission, scientific evaluation, Funding Decision and Handover.
-3. **RESOLVED — propagated to Parts 00–03:** Research Need has its own lifecycle; downstream Procurement execution is represented through related objects / quantities rather than Research Need lifecycle states. Exact final lifecycle labels and unresolved reverse cardinalities remain Part 05 detail under Issue #17.
+3. **RESOLVED — propagated to Parts 00–03; Part 05 modeling completed:** Research Need has its own lifecycle; downstream Procurement execution is represented through related objects / quantities rather than Research Need lifecycle states. Part 05 resolves the relationship/cardinality model to the supported semantic boundary and leaves only explicitly identified route-specific business rules `BUSINESS TO_CONFIRM`.
 4. **RESOLVED — propagated to Parts 00–03:** Procurement Plan semantics are normalized: `Effective Procurement Plan` is current operational truth; `Approved Procurement Plan Version` is a formal immutable snapshot; `Procurement Plan Amendment` is the formal delta; `Consolidated Approved Procurement Plan` is the latest formally approved consolidated representation.
 5. **RESOLVED — propagated to Parts 00–03:** Procurement Procedure is not a separate first-class Business Object; target execution is `Procurement Case + Procurement Method-specific rules/workflow`.
 6. **RESOLVED — propagated to Parts 00–03:** Goods Acceptance is item/quantity-level, supports multiple actual receivers in one Delivery, and uses derived aggregate outcomes where possible. Advance Delivery Notice is added as a target supplier-control / ERP capability with operational fallback.
@@ -843,19 +843,19 @@ Items below are either intentionally unresolved or resolved architecture-normali
 11. **RESOLVED — propagated to Parts 00–03:** one Project may require/link multiple Agreements/official instruments; one Agreement may also cover multiple Projects where the business model requires it. Type-specific constraints remain for Part 05.
 12. **RESOLVED — propagated to Parts 00–03:** Agreement/Contract Type is separated from purpose, obligations, conditional effect, Post-Award relevance and Authorizing Basis role; Authorizing Basis Requirement may be composite.
 13. Confirm formal Process Owners / process accountability.
-14. **RESOLVED — propagated to Parts 00–03:** Calendar Plan is contextual and versioned; Calendar Plan Items / Tasks are hierarchical; administrative Milestones are separate; Deliverable is not a mandatory universal first-class object; Research Output is a durable Business Object; NURA lead/co-executor route semantics and period-level acceptance semantics are established. Exact cardinalities / lineage remain deferred to Parts 04–05 under Issues #33–34.
+14. **RESOLVED — propagated to Parts 00–03; Part 05 modeling completed:** Calendar Plan is contextual and versioned; Calendar Plan Items / Tasks are hierarchical; administrative Milestones are separate; Deliverable is not a mandatory universal first-class object; Research Output is a durable Business Object; NURA lead/co-executor route semantics and period-level acceptance semantics are established. Part 05 formalizes Calendar Plan / Item temporal identity and Research Output lineage under the resolved Issues #33–34.
 
 35. **RESOLVED — propagated to Parts 00–03:** Contract Financial Direction is a separate dimension from Contract Type. Incoming / Authorizing Contracts use the applicable Legal-led route and may exist without Application; Outgoing Contracts originate from Post-Award / Procurement expenditure processes and retain Budget / Commitment / Financial Attribution controls. Non-monetary / Mixed agreements remain supported. Exact `Contract Type × Financial Direction × responsible route / approval profile` data/configuration formalization is deferred to Parts 04–05 where needed.
 
-### Data / financial logic still to formalize
+### Part 05 modeling disposition
 
-15. Finalize exact Commitment → Actual → Available Budget calculation and double-counting prevention. Established constraint: Unallocated Funding is not Available Budget and must not become spendable until it is allocated and approved.
-16. **RESOLVED at architecture-concept level:** Research Need owns only its own lifecycle; downstream procurement progress belongs to related Procurement objects / quantities. Exact Part 05 relationship/cardinality implementation remains under Issue #17.
-17. Final cardinalities and temporal constraints for unresolved relationships before Part 05. Scope explicitly includes unresolved reverse Research Need ↔ Procurement Request Item relationships, Procurement Case ↔ Supplier Contract cardinalities/constraints, Agreement closeout-obligation relationships and Delivery / Acceptance / Receiver / Advance Delivery Notice cardinalities.
-31. Determine the exact Part 04–05 representation for external research activities known to NURA but not administratively managed by NURA. Established principle: known by NURA ≠ administered by NURA.
-32. Formalize the configurable `Project Type / Scenario → Authorizing Basis Requirement` mapping, including applicable composite requirement structures, during rule / data design. The architectural concept is resolved; this is a deferred modeling/configuration detail needed for later Parts.
-33. Formalize Calendar Plan / Calendar Plan Version / Calendar Plan Item cardinalities and temporal constraints, including links between principal Project plans and separate co-executor/service-contract plans. Business semantics are resolved under Decisions 68–71.
-34. Formalize Research Output lineage and relationships across Project, Calendar Plan Item, Project Obligation, Report, repository/evidence, Research Outcome and maturity/TRL facts. The model must support cross-Project continuation without forcing every Output to belong to exactly one Project.
+15. **RESOLVED IN PART 05:** Commitment → Actual → Available Budget semantics and double-counting prevention are formalized through separate Commitment, Operational Actual and Accounting Actual facts, Commitment–Actual Match, Financial Attribution, reconciliation rules and Derived Fact integrity. Established constraint remains: Unallocated Funding is not Available Budget and must not become spendable until it is allocated and approved.
+16. **RESOLVED IN PART 05:** Research Need owns only its own lifecycle; downstream procurement progress belongs to related Procurement objects / quantities. The Part 05 relationship/cardinality model is complete to the supported semantic boundary; route-specific institutional rules remain explicit where authority is absent.
+17. **RESOLVED TO PART 05 COMPLETION BOUNDARY:** previously unresolved relationship cardinalities and temporal constraints were addressed across the Part 05 relationship, cardinality, temporal/version and logical-integrity passes. Remaining institutional maxima or route-specific rules not established by authoritative sources are explicitly `BUSINESS TO_CONFIRM` and must not be narrowed by downstream implementation without confirmation.
+31. **RESOLVED IN PART 05:** external research activities known to NURA but not administratively managed by NURA are represented through `External Research Activity Reference` with typed links to known Person / Organization / Research Output / Research Outcome context. Such a record does not acquire NURA Project lifecycle, Budget, Operational Authorization or Closure semantics.
+32. **RESOLVED AT MODEL / CONFIGURATION STRUCTURE LEVEL:** configurable `Project Type / Scenario → Authorizing Basis Requirement` semantics are represented through versioned Authorizing Basis Requirement Profiles / Configuration, applicability and Requirement Components. Exact institutional profile content remains an authoritative/business configuration input and is not invented by Part 05.
+33. **RESOLVED IN PART 05:** Calendar Plan uses stable Plan identity + immutable Formal Versions; Calendar Plan Item retains stable identity under semantic continuity with version-specific state, while split / merge / semantic replacement creates new Item identities with explicit lineage. Principal/co-executor/service-contract contexts remain represented through their applicable Plan / Agreement relations rather than by rewriting Item identity.
+34. **RESOLVED IN PART 05:** Research Output lineage is represented through typed provenance/contribution associations to Project, Calendar Plan Item, Obligation, Report, External Research Activity, Repository/evidence, Research Outcome and TRL/maturity context. The model supports multi-Project continuation without forcing each Output to belong to exactly one Project.
 
 
 ### Institutional verification required
@@ -904,19 +904,17 @@ A material transition V&V across the current Parts 00–03 found no known cross-
 
 ### Part 04 — Data Architecture
 
-**CURRENT PHASE — working draft exists; completion / V&V / Architecture-to-Delivery readiness is in progress. Part 04 is not yet an accepted completed baseline, and Part 05 has not started.**
+Completed and used as the verified upstream Data Architecture baseline for Part 05.
 
-Part 04 must define the data-architecture view of the established business/system semantics: Data Domains, Master Data, Reference Data, claim-specific Systems of Record, Data Ownership / Stewardship boundaries, provenance / lineage, Data Lifecycle, Data Quality and Data Governance Rules. It must create a coherent basis for Part 05 without prematurely fixing physical database implementation.
-
-Priority carry-forward questions include Issues #15, #17 and #31–34, plus ownership / authority questions when they become decision-relevant.
+Part 04 establishes the data-architecture view of the accepted business/system semantics: Data Domains, Master Data, Reference Data, claim-specific Systems of Record, Data Ownership / Stewardship boundaries, provenance / lineage, Data Lifecycle, Data Quality and Data Governance Rules, without prematurely fixing physical database implementation.
 
 ### Part 05 — Data Model
 
-Not started. Exact conceptual/logical cardinalities, temporal constraints, entity/relationship catalogues and data dictionary follow Part 04.
+**CURRENT PHASE — final semantic coverage / completion review.** Scoped gates through `PASS 08 SAFE TO CONTINUE` are established. Identity, relationships, cardinality/optionality, temporal/version semantics, Logical Entity Model, identifiers/attributes/provenance, Reference/Configuration + logical integrity and Data Dictionary have been modeled. Full `MODEL PASS` is not yet claimed.
 
 ### Readiness
 
-Parts 00–03 are treated as the synchronized semantic baseline for Part 04. Architecture-normalization issues that previously blocked Part 04 have been propagated into the source Parts. Remaining Open Issues are intentionally carried into Data Architecture, Data Model, institutional verification or technical verification and are not currently semantic blockers to starting Part 04.
+Parts 00–04 are the current upstream baseline for the Part 05 final completion review. Issues #15, #17 and #31–34 have reached the Part 05 dispositions recorded above. Remaining business, institutional and technical items stay explicit and must not be closed by architectural invention. Transition to Part 06 remains subject to the final Part 05 completion gate and controlled-state synchronization.
 
 The approved master architecture structure is:
 
@@ -966,7 +964,7 @@ Parts 04–05 must preserve and explicitly model:
 - Procurement Case + Procurement Method-specific execution, with no separate required Procurement Procedure Business Object;
 - failed/non-resulting Case Item outcome and later re-allocation of remaining need to a new Case;
 - cross-project Request/Need consolidation while preserving source Project/Budget/Funding attribution;
-- Procurement Case → zero/one/multiple Supplier Contracts as an allowed architecture direction, with exact constraints deferred to Issue #17;
+- Procurement Case → zero/one/multiple Supplier Contracts as an allowed architecture direction; Part 05 preserves this multiplicity and leaves only unsupported institutional maxima explicit rather than inventing them;
 - `Effective Procurement Plan` versus `Approved Procurement Plan Version` versus `Procurement Plan Amendment` versus `Consolidated Approved Procurement Plan`;
 - Supplier Contract / Advance Delivery Notice / Shipment / Delivery / Acceptance / Payment distinctions;
 - Delivery Item / Quantity-level Acceptance, multiple actual receivers and derived aggregate acceptance outcome;

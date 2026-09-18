@@ -1,9 +1,9 @@
 # ENGAGEMENT_CONTROL.md
 
 - **ENGAGEMENT_ID:** `ENG-NURA-ERP-001`
-- **CONTROL_VERSION:** `1.11`
+- **CONTROL_VERSION:** `1.12`
 - **CONTROL_STATUS:** ACTIVE
-- **LAST_UPDATED:** `2026-09-16`
+- **LAST_UPDATED:** `2026-09-18`
 
 ## 1. Purpose
 
@@ -46,8 +46,8 @@ Established Engagement knowledge belongs in `memory/ENGAGEMENT_MEMORY.md`, subje
 
 ### 3.1 Phase State
 
-- **CURRENT_PHASE:** Part 04 — Data Architecture — completion / V&V / Architecture-to-Delivery readiness
-- **NEXT_PHASE:** Part 05 — Data Model
+- **CURRENT_PHASE:** Part 05 — Data Model — final semantic coverage / completion review
+- **NEXT_PHASE:** Part 06 — Information Architecture
 - **NEXT_PHASE_GATE:** `NOT_READY`
 - **NEXT_PHASE_USER_CONTINUATION_DECISION:** `PENDING`
 - **INFRASTRUCTURE_DEFERMENT:** `GITHUB_CANONICAL_WRITE / CHECKPOINT FINALIZATION TECHNICALLY UNAVAILABLE`
@@ -55,7 +55,9 @@ Established Engagement knowledge belongs in `memory/ENGAGEMENT_MEMORY.md`, subje
 - **MASTER_INDEX_ARTIFACT_STATUS:** `NOT IN CURRENT CONTROLLED SOURCE SET — NO CONTENT.pdf SYNC GATE`
 - **POST_ARCHITECTURE_DELIVERY_OBJECTIVE:** `ACCEPTED — ARCHITECTURE-TO-DELIVERY LAYER AFTER PARTS 00–08`
 - **ARCHITECTURE_PART_AUTHORING_STANDARD:** `ACTIVE — v1.1 — REQUIRED FOR PARTS 04–08`
-- **PART_04_DOWNSTREAM_READINESS:** `IN_PROGRESS — REQUIRED BEFORE PART 05 GATE MAY PASS`
+- **PART_04_DOWNSTREAM_READINESS:** `PASS — VERIFIED UPSTREAM BASELINE FOR PART 05`
+- **PART_05_COMPLETION_STATE:** `PASS 08 SAFE TO CONTINUE — FINAL SEMANTIC COVERAGE / COMPLETION REVIEW IN PROGRESS`
+- **PART_05_DOWNSTREAM_READINESS:** `IN_PROGRESS — FULL MODEL PASS NOT YET ESTABLISHED`
 
 ### 3.2 System State Checkpoint / Bootstrap State
 
@@ -81,7 +83,7 @@ The post-v1.3 material delta has now been reviewed and semantically consolidated
 - **UNCONSOLIDATED_SIGNIFICANT_ACCEPTED_WORK:** `NO`
 - **CONSOLIDATION_STATE:** `CURRENT`
 
-Reason: the Part 03 rewrite and final Parts 00–03 normalization remain consolidated. Accepted Engagement objectives establish the post-Parts `Architecture-to-Delivery Layer`, per-increment implementation specification approach, independently acceptable end-to-end delivery increments and a machine-readable Architecture Control Model. The 2026-09-16 refinement additionally requires verification-aware but technology-agnostic Part authoring, deterministic/formal conformance where feasible, optional rather than constitutive AI assurance, and an explicit Architecture-to-Delivery Readiness Pass before Part transition. These are consolidated into current `ENGAGEMENT_MEMORY.md v2.2` and `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1`. Part 04 remains the current architecture phase. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
+Reason: the Part 03 rewrite and final Parts 00–03 normalization remain consolidated. Accepted Engagement objectives establish the post-Parts `Architecture-to-Delivery Layer`, per-increment implementation specification approach, independently acceptable end-to-end delivery increments and a machine-readable Architecture Control Model. The 2026-09-16 refinement additionally requires verification-aware but technology-agnostic Part authoring, deterministic/formal conformance where feasible, optional rather than constitutive AI assurance, and an explicit Architecture-to-Delivery Readiness Pass before Part transition. These are consolidated into current `ENGAGEMENT_MEMORY.md v2.3` and `ARCHITECTURE_PART_AUTHORING_STANDARD.md v1.1`. Part 04 is the verified upstream Data Architecture baseline; Part 05 is the current architecture phase and is in final semantic coverage / completion review after `PASS 08 SAFE TO CONTINUE`. Canonical checkpoint persistence/finalization is still pending, so the system update remains `IN_PROGRESS` and material delta remains uncheckpointed.
 
 ### 3.4 Required State Invariant
 
@@ -791,9 +793,9 @@ Current NURA ERP progress is:
 → **Part 02 rewritten / synchronized**
 → **Part 03 rewritten / synchronized**
 → **material cross-Part transition V&V PASS**
-→ **CURRENT: Part 04 Data Architecture**
-→ **NEXT: Part 05 Data Model**
-→ **Part 06 Information Architecture**
+→ **Part 04 Data Architecture completed / verified as the upstream baseline for Part 05**
+→ **CURRENT: Part 05 Data Model — final semantic coverage / completion review**
+→ **NEXT: Part 06 Information Architecture**
 → **Part 07 Solution Architecture**
 → **Part 08 Enterprise Architecture**.
 
@@ -859,19 +861,23 @@ If a material required source/revision is unavailable or conflicting, do not cla
 
 Any material applicable failure keeps `NEXT_PHASE_GATE = NOT_READY`.
 
-### 24.3 Current Part 04 status
+### 24.3 Current Part 05 status
 
-Part 04 is currently in completion / V&V / Architecture-to-Delivery readiness work. No Part 04 completion or Part 05 transition is claimed by this Control revision.
+Part 04 is complete as the verified upstream Data Architecture baseline used by Part 05. Part 05 has completed scoped gates through `PASS 08 SAFE TO CONTINUE` and is now in final semantic coverage / completion review.
 
-The Part 04 gate remains:
+The current Part 05 gate is:
 
 ```text
-NEXT_PHASE = Part 05 — Data Model
+CURRENT_PHASE = Part 05 — Data Model — final semantic coverage / completion review
+NEXT_PHASE = Part 06 — Information Architecture
 NEXT_PHASE_GATE = NOT_READY
-PART_04_DOWNSTREAM_READINESS = IN_PROGRESS
+PART_05_COMPLETION_STATE = PASS 08 SAFE TO CONTINUE — FINAL COMPLETION REVIEW IN PROGRESS
+PART_05_DOWNSTREAM_READINESS = IN_PROGRESS
 ```
 
-When all applicable criteria in 24.2 pass, the transition evidence must be recorded before Part 05 is treated as started.
+`NEXT_PHASE_GATE` remains `NOT_READY` until the final Part 05 completion review is accepted and the required controlled-state synchronization is verified.
+
+Historical Part 04 phase-start / transition evidence elsewhere in this file remains historical evidence and is not rewritten by this current-state update.
 
 ## 25. Learning Candidate Approval Trail — Cross-Chat Requirement
 

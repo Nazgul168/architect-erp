@@ -1,7 +1,7 @@
 # LEARNING_CANDIDATES.md
 
-- **REVISION:** `2026-09-16-r4`
-- **LAST_UPDATED:** `2026-09-16`
+- **REVISION:** `2026-09-18-r5`
+- **LAST_UPDATED:** `2026-09-18`
 
 Durable Engagement-side staging for transferable learning identified during NURA ERP work.
 
@@ -56,6 +56,18 @@ At final handoff, produce a separate export containing candidates marked `APPROV
 ### Cross-runtime continuity rule
 
 This approval/artifact trail is Engagement-wide. A new chat/runtime using the current controlled NURA ERP sources must continue the same record rather than starting a separate informal learning history. Explicit user disposition is recorded as evidence; silence or ordinary continuation is not approval.
+
+### Multi-actor / tool provenance rule
+
+When learning evidence was produced through several roles, runtimes or verification instruments, the trail must attribute those contributions explicitly rather than describe the outcome as work of ARCHITECT alone.
+
+For Part 05, the working pattern was:
+
+- **ARCHITECT** — source-derived analysis, modelling decisions, candidate architecture and correction synthesis;
+- **independently run DTA / DMV verification instrument/runtime** — adversarial review of candidates against declared baselines, blocking findings and scoped gate outcomes;
+- **Engagement owner / user** — supplied or relayed the independent review results into the controlling ARCHITECT conversation, confirmed the gate state used for continuation, and controlled continuation between passes.
+
+DTA/DMV provides verification evidence; it does not silently invent NURA business meaning. Conversely, ARCHITECT must not represent independently verified outcomes as self-validation by one model/runtime.
 
 ---
 
@@ -677,6 +689,8 @@ The candidate was operationalized in the NURA Engagement through a controlled au
 - **Updated** `ENGAGEMENT_MEMORY.md` to v2.1 so the cross-Part rule is part of established Engagement state: human-readable Parts remain the source of architectural meaning; material assertions must be precise enough for later transformation into requirements, implementation obligations, acceptance criteria and conformance rules without inventing new business meaning.
 - **Updated** `ENGAGEMENT_CONTROL.md` (v1.8, then corrective v1.9) to make the Authoring Standard and an Architecture-to-Delivery Readiness Check part of the completion gate for Parts 04–08. This prevents a Part from being treated as complete merely because it is narratively polished.
 - **Updated** `00_ENGAGEMENT_MANIFEST.md` (v1.2, then merged/corrected v1.3) so the new Authoring Standard is a controlled Engagement artifact, is included in the System State Bundle, and remains available to future chats working on Parts 05–08.
+- **Part 05 completion evidence (2026-09-18):** the Data Model was authored through eight scoped modelling passes plus correction passes and independent DTA/DMV gates across identity, relationships, cardinality/optionality, temporal/version semantics, Logical Entity Model, identifiers/attributes/provenance, Reference/Configuration + logical integrity, and Data Dictionary. The final completion package performs cross-Part semantic coverage, end-to-end traceability, unresolved-item disposition and Architecture-to-Delivery Readiness before a full `MODEL PASS` may be claimed.
+- **Multi-actor provenance for this evidence:** ARCHITECT produced the modelling candidates and corrections; an independently run DTA/DMV verifier performed adversarial checks and issued scoped findings/gates; the Engagement owner/user relayed and confirmed those gate outcomes before ARCHITECT continued. This evidence therefore must not be read as self-validation by a single model/runtime.
 
 **Why these file changes were needed:** the method affects how multiple future Parts must be authored. Keeping it only in one chat would create a high risk that later chats reproduce the content but lose the downstream-verifiability constraint.
 
@@ -875,6 +889,8 @@ Reduces loss or misattribution of learning across chats, preserves causality bet
 - `ARCHITECTURE_PART_AUTHORING_STANDARD.md` v1.1 adds a Part-completion learning/approval-trail check so Parts 04–08 created in different chats apply the same method.
 - `LEARNING_CANDIDATES.md` revision `2026-09-16-r3` makes the candidate/artifact/disposition record continuous across runtimes and preserves `NOT_REVIEWED` when approval is absent.
 - Revision `2026-09-16-r4` aligns approved dispositions with RF canonical `APPROVED_FOR_ROLE_REVIEW` and records `approved_by` / `approved_at` metadata required by `_ROLE_LEARNING_EXPORT_TEMPLATE.md`, so approved candidates can be exported without reconstructing approval facts from chat history.
+- **Part 05 completion evidence (2026-09-18):** the final Part 05 review explicitly distinguished semantic completion from controlled Engagement completion: `ENGAGEMENT_MEMORY.md`, `ENGAGEMENT_CONTROL.md`, Manifest source-of-truth metadata and this Learning Candidate trail had to be synchronized before a full `MODEL PASS` could be claimed.
+- **Multi-runtime / verifier provenance:** Part 05 continuity depended on a three-role loop rather than one assistant acting alone: ARCHITECT authored/revised the model, an independent DTA/DMV runtime/instrument challenged it against declared baselines and produced gate evidence, and the Engagement owner/user carried the accepted review outcome back into the controlling conversation. This directly demonstrates why contributor roles and gate evidence must persist across runtimes.
 
 **Why these file changes were needed:** the prior approval trail existed in the Learning Candidates artifact, but other chats were not yet normatively required to maintain it. Moving the rule into Manifest, Control and the Part Authoring Standard makes it a property of the Engagement workflow and handoff package rather than an accidental behavior of one chat.
 
